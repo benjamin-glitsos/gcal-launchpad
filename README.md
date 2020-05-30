@@ -47,7 +47,7 @@ In the first example we are going to display a digital clock that updates every 
 
 ![](http://i.imgur.com/JCxtWSj.gif)
 
-Our page is located at `pages/index.js` so it will map the route `/`. To get the initial data for rendering we are implementing the static method `getInitialProps`, initializing the redux store and dispatching the required actions until we are ready to return the initial state to be rendered. Since the component is wrapped with `next-redux-wrapper`, the component is automatically connected to Redux and wrapped with `react-redux Provider`, that allows us to access redux state immediately and send the store down to children components so they can access to the state when required.
+Our page is located at `pages/index.js` so it will map the route `/`. To get the initial data for rendering we are implementing the static method `getInitialProps`, initializing the redux state and dispatching the required actions until we are ready to return the initial state to be rendered. Since the component is wrapped with `next-redux-wrapper`, the component is automatically connected to Redux and wrapped with `react-redux Provider`, that allows us to access redux state immediately and send the state down to children components so they can access to the state when required.
 
 For safety it is recommended to wrap all pages, no matter if they use Redux or not, so that you should not care about it anymore in all child components.
 
@@ -55,7 +55,7 @@ This example wraps pages individually using `getStaticProps` and `getServerSideP
 
 To pass the initial state from the server to the client we pass it as a prop called `initialState` so then it's available when the client takes over.
 
-The trick here for supporting universal redux is to separate the cases for the client and the server. When we are on the server we want to create a new store every time, otherwise different users data will be mixed up. If we are in the client we want to use always the same store. That's what we accomplish on `store.js`
+The trick here for supporting universal redux is to separate the cases for the client and the server. When we are on the server we want to create a new state every time, otherwise different users data will be mixed up. If we are in the client we want to use always the same state. That's what we accomplish on `state.js`
 
 The clock, under `components/Clock.js`, has access to the state using the `connect` function from `react-redux`. In this case Clock is a direct child from the page but it could be deep down the render tree.
 

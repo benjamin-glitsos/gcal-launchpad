@@ -1,5 +1,5 @@
 import App from "next/app";
-import { wrapper } from "~/store/store";
+import { wrapper } from "~/state/store";
 
 class WrappedApp extends App {
     render() {

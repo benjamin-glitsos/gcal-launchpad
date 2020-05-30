@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { addCount } from '../store/count/action'
+import { addCount } from '../state/count/action'
 
 const AddCount = ({ count, addCount }) => {
   return (

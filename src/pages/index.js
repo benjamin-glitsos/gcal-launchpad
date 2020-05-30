@@ -2,16 +2,18 @@ import { useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Page from "~/components/Page";
-import { addCount } from "~/store/count/action";
+import { addCount } from "~/state/count/action";
 import AddCount from "~/components/AddCount";
-import { wrapper } from "~/store/store";
+import { wrapper } from "~/state/store";
 
 const Index = props => {
+    console.log(props);
+    const state = JSON.stringify(props);
     return (
         <Fragment>
             <AddCount />
             <h2>Redux State:</h2>
-            <code>{JSON.stringify(props)}</code>
+            <code>{state}</code>
         </Fragment>
     );
 };
@@ -26,4 +28,6 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(state => state, mapDispatchToProps)(Index);
+export default wrapper.withredux(
+    connect(state => state, mapDispatchToProps)(Index)
+);
