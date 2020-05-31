@@ -4,8 +4,23 @@ import { createUpdater } from "redux-lightweight";
 export const [userReducer, userActions] = createUpdater(
     class User {
         state = {
-            username: "default"
+            username: "default_user"
         };
+
+        updateUser() {
+            return this.state;
+        }
+
+        updateUserSuccess({ username, app_id }) {
+            return {
+                username,
+                app_id
+            };
+        }
+
+        updateUserFailure() {
+            return this.state;
+        }
     }
 );
 

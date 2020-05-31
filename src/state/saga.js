@@ -1,11 +1,23 @@
 import { all, put, takeLatest, call, select } from "redux-saga/effects";
 import es6promise from "es6-promise";
-import { historyActions } from "./redux";
+import { userActions, historyActions } from "./redux";
 import querystring from "querystring";
 
 es6promise.polyfill();
 
-function* updateHistorySaga() {
+function* getUserSaga() {
+    try {
+        const username = yield select(state => state.user.username);
+        const res = yield fetch(process.env.settings.api + "user/" + username);
+        const data = yield res.json();
+        yield put(userActions.updateUserSuccess(data));
+    } catch (err) {
+        console.error(err);
+        yield put(userActions.updateUserFailure());
+    }
+}
+
+function* getHistorySaga() {
     try {
         const username = yield select(state => state.user.username);
         const res = yield fetch(
@@ -26,8 +38,10 @@ function* updateHistorySaga() {
 
 function* rootSaga() {
     yield all([
-        call(updateHistorySaga),
-        takeLatest(historyActions.updateHistory.type, updateHistorySaga)
+        call(getUserSaga),
+        call(getHistorySaga),
+        takeLatest(historyActions.updateHistory.type, getHistorySaga),
+        takeLatest(userActions.updateUser.type, getUserSaga)
     ]);
 }
 
