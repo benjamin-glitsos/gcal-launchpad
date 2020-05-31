@@ -1,4 +1,4 @@
-import { all, put, takeLatest } from "redux-saga/effects";
+import { all, put, takeLatest, call } from "redux-saga/effects";
 import es6promise from "es6-promise";
 import { historyActions } from "./redux";
 import querystring from "querystring";
@@ -25,6 +25,7 @@ function* updateHistorySaga() {
 
 function* rootSaga() {
     yield all([
+        call(updateHistorySaga),
         takeLatest(historyActions.updateHistory.type, updateHistorySaga)
     ]);
 }
