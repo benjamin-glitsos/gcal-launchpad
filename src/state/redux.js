@@ -1,35 +1,29 @@
 import { combineReducers } from "redux";
 import { createUpdater } from "redux-lightweight";
 
-export class UpdateInput {
+export class Input {
     state = "";
 
     updateInput(data) {
-        return {
-            ...this.state,
-            ...{ input: data }
-        };
+        return data;
     }
 }
 
 export const [updateInputReducer, updateInputActions] = createUpdater(
-    UpdateInput
+    Input
 );
 
-export class GetHistory {
+export class History {
     state = [];
 
     getHistory(data) {
-        return {
-            ...this.state,
-            ...{ history: data }
-        };
+        return data;
     }
 }
 
-export const [getHistoryReducer, getHistoryActions] = createUpdater(GetHistory);
+export const [getHistoryReducer, getHistoryActions] = createUpdater(History);
 
 export const rootReducer = combineReducers({
-    updateInputReducer,
-    getHistoryReducer
+    input: updateInputReducer,
+    history: getHistoryReducer
 });

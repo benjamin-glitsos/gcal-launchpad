@@ -2,8 +2,7 @@ import { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { END } from "redux-saga";
 import { wrapper } from "~/state/store";
-import { getHistory } from "~/state/actions";
-import { updateInputActions } from "~/state/redux";
+import { updateInputActions, getHistoryActions } from "~/state/redux";
 
 const Index = () => {
     const state = useSelector(state => state);
@@ -21,11 +20,11 @@ const Index = () => {
 };
 
 export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
-    // if (store.getState().history.length === 0) {
-    //     store.dispatch(getHistory());
-    //     store.dispatch(END);
-    // }
-    // await store.sagaTask.toPromise();
+    if (store.getState().history.length === 0) {
+        // store.dispatch(getHistoryActions.getHistory());
+        store.dispatch(END);
+    }
+    await store.sagaTask.toPromise();
 });
 
 export default Index;
