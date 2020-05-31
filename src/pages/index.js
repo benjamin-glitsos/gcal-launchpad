@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { END } from "redux-saga";
-import { wrapper } from "../store";
-import { loadData } from "../actions";
-import Page from "../components/page";
+import { wrapper } from "~/state/store";
+import { loadData } from "~/state/actions";
+import Page from "~/components/page";
 
 const Index = () => {
     // const dispatch = useDispatch();
