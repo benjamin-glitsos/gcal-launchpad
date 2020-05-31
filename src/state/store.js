@@ -4,8 +4,6 @@ import { createWrapper } from "next-redux-wrapper";
 import { rootReducer } from "./redux";
 import rootSaga from "./saga";
 
-const initialState = {};
-
 const bindMiddleware = middleware => {
     if (process.env.NODE_ENV !== "production") {
         const { composeWithDevTools } = require("redux-devtools-extension");
@@ -14,12 +12,12 @@ const bindMiddleware = middleware => {
     return applyMiddleware(...middleware);
 };
 
-export const makeStore = (context, state = initialState) => {
+export const makeStore = context => {
     const sagaMiddleware = createSagaMiddleware();
 
     const store = createStore(
         rootReducer,
-        state,
+        {},
         bindMiddleware([sagaMiddleware])
     );
 
@@ -28,4 +26,6 @@ export const makeStore = (context, state = initialState) => {
     return store;
 };
 
-export const wrapper = createWrapper(makeStore, { debug: true });
+export const wrapper = createWrapper(makeStore, {
+    debug: process.env.settings.reduxDebugMode
+});

@@ -18,6 +18,7 @@ module.exports = {
     },
     env: {
         settings: {
+            reduxDebugMode: true,
             api: "http://localhost:3000/api/"
         }
     }

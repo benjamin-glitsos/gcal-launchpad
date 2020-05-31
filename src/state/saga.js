@@ -22,7 +22,9 @@ function* updateHistorySaga() {
 }
 
 function* rootSaga() {
-    yield all([takeLatest(historyActions.updateHistory.type, updateHistorySaga)]);
+    yield all([
+        takeLatest(historyActions.updateHistory.type, updateHistorySaga)
+    ]);
 }
 
 export default rootSaga;
