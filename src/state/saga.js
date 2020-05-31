@@ -11,6 +11,7 @@ function* updateHistorySaga() {
             [
                 process.env.settings.api,
                 "history",
+                "?",
                 querystring.stringify({ username: "default" })
             ].join("")
         );

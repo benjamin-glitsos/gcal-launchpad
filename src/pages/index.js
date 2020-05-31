@@ -13,7 +13,9 @@ const Index = () => {
         <Fragment>
             <h1>Home</h1>
             <input type="text" onChange={handleChange} />
-            <p>State:</p>
+            <p onClick={() => dispatch(historyActions.updateHistory())}>
+                click to update history:
+            </p>
             <code>{JSON.stringify(state)}</code>
         </Fragment>
     );
@@ -21,7 +23,7 @@ const Index = () => {
 
 export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
     if (store.getState().history.length === 0) {
-        // store.dispatch(historyActions.updateHistory());
+        store.dispatch(historyActions.updateHistory());
         store.dispatch(END);
     }
     await store.sagaTask.toPromise();

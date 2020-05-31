@@ -9,11 +9,10 @@ export default async (req, res) => {
             SELECT h.title
             FROM history h
             ${
-                username &&
-                `
-                LEFT JOIN users u ON h.user_id = u.id
-                WHERE u.username = ${username}
-                `
+                username
+                    ? `LEFT JOIN users u ON h.user_id = u.id
+            WHERE u.username = '${username}'`
+                    : ""
             }
             ORDER BY h.id DESC
             LIMIT 15
