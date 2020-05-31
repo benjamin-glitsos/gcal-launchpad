@@ -2,7 +2,7 @@ import { useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Page from "~/components/Page";
-import { addCount } from "~/state/count/action";
+import { addCount } from "~/state/count";
 import AddCount from "~/components/AddCount";
 import { wrapper } from "~/state/store";
 

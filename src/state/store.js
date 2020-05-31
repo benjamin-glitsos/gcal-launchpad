@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import { HYDRATE, createWrapper } from "next-redux-wrapper";
 import thunkMiddleware from "redux-thunk";
-import count from "~/state/count/reducer";
+import count from "./count";
 
 const bindMiddleware = middleware => {
     if (process.env.NODE_ENV !== "production") {
