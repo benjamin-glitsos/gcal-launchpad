@@ -7,19 +7,13 @@ import Counter from "~/components/counter";
 
 const Index = () => {
     // useEffect(() => {}, [dispatch]);
-    const placeholderData = useSelector(state => state.placeholderData);
-    const error = useSelector(state => state.error);
-    const lastUpdate = useSelector(state => state.lastUpdate);
+    const state = useSelector(state => state);
     return (
         <Fragment>
             <h1>Home</h1>
             <Counter />
-            {placeholderData && (
-                <pre>
-                    <code>{JSON.stringify(placeholderData, null, 2)}</code>
-                </pre>
-            )}
-            {error && <p style={{ color: "red" }}>Error: {error.message}</p>}
+            <p>State:</p>
+            <code>{JSON.stringify(state)}</code>
         </Fragment>
     );
 };
