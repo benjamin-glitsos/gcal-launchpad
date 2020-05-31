@@ -2,15 +2,18 @@ import { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { END } from "redux-saga";
 import { wrapper } from "~/state/store";
-import { loadData } from "~/state/actions";
+import { loadData, updateInput } from "~/state/actions";
 import Counter from "~/components/counter";
 
 const Index = () => {
     // useEffect(() => {}, [dispatch]);
     const state = useSelector(state => state);
+    const dispatch = useDispatch();
+    const handleChange = e => dispatch(updateInput(e.target.value));
     return (
         <Fragment>
             <h1>Home</h1>
+            <input type="text" onChange={handleChange} />
             <Counter />
             <p>State:</p>
             <code>{JSON.stringify(state)}</code>

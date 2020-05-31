@@ -1,6 +1,7 @@
 import { actionTypes } from "./actions";
 
 export const exampleInitialState = {
+    input: "",
     count: 0,
     error: false,
     lastUpdate: 0,
@@ -29,6 +30,12 @@ function reducer(state = exampleInitialState, action) {
             return {
                 ...state,
                 ...{ count: state.count - 1 }
+            };
+
+        case actionTypes.UPDATE_INPUT:
+            return {
+                ...state,
+                ...{ input: action.data }
             };
 
         case actionTypes.RESET:
