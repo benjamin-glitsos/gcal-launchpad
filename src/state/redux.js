@@ -18,6 +18,14 @@ export const [historyReducer, historyActions] = createUpdater(
         updateHistory() {
             return this.state;
         }
+
+        updateHistorySuccess(data) {
+            return data;
+        }
+
+        updateHistoryFailure(err) {
+            return this.state;
+        }
     }
 );
 

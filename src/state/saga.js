@@ -16,9 +16,10 @@ function* updateHistorySaga() {
             ].join("")
         );
         const data = yield res.json();
-        yield put(historyActions.updateHistory(data));
+        yield put(historyActions.updateHistorySuccess(data));
     } catch (err) {
         console.error(err);
+        yield put(historyActions.updateHistoryFailure());
     }
 }
 
