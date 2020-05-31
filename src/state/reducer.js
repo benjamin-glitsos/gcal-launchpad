@@ -2,8 +2,7 @@ import { actionTypes } from "./actions";
 
 export const initialState = {
     input: "",
-    error: false,
-    history: null
+    history: []
 };
 
 function reducer(state = initialState, action) {
@@ -12,19 +11,13 @@ function reducer(state = initialState, action) {
             return { ...state, ...action.payload };
         }
 
-        case actionTypes.FAILURE:
-            return {
-                ...state,
-                ...{ error: action.error }
-            };
-
         case actionTypes.UPDATE_INPUT:
             return {
                 ...state,
                 ...{ input: action.data }
             };
 
-        case actionTypes.GET_HISTORY_SUCCESS:
+        case actionTypes.GET_HISTORY:
             return {
                 ...state,
                 ...{ history: action.data }

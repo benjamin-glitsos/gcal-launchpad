@@ -20,7 +20,7 @@ const Index = () => {
 };
 
 export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
-    if (!store.getState().history) {
+    if (store.getState().history.length === 0) {
         store.dispatch(getHistory());
         store.dispatch(END);
     }

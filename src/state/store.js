@@ -1,7 +1,6 @@
 import { applyMiddleware, createStore } from "redux";
 import createSagaMiddleware from "redux-saga";
 import { createWrapper } from "next-redux-wrapper";
-
 import rootReducer, { initialState } from "./reducer";
 import rootSaga from "./saga";
 
