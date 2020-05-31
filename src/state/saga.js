@@ -5,7 +5,7 @@ import querystring from "querystring";
 
 es6promise.polyfill();
 
-function* getHistorySaga() {
+function* updateHistorySaga() {
     try {
         const res = yield fetch(
             [
@@ -15,14 +15,14 @@ function* getHistorySaga() {
             ].join("")
         );
         const data = yield res.json();
-        yield put(historyActions.getHistory(data));
+        yield put(historyActions.updateHistory(data));
     } catch (err) {
         console.error(err);
     }
 }
 
 function* rootSaga() {
-    yield all([takeLatest(historyActions.getHistory.type, getHistorySaga)]);
+    yield all([takeLatest(historyActions.updateHistory.type, updateHistorySaga)]);
 }
 
 export default rootSaga;

@@ -15,7 +15,7 @@ export const [historyReducer, historyActions] = createUpdater(
     class History {
         state = [];
 
-        getHistory(data) {
+        updateHistory(data) {
             return data;
         }
     }

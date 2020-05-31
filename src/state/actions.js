@@ -8,6 +8,6 @@ export function updateInput(data) {
     return { type: actionTypes.UPDATE_INPUT, data };
 }
 
-export function getHistory(data) {
+export function updateHistory(data) {
     return { type: actionTypes.GET_HISTORY, data };
 }

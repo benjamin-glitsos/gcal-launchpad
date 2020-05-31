@@ -21,7 +21,7 @@ const Index = () => {
 
 export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
     if (store.getState().history.length === 0) {
-        // store.dispatch(historyActions.getHistory());
+        // store.dispatch(historyActions.updateHistory());
         store.dispatch(END);
     }
     await store.sagaTask.toPromise();
