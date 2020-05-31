@@ -1,6 +1,6 @@
 import { all, put, takeLatest } from "redux-saga/effects";
 import es6promise from "es6-promise";
-import { getHistoryActions } from "./redux";
+import { historyActions } from "./redux";
 import querystring from "querystring";
 
 es6promise.polyfill();
@@ -15,14 +15,14 @@ function* getHistorySaga() {
             ].join("")
         );
         const data = yield res.json();
-        yield put(getHistoryActions.getHistory(data));
+        yield put(historyActions.getHistory(data));
     } catch (err) {
         console.error(err);
     }
 }
 
 function* rootSaga() {
-    yield all([takeLatest(getHistoryActions.getHistory.type, getHistorySaga)]);
+    yield all([takeLatest(historyActions.getHistory.type, getHistorySaga)]);
 }
 
 export default rootSaga;

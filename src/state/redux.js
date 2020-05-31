@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import { createUpdater } from "redux-lightweight";
 
-export const [updateInputReducer, updateInputActions] = createUpdater(
+export const [inputReducer, inputActions] = createUpdater(
     class Input {
         state = "";
 
@@ -11,7 +11,7 @@ export const [updateInputReducer, updateInputActions] = createUpdater(
     }
 );
 
-export const [getHistoryReducer, getHistoryActions] = createUpdater(
+export const [historyReducer, historyActions] = createUpdater(
     class History {
         state = [];
 
@@ -22,6 +22,6 @@ export const [getHistoryReducer, getHistoryActions] = createUpdater(
 );
 
 export const rootReducer = combineReducers({
-    input: updateInputReducer,
-    history: getHistoryReducer
+    input: inputReducer,
+    history: historyReducer
 });
