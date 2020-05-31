@@ -10,8 +10,10 @@ export default async (req, res) => {
             FROM history h
             ${
                 username
-                    ? `LEFT JOIN users u ON h.user_id = u.id
-            WHERE u.username = '${username}'`
+                    ? `
+                LEFT JOIN users u ON h.user_id = u.id
+                WHERE u.username = '${username}'
+                `
                     : ""
             }
             ORDER BY h.id DESC
