@@ -1,6 +1,18 @@
 import { combineReducers } from "redux";
 import { createUpdater } from "redux-lightweight";
 
+export const [userReducer, userActions] = createUpdater(
+    class User {
+        state = {
+            username: "default"
+        };
+
+        updateUser({ username }) {
+            return { username };
+        }
+    }
+);
+
 export const [inputReducer, inputActions] = createUpdater(
     class Input {
         state = "";
@@ -30,6 +42,7 @@ export const [historyReducer, historyActions] = createUpdater(
 );
 
 export const rootReducer = combineReducers({
+    user: userReducer,
     input: inputReducer,
     history: historyReducer
 });
