@@ -1,14 +1,14 @@
 import { useEffect, Fragment } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, connect } from "react-redux";
 import { END } from "redux-saga";
 import { wrapper } from "~/state/store";
-import { getHistory, updateInput } from "~/state/actions";
+import { getHistory } from "~/state/actions";
+import { updateInputActions } from "~/state/redux";
 
-const Index = () => {
-    // useEffect(() => {}, [dispatch]);
+const Index = ({ updateInput }) => {
     const state = useSelector(state => state);
     const dispatch = useDispatch();
-    const handleChange = e => dispatch(updateInput(e.target.value));
+    const handleChange = e => updateInput(e.target.value);
     return (
         <Fragment>
             <h1>Home</h1>
@@ -19,6 +19,12 @@ const Index = () => {
     );
 };
 
+const mapStateToProps = state => ({ input: state });
+
+const mapDispatchToProps = {
+    updateInput: updateInputActions.updateInput
+};
+
 export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
     if (store.getState().history.length === 0) {
         store.dispatch(getHistory());
@@ -27,4 +33,4 @@ export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
     await store.sagaTask.toPromise();
 });
 
-export default Index;
+export default connect(mapStateToProps, mapDispatchToProps)(Index);

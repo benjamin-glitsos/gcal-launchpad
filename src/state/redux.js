@@ -14,6 +14,3 @@ export class UpdateInput {
 export const [updateInputReducer, updateInputActions] = createUpdater(
     UpdateInput
 );
-
-counterReducer;
-counterActions;
