@@ -6,10 +6,6 @@ export const [userReducer, userActions] = createUpdater(
         state = {
             username: "default"
         };
-
-        updateUser({ username }) {
-            return { username };
-        }
     }
 );
 
