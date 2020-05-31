@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Counter from "./counter";
 
 function Page({ linkTo, NavigateTo, title }) {
-    const placeholderData = useSelector(state => state.placeholderData);
+    const history = useSelector(state => state.history);
     const error = useSelector(state => state.error);
     const light = useSelector(state => state.light);
     const lastUpdate = useSelector(state => state.lastUpdate);
@@ -17,9 +17,9 @@ function Page({ linkTo, NavigateTo, title }) {
                     <a>Navigate: {NavigateTo}</a>
                 </Link>
             </nav>
-            {placeholderData && (
+            {history && (
                 <pre>
-                    <code>{JSON.stringify(placeholderData, null, 2)}</code>
+                    <code>{JSON.stringify(history, null, 2)}</code>
                 </pre>
             )}
             {error && <p style={{ color: "red" }}>Error: {error.message}</p>}

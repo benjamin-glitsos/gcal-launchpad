@@ -2,8 +2,7 @@ import { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { END } from "redux-saga";
 import { wrapper } from "~/state/store";
-import { loadData, updateInput } from "~/state/actions";
-import Counter from "~/components/counter";
+import { getHistory, updateInput } from "~/state/actions";
 
 const Index = () => {
     // useEffect(() => {}, [dispatch]);
@@ -14,7 +13,6 @@ const Index = () => {
         <Fragment>
             <h1>Home</h1>
             <input type="text" onChange={handleChange} />
-            <Counter />
             <p>State:</p>
             <code>{JSON.stringify(state)}</code>
         </Fragment>
@@ -22,8 +20,8 @@ const Index = () => {
 };
 
 export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
-    if (!store.getState().placeholderData) {
-        store.dispatch(loadData());
+    if (!store.getState().history) {
+        store.dispatch(getHistory());
         store.dispatch(END);
     }
     await store.sagaTask.toPromise();

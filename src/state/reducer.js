@@ -1,14 +1,12 @@
 import { actionTypes } from "./actions";
 
-export const exampleInitialState = {
+export const initialState = {
     input: "",
-    count: 0,
     error: false,
-    lastUpdate: 0,
-    placeholderData: null
+    history: null
 };
 
-function reducer(state = exampleInitialState, action) {
+function reducer(state = initialState, action) {
     switch (action.type) {
         case "__NEXT_REDUX_WRAPPER_HYDRATE__": {
             return { ...state, ...action.payload };
@@ -20,34 +18,16 @@ function reducer(state = exampleInitialState, action) {
                 ...{ error: action.error }
             };
 
-        case actionTypes.INCREMENT:
-            return {
-                ...state,
-                ...{ count: state.count + 1 }
-            };
-
-        case actionTypes.DECREMENT:
-            return {
-                ...state,
-                ...{ count: state.count - 1 }
-            };
-
         case actionTypes.UPDATE_INPUT:
             return {
                 ...state,
                 ...{ input: action.data }
             };
 
-        case actionTypes.RESET:
+        case actionTypes.GET_HISTORY_SUCCESS:
             return {
                 ...state,
-                ...{ count: exampleInitialState.count }
-            };
-
-        case actionTypes.LOAD_DATA_SUCCESS:
-            return {
-                ...state,
-                ...{ placeholderData: action.data }
+                ...{ history: action.data }
             };
 
         default:

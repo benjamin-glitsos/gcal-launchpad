@@ -17,6 +17,8 @@ module.exports = {
         return config;
     },
     env: {
-        settings: {}
+        settings: {
+            api: "http://localhost:3000/api/"
+        }
     }
 };

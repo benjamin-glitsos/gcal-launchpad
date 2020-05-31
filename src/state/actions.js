@@ -1,11 +1,8 @@
 export const actionTypes = {
     FAILURE: "FAILURE",
-    INCREMENT: "INCREMENT",
-    DECREMENT: "DECREMENT",
     UPDATE_INPUT: "UPDATE_INPUT",
-    RESET: "RESET",
-    LOAD_DATA: "LOAD_DATA",
-    LOAD_DATA_SUCCESS: "LOAD_DATA_SUCCESS",
+    GET_HISTORY: "GET_HISTORY",
+    GET_HISTORY_SUCCESS: "GET_HISTORY_SUCCESS",
     HYDRATE: "HYDRATE"
 };
 
@@ -16,29 +13,17 @@ export function failure(error) {
     };
 }
 
-export function increment() {
-    return { type: actionTypes.INCREMENT };
-}
-
-export function decrement() {
-    return { type: actionTypes.DECREMENT };
-}
-
 export function updateInput(data) {
     return { type: actionTypes.UPDATE_INPUT, data };
 }
 
-export function reset() {
-    return { type: actionTypes.RESET };
+export function getHistory() {
+    return { type: actionTypes.GET_HISTORY };
 }
 
-export function loadData() {
-    return { type: actionTypes.LOAD_DATA };
-}
-
-export function loadDataSuccess(data) {
+export function getHistorySuccess(data) {
     return {
-        type: actionTypes.LOAD_DATA_SUCCESS,
+        type: actionTypes.GET_HISTORY_SUCCESS,
         data
     };
 }
