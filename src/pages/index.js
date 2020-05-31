@@ -1,18 +1,28 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, Fragment } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { END } from "redux-saga";
 import { wrapper } from "~/state/store";
 import { loadData } from "~/state/actions";
-import Page from "~/components/page";
+import Counter from "~/components/counter";
 
 const Index = () => {
     // const dispatch = useDispatch();
-    //
     // useEffect(() => {}, [dispatch]);
+    const placeholderData = useSelector(state => state.placeholderData);
+    const error = useSelector(state => state.error);
+    const light = useSelector(state => state.light);
+    const lastUpdate = useSelector(state => state.lastUpdate);
     return (
-        <>
-            <Page title="Index Page" linkTo="/other" NavigateTo="Other Page" />
-        </>
+        <Fragment>
+            <h1>Home</h1>
+            <Counter />
+            {placeholderData && (
+                <pre>
+                    <code>{JSON.stringify(placeholderData, null, 2)}</code>
+                </pre>
+            )}
+            {error && <p style={{ color: "red" }}>Error: {error.message}</p>}
+        </Fragment>
     );
 };
 
