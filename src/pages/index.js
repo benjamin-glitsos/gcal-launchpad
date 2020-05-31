@@ -6,11 +6,9 @@ import { loadData } from "~/state/actions";
 import Counter from "~/components/counter";
 
 const Index = () => {
-    // const dispatch = useDispatch();
     // useEffect(() => {}, [dispatch]);
     const placeholderData = useSelector(state => state.placeholderData);
     const error = useSelector(state => state.error);
-    const light = useSelector(state => state.light);
     const lastUpdate = useSelector(state => state.lastUpdate);
     return (
         <Fragment>
