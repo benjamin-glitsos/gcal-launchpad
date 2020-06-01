@@ -16,6 +16,15 @@ import {
     sequenceOf
 } from "arcsecond";
 
+const timeZone = "Australia/Sydney";
+
+const symbols = {
+    day: "d",
+    week: "w",
+    month: "m",
+    year: "y"
+};
+
 const unchars = s => s.join("");
 
 const whitespaces = many(whitespace);
@@ -24,18 +33,37 @@ const notWhitespaces = many1(anythingExcept(whitespace)).map(unchars);
 
 const words = sepBy1(whitespace)(notWhitespaces);
 
-const daySymbol = char("d");
-
 const anything = regex(/^.*/);
+
+const now = moment(new Date(), timeZone);
+
+const createDay = ({ optionalNumber = 0, unit }) => {
+    switch (unit) {
+        case "d":
+            return now.add(optionalNumber, "days");
+            break;
+        case "w":
+            return now.add(optionalNumber, "weeks");
+            break;
+        case "m":
+            return now.add(optionalNumber, "months");
+            break;
+        case "y":
+            return now.add(optionalNumber, "years");
+            break;
+        default:
+            return now;
+    }
+};
 
 const day = coroutine(function* () {
     const optionalNumber = yield possibly(digits);
 
-    const unit = yield daySymbol;
+    const unit = yield choice(Object.values(symbols).map(c => char(c)));
 
     yield whitespaces;
 
-    return { optionalNumber, unit };
+    return createDay({ optionalNumber, unit });
 });
 
 const event = coroutine(function* () {
