@@ -1,5 +1,6 @@
 import moment from "moment";
 import {
+    sepBy,
     sepBy1,
     whitespace,
     many,
@@ -11,7 +12,8 @@ import {
     digits,
     choice,
     coroutine,
-    regex
+    regex,
+    sequenceOf
 } from "arcsecond";
 
 const unchars = s => s.join("");
@@ -22,22 +24,24 @@ const notWhitespaces = many1(anythingExcept(whitespace)).map(unchars);
 
 const words = sepBy1(whitespace)(notWhitespaces);
 
-// const unitSymbol = choice(symbols.keys.map(c => char(c)));
+const daySymbol = char("d");
 
 const anything = regex(/^.*/);
 
-const event = coroutine(function* () {
-    const day = coroutine(function* () {
-        const optionalNumber = yield possibly(digits);
+const day = coroutine(function* () {
+    const optionalNumber = yield possibly(digits);
 
-        const unit = yield possibly(char("d"));
-
-        return { optionalNumber, unit };
-    });
+    const unit = yield daySymbol;
 
     yield whitespaces;
 
-    const optionalDay = yield possibly(date);
+    return { optionalNumber, unit };
+});
+
+const event = coroutine(function* () {
+    yield whitespaces;
+
+    const days = yield sepBy(sequenceOf([char(","), whitespaces]))(day);
 
     yield whitespaces;
 
@@ -45,7 +49,7 @@ const event = coroutine(function* () {
 
     yield whitespaces;
 
-    return { optionalDay, title };
+    return { days, title };
 });
 
 export default function parser(s) {
