@@ -10,7 +10,8 @@ import {
     char,
     digits,
     choice,
-    coroutine
+    coroutine,
+    regex
 } from "arcsecond";
 
 const unchars = s => s.join("");
@@ -23,16 +24,28 @@ const words = sepBy1(whitespace)(notWhitespaces);
 
 // const unitSymbol = choice(symbols.keys.map(c => char(c)));
 
+const anything = regex(/^.*/);
+
 const event = coroutine(function* () {
-    const lead = yield possibly(digits);
+    const day = coroutine(function* () {
+        const optionalNumber = yield possibly(digits);
 
-    // const unit = yield possibly(unitSymbol).map(ifNil(symbols.key("today")));
+        const unit = yield possibly(char("d"));
 
-    const space = yield whitespaces;
+        return { optionalNumber, unit };
+    });
 
-    const title = yield many(anythingExcept(char(".")));
+    yield whitespaces;
 
-    return { lead, title };
+    const optionalDay = yield possibly(date);
+
+    yield whitespaces;
+
+    const title = yield possibly(anything);
+
+    yield whitespaces;
+
+    return { optionalDay, title };
 });
 
 export default function parser(s) {
