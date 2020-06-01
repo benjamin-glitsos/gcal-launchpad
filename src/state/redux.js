@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import { createUpdater } from "redux-lightweight";
+import parser from "~/lib/parser";
 
 export const [userReducer, userActions] = createUpdater(
     class User {
@@ -31,6 +32,25 @@ export const [inputReducer, inputActions] = createUpdater(
         updateInput(data) {
             return data;
         }
+
+        clearInput(data) {
+            return this.state;
+        }
+    }
+);
+
+export const [reviewReducer, reviewActions] = createUpdater(
+    class Review {
+        // state = [];
+        state = null;
+
+        parseEvents(s) {
+            return parser(s);
+        }
+
+        clearReview(data) {
+            return this.state;
+        }
     }
 );
 
@@ -55,5 +75,6 @@ export const [historyReducer, historyActions] = createUpdater(
 export const rootReducer = combineReducers({
     user: userReducer,
     input: inputReducer,
+    review: reviewReducer,
     history: historyReducer
 });

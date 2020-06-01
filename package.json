@@ -8,9 +8,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "arcsecond": "2.0.4",
     "conds": "0.0.1",
     "dotenv": "8.2.0",
     "es6-promise": "4.1.1",
+    "moment": "2.26.0",
     "next": "latest",
     "next-redux-wrapper": "6.0.0",
     "pg": "8.2.1",

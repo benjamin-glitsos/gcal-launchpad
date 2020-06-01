@@ -2,19 +2,24 @@ import { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { END } from "redux-saga";
 import { wrapper } from "~/state/store";
-import { inputActions, historyActions } from "~/state/redux";
+import { inputActions, reviewActions, historyActions } from "~/state/redux";
 
 const Index = () => {
     const state = useSelector(state => state);
     const dispatch = useDispatch();
-    const handleChange = e =>
-        dispatch(inputActions.updateInput(e.target.value));
+    const handleChange = e => {
+        const input = e.target.value;
+        dispatch(inputActions.updateInput(input));
+        dispatch(reviewActions.parseEvents(input));
+    };
     return (
         <Fragment>
             <h1>Home</h1>
             <input type="text" onChange={handleChange} />
             <h2>State:</h2>
-            <code>{JSON.stringify(state)}</code>
+            <pre>
+                <code>{JSON.stringify(state, null, 4)}</code>
+            </pre>
         </Fragment>
     );
 };
