@@ -1,15 +1,42 @@
 import moment from "moment";
-
-import { sepBy1, whitespace, many1, anythingExcept } from "arcsecond";
+import {
+    sepBy1,
+    whitespace,
+    many,
+    many1,
+    anythingExcept,
+    possibly,
+    number,
+    char,
+    digits,
+    choice,
+    coroutine
+} from "arcsecond";
 
 const unchars = s => s.join("");
+
+const whitespaces = many(whitespace);
 
 const notWhitespaces = many1(anythingExcept(whitespace)).map(unchars);
 
 const words = sepBy1(whitespace)(notWhitespaces);
 
+// const unitSymbol = choice(symbols.keys.map(c => char(c)));
+
+const event = coroutine(function* () {
+    const lead = yield possibly(digits);
+
+    // const unit = yield possibly(unitSymbol).map(ifNil(symbols.key("today")));
+
+    const space = yield whitespaces;
+
+    const title = yield many(anythingExcept(char(".")));
+
+    return { lead, title };
+});
+
 export default function parser(s) {
-    return words.fork(
+    return event.fork(
         s,
         (error, parsingState) => error,
         (result, parsingState) => result

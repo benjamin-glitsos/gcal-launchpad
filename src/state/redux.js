@@ -41,8 +41,10 @@ export const [inputReducer, inputActions] = createUpdater(
 
 export const [reviewReducer, reviewActions] = createUpdater(
     class Review {
-        // state = [];
-        state = null;
+        state = {
+            lead: [],
+            title: []
+        };
 
         parseEvents(s) {
             return parser(s);
