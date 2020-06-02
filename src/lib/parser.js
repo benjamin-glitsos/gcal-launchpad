@@ -17,8 +17,6 @@ import {
 } from "arcsecond";
 import { cond } from "~/lib/utilities";
 
-const timeZone = "Australia/Sydney";
-
 const symbols = {
     day: "d",
     week: "w",
@@ -36,15 +34,24 @@ const words = sepBy1(whitespace)(notWhitespaces);
 
 const anything = regex(/^.*/);
 
-const now = moment(new Date(), timeZone);
+const now = moment(new Date(), process.env.settings.timeZone);
 
 const createDay = (optionalNumber = 0, unit) => {
     const isUnit = s => unit === s;
     return cond([
         { case: x => !optionalNumber, return: now },
-        { case: isUnit("d"), return: now.add(optionalNumber, "days") },
-        { case: isUnit("w"), return: now.add(optionalNumber, "weeks") },
-        { case: isUnit("m"), return: now.add(optionalNumber, "months") },
+        {
+            case: isUnit("d"),
+            return: now.add(optionalNumber, "days").format("yyyy-mm-dd")
+        },
+        {
+            case: isUnit("w"),
+            return: now.add(optionalNumber, "weeks")
+        },
+        {
+            case: isUnit("m"),
+            return: now.add(optionalNumber, "months")
+        },
         { case: isUnit("y"), return: now.add(optionalNumber, "years") }
     ])(true);
 };
