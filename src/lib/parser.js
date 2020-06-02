@@ -68,7 +68,7 @@ const event = coroutine(function* () {
 
     yield whitespaces;
 
-    return { days, title };
+    return { title, days };
 });
 
 export default function parser(s) {
