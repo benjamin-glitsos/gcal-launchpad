@@ -15,6 +15,7 @@ const Index = () => {
     return (
         <Fragment>
             <h1>Home</h1>
+            {/* TODO: add handler for Enter and C-Enter so that this actually pushes to Review state and clears input */}
             <input type="text" onChange={handleChange} />
             <h2>State:</h2>
             <pre>

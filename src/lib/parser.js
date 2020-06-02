@@ -15,6 +15,7 @@ import {
     regex,
     sequenceOf
 } from "arcsecond";
+import { cond } from "~/lib/utilities";
 
 const timeZone = "Australia/Sydney";
 
@@ -37,23 +38,15 @@ const anything = regex(/^.*/);
 
 const now = moment(new Date(), timeZone);
 
-const createDay = ({ optionalNumber = 0, unit }) => {
-    switch (unit) {
-        case "d":
-            return now.add(optionalNumber, "days");
-            break;
-        case "w":
-            return now.add(optionalNumber, "weeks");
-            break;
-        case "m":
-            return now.add(optionalNumber, "months");
-            break;
-        case "y":
-            return now.add(optionalNumber, "years");
-            break;
-        default:
-            return now;
-    }
+const createDay = (optionalNumber = 0, unit) => {
+    const isUnit = s => unit === s;
+    return cond([
+        { case: x => !optionalNumber, return: now },
+        { case: isUnit("d"), return: now.add(optionalNumber, "days") },
+        { case: isUnit("w"), return: now.add(optionalNumber, "weeks") },
+        { case: isUnit("m"), return: now.add(optionalNumber, "months") },
+        { case: isUnit("y"), return: now.add(optionalNumber, "years") }
+    ])(true);
 };
 
 const day = coroutine(function* () {
@@ -63,7 +56,7 @@ const day = coroutine(function* () {
 
     yield whitespaces;
 
-    return createDay({ optionalNumber, unit });
+    return createDay(optionalNumber, unit);
 });
 
 const event = coroutine(function* () {
@@ -81,9 +74,14 @@ const event = coroutine(function* () {
 });
 
 export default function parser(s) {
+    // TODO: make this run the redux success or failure actions
     return event.fork(
         s,
-        (error, parsingState) => error,
+        (error, parsingState) => {
+            // TODO: remove this console.error ?
+            console.error(error);
+            return s;
+        },
         (result, parsingState) => result
     );
 }
