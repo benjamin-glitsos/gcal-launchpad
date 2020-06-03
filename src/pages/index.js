@@ -8,8 +8,8 @@ import { inputActions, reviewActions, historyActions } from "~/state/redux";
 const Index = () => {
     const dispatch = useDispatch();
     const state = useSelector(state => state);
-    const input = useSelector(state => state.input);
-    const onChange = e => {
+    const inputState = useSelector(state => state.input);
+    const onChangeHandler = e => {
         e.preventDefault();
         const value = e.target.value;
         dispatch(inputActions.update(e.target.value));
@@ -19,7 +19,7 @@ const Index = () => {
             dispatch(reviewActions.clear());
         }
     };
-    const onKeyPress = e => {
+    const onKeyPressHandler = e => {
         if (e.key === "Enter") {
             dispatch(reviewActions.enter());
             dispatch(inputActions.clear());
@@ -27,12 +27,13 @@ const Index = () => {
     };
     return (
         <Fragment>
+            {/* TODO: make parser always return today as default instead of empty array for 'days' object key */}
             <Input
                 type="text"
                 placeholder="d, 2d, 2w buy some milk"
-                value={input}
-                onChange={onChange}
-                onKeyPress={onKeyPress}
+                value={inputState}
+                onChange={onChangeHandler}
+                onKeyPress={onKeyPressHandler}
             />
             <pre>
                 <code>{JSON.stringify(state, null, 4)}</code>
