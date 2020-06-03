@@ -18,6 +18,7 @@ import {
 import { cond } from "~/lib/utilities";
 
 const symbols = {
+    today: "t",
     day: "d",
     week: "w",
     month: "m",
@@ -40,10 +41,12 @@ const createDay = (optionalNumber = 0, unit) => {
     const future = momentUnit => now.add(optionalNumber, momentUnit);
     return cond([
         { case: x => !optionalNumber, return: now },
-        { case: isUnit("d"), return: future("days") },
-        { case: isUnit("w"), return: future("weeks") },
-        { case: isUnit("m"), return: future("months") },
-        { case: isUnit("y"), return: future("years") }
+        { case: isUnit(symbols.today), return: now },
+        { case: isUnit(symbols.day), return: future("days") },
+        { case: isUnit(symbols.week), return: future("weeks") },
+        { case: isUnit(symbols.month), return: future("months") },
+        { case: isUnit(symbols.year), return: future("years") }
+        { case: true, return: now }
     ])(true);
 };
 

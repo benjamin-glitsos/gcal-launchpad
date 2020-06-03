@@ -47,6 +47,8 @@ export const [reviewReducer, reviewActions] = createUpdater(
 
         state = this.empty;
 
+        // TODO: use indexed object instead of array
+        // TODO: Use Immer
         parse(s) {
             return [parser(s)].concat(this.state.slice(1));
         }

@@ -27,6 +27,7 @@ const Index = () => {
     };
     return (
         <Fragment>
+            <h1>{process.env.settings.title}</h1>
             {/* TODO: make parser always return today as default instead of empty array for 'days' object key */}
             <Input
                 type="text"
