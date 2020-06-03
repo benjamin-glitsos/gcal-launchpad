@@ -10,10 +10,10 @@ function* getUserSaga() {
         const username = yield select(state => state.user.username);
         const res = yield fetch(process.env.settings.api + "user/" + username);
         const data = yield res.json();
-        yield put(userActions.updateUserSuccess(data));
+        yield put(userActions.updateSuccess(data));
     } catch (err) {
         console.error(err);
-        yield put(userActions.updateUserFailure());
+        yield put(userActions.updateFailure());
     }
 }
 
@@ -29,10 +29,10 @@ function* getHistorySaga() {
             ].join("")
         );
         const data = yield res.json();
-        yield put(historyActions.updateHistorySuccess(data));
+        yield put(historyActions.updateSuccess(data));
     } catch (err) {
         console.error(err);
-        yield put(historyActions.updateHistoryFailure());
+        yield put(historyActions.updateFailure());
     }
 }
 
@@ -40,8 +40,8 @@ function* rootSaga() {
     yield all([
         call(getUserSaga),
         call(getHistorySaga),
-        takeLatest(historyActions.updateHistory.type, getHistorySaga),
-        takeLatest(userActions.updateUser.type, getUserSaga)
+        takeLatest(historyActions.update.type, getHistorySaga),
+        takeLatest(userActions.update.type, getUserSaga)
     ]);
 }
 

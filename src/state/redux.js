@@ -8,18 +8,18 @@ export const [userReducer, userActions] = createUpdater(
             username: "default_user"
         };
 
-        updateUser() {
+        update() {
             return this.state;
         }
 
-        updateUserSuccess({ username, app_id }) {
+        updateSuccess({ username, app_id }) {
             return {
                 username,
                 app_id
             };
         }
 
-        updateUserFailure() {
+        updateFailure() {
             return this.state;
         }
     }
@@ -69,15 +69,15 @@ export const [historyReducer, historyActions] = createUpdater(
     class History {
         state = [];
 
-        updateHistory() {
+        update() {
             return this.state;
         }
 
-        updateHistorySuccess(data) {
+        updateSuccess(data) {
             return data;
         }
 
-        updateHistoryFailure(err) {
+        updateFailure(err) {
             return this.state;
         }
     }
