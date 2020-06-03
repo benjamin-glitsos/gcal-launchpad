@@ -1,6 +1,7 @@
 import { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { END } from "redux-saga";
+import { Heading } from "rebass";
 import { Input } from "@rebass/forms";
 import { wrapper } from "~/state/store";
 import { inputActions, reviewActions, historyActions } from "~/state/redux";
@@ -27,7 +28,7 @@ const Index = () => {
     };
     return (
         <Fragment>
-            <h1>{process.env.settings.title}</h1>
+            <Heading>{process.env.settings.title}</Heading>
             {/* TODO: make parser always return today as default instead of empty array for 'days' object key */}
             <Input
                 type="text"
@@ -35,6 +36,7 @@ const Index = () => {
                 value={inputState}
                 onChange={onChangeHandler}
                 onKeyPress={onKeyPressHandler}
+                my={4}
             />
             <pre>
                 <code>{JSON.stringify(state, null, 4)}</code>

@@ -45,7 +45,7 @@ const createDay = (optionalNumber = 0, unit) => {
         { case: isUnit(symbols.day), return: future("days") },
         { case: isUnit(symbols.week), return: future("weeks") },
         { case: isUnit(symbols.month), return: future("months") },
-        { case: isUnit(symbols.year), return: future("years") }
+        { case: isUnit(symbols.year), return: future("years") },
         { case: true, return: now }
     ])(true);
 };
