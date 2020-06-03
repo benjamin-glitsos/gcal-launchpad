@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@rebass/forms": "4.0.6",
     "arcsecond": "2.0.4",
     "conds": "0.0.1",
     "dotenv": "8.2.0",
@@ -19,6 +20,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-redux": "7.2.0",
+    "rebass": "4.0.7",
     "redux": "4.0.5",
     "redux-lightweight": "1.1.2",
     "redux-saga": "1.1.3"

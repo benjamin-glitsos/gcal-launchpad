@@ -1,23 +1,39 @@
 import { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { END } from "redux-saga";
+import { Input } from "@rebass/forms";
 import { wrapper } from "~/state/store";
 import { inputActions, reviewActions, historyActions } from "~/state/redux";
 
 const Index = () => {
-    const state = useSelector(state => state);
     const dispatch = useDispatch();
-    const handleChange = e => {
-        const input = e.target.value;
-        dispatch(inputActions.updateInput(input));
-        dispatch(reviewActions.parseEvents(input));
+    const state = useSelector(state => state);
+    const input = useSelector(state => state.input);
+    const onChange = e => {
+        e.preventDefault();
+        const value = e.target.value;
+        dispatch(inputActions.update(e.target.value));
+        if (value.length > 0) {
+            dispatch(reviewActions.parse(input));
+        } else {
+            dispatch(reviewActions.clear());
+        }
+    };
+    const onKeyPress = e => {
+        if (e.key === "Enter") {
+            dispatch(reviewActions.enter());
+            dispatch(inputActions.clear());
+        }
     };
     return (
         <Fragment>
-            <h1>Home</h1>
-            {/* TODO: add handler for Enter and C-Enter so that this actually pushes to Review state and clears input */}
-            <input type="text" onChange={handleChange} />
-            <h2>State:</h2>
+            <Input
+                type="text"
+                placeholder="d, 2d, 2w buy some milk"
+                value={input}
+                onChange={onChange}
+                onKeyPress={onKeyPress}
+            />
             <pre>
                 <code>{JSON.stringify(state, null, 4)}</code>
             </pre>

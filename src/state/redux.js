@@ -27,31 +27,40 @@ export const [userReducer, userActions] = createUpdater(
 
 export const [inputReducer, inputActions] = createUpdater(
     class Input {
-        state = "";
+        empty = "";
 
-        updateInput(data) {
+        state = this.empty;
+
+        update(data) {
             return data;
         }
 
-        clearInput(data) {
-            return this.state;
+        clear(data) {
+            return this.empty;
         }
     }
 );
 
 export const [reviewReducer, reviewActions] = createUpdater(
     class Review {
-        state = {
-            title: "",
-            days: []
-        };
+        empty = [{}];
 
-        parseEvents(s) {
-            return parser(s);
+        state = this.empty;
+
+        parse(s) {
+            return [parser(s)].concat(this.state.slice(1));
         }
 
-        clearReview(data) {
-            return this.state;
+        enter() {
+            if (Object.keys(this.state[0]).length > 0) {
+                return this.empty.concat(this.state);
+            } else {
+                return this.state;
+            }
+        }
+
+        clear() {
+            return this.empty;
         }
     }
 );
