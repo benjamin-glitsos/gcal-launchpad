@@ -1,8 +1,8 @@
 import { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { END } from "redux-saga";
 import { Heading } from "rebass";
 import { Input } from "@rebass/forms";
+import { useUpdater } from "redux-lightweight";
 import { wrapper } from "~/state/store";
 import { inputActions, reviewActions, historyActions } from "~/state/redux";
 
@@ -13,9 +13,9 @@ const Index = () => {
     const onChangeHandler = e => {
         e.preventDefault();
         const value = e.target.value;
-        dispatch(inputActions.update(e.target.value));
+        dispatch(inputActions.update(value));
         if (value.length > 0) {
-            dispatch(reviewActions.parse(input));
+            dispatch(reviewActions.parse(value));
         } else {
             dispatch(reviewActions.clear());
         }

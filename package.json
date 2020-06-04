@@ -13,6 +13,7 @@
     "conds": "0.0.1",
     "dotenv": "8.2.0",
     "es6-promise": "4.1.1",
+    "immer": "6.0.9",
     "moment": "2.26.0",
     "next": "latest",
     "next-redux-wrapper": "6.0.0",

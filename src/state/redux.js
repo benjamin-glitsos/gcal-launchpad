@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import { createUpdater } from "redux-lightweight";
+import produce from "immer";
 import parser from "~/lib/parser";
 
 export const [userReducer, userActions] = createUpdater(
@@ -12,11 +13,8 @@ export const [userReducer, userActions] = createUpdater(
             return this.state;
         }
 
-        updateSuccess({ username, app_id }) {
-            return {
-                username,
-                app_id
-            };
+        updateSuccess(x) {
+            return x;
         }
 
         updateFailure() {
@@ -47,8 +45,6 @@ export const [reviewReducer, reviewActions] = createUpdater(
 
         state = this.empty;
 
-        // TODO: use indexed object instead of array
-        // TODO: Use Immer
         parse(s) {
             return [parser(s)].concat(this.state.slice(1));
         }
