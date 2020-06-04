@@ -2,9 +2,8 @@ import { pool } from "~/lib/database";
 
 export default async (req, res) => {
     const {
-        query: { slug }
+        query: { username }
     } = req;
-    const username = slug[0];
     try {
         const query = await pool.query(`
             SELECT *

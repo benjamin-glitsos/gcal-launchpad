@@ -10,12 +10,13 @@ const Index = () => {
     const dispatch = useDispatch();
     const state = useSelector(state => state);
     const inputState = useSelector(state => state.input);
+    const timeZone = useSelector(state => state.user.time_zone);
     const onChangeHandler = e => {
         e.preventDefault();
         const value = e.target.value;
         dispatch(inputActions.update(value));
         if (value.length > 0) {
-            dispatch(reviewActions.parse(value));
+            dispatch(reviewActions.parse(value, timeZone));
         } else {
             dispatch(reviewActions.clear());
         }

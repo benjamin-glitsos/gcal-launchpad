@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { useSelector } from "react-redux";
 import { createUpdater } from "redux-lightweight";
 import produce from "immer";
 import parser from "~/lib/parser";
@@ -13,8 +14,8 @@ export const [userReducer, userActions] = createUpdater(
             return this.state;
         }
 
-        updateSuccess(x) {
-            return x;
+        updateSuccess(data) {
+            return data[0];
         }
 
         updateFailure() {
@@ -45,8 +46,8 @@ export const [reviewReducer, reviewActions] = createUpdater(
 
         state = this.empty;
 
-        parse(s) {
-            return [parser(s)].concat(this.state.slice(1));
+        parse(s, timeZone) {
+            return [parser(s, { timeZone })].concat(this.state.slice(1));
         }
 
         enter() {
