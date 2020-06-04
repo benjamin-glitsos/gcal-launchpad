@@ -64,7 +64,9 @@ export default function parser(s, settings) {
     const event = coroutine(function* () {
         yield whitespaces;
 
-        const days = yield sepBy(sequenceOf([char(","), whitespaces]))(day);
+        const days = yield sepBy(sequenceOf([char(","), whitespaces]))(
+            day
+        ).map(ds => (ds.length === 0 ? [createDay(0, "d")] : ds));
 
         yield whitespaces;
 

@@ -42,7 +42,7 @@ export const [inputReducer, inputActions] = createUpdater(
 
 export const [reviewReducer, reviewActions] = createUpdater(
     class Review {
-        empty = [{}];
+        empty = [{ title: "", days: [] }];
 
         state = this.empty;
 
