@@ -1,8 +1,8 @@
 import App from "next/app";
 import { END } from "redux-saga";
-// import { ThemeProvider } from "theme-ui";
+import { ThemeProvider } from "theme-ui";
 import { wrapper } from "~/state/store";
-// import theme from "~/lib/theme";
+import theme from "~/lib/theme";
 
 class MyApp extends App {
     static async getInitialProps({ Component, ctx }) {
@@ -22,7 +22,11 @@ class MyApp extends App {
 
     render() {
         const { Component, pageProps } = this.props;
-        return <Component {...pageProps} />;
+        return (
+            <ThemeProvider theme={theme}>
+                <Component {...pageProps} />
+            </ThemeProvider>
+        );
     }
 }
 
