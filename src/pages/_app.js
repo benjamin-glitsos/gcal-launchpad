@@ -1,6 +1,8 @@
 import App from "next/app";
 import { END } from "redux-saga";
+// import { ThemeProvider } from "theme-ui";
 import { wrapper } from "~/state/store";
+// import theme from "~/lib/theme";
 
 class MyApp extends App {
     static async getInitialProps({ Component, ctx }) {

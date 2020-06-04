@@ -37,6 +37,7 @@ const Index = () => {
                 value={inputState}
                 onChange={onChangeHandler}
                 onKeyPress={onKeyPressHandler}
+                color="primary"
                 my={4}
             />
             <pre>
