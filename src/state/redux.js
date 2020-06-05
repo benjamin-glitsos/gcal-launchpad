@@ -95,6 +95,12 @@ export const [reviewReducer, reviewActions] = createUpdater(
             });
         }
 
+        updateDay({ reviewId, dayIndex, dayValue }) {
+            return produce(this.state, draft => {
+                draft.days[dayIndex] = dayValue;
+            });
+        }
+
         delete(ids) {
             return produce(this.state, draft => {
                 ids.forEach(id => {
