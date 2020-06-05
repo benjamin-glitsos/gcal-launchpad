@@ -11,7 +11,7 @@ export function* createId() {
     }
 }
 
-export const validateId = (id, f) => {
+export const ifValidId = (id, f) => {
     if (parseInt(id).isInteger()) {
         f();
     } else {

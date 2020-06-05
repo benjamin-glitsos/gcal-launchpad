@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { createUpdater } from "redux-lightweight";
 import produce from "immer";
 import parser from "~/lib/parser";
-import { validateId, createId } from "~/lib/utilities";
+import { ifValidId, createId } from "~/lib/utilities";
 
 export const [userReducer, userActions] = createUpdater(
     class User {
@@ -76,7 +76,7 @@ export const [reviewReducer, reviewActions] = createUpdater(
 
         update(id, j) {
             return produce(this.state, draft => {
-                validateId(id, () => {
+                ifValidId(id, () => {
                     draft[id] = { ...draft[id], ...j };
                 });
             });
@@ -85,7 +85,7 @@ export const [reviewReducer, reviewActions] = createUpdater(
         delete(ids) {
             return produce(this.state, draft => {
                 ids.map(id => {
-                    validateId(id, () => delete draft[id]);
+                    ifValidId(id, () => delete draft[id]);
                 });
             });
         }
