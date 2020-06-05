@@ -33,9 +33,12 @@ const Index = () => {
         <Fragment>
             <Heading color="primary">{process.env.settings.title}</Heading>
             {Object.entries(reviewState)
-                .filter(([key, val]) => val.status !== "EMPTY")
-                .map(([key, val]) => (
-                    <ReviewEvent {...{ key, ...val }} />
+                .filter(([id, values]) => values.status !== "EMPTY")
+                .map(([id, values]) => (
+                    <ReviewEvent
+                        {...{ id, ...values }}
+                        key={id + values.title}
+                    />
                 ))}
             <Input
                 type="text"

@@ -12,9 +12,7 @@ export function* createId() {
 }
 
 export const ifValidId = (id, f) => {
-    if (parseInt(id).isInteger()) {
+    if (!Number.isNaN(parseInt(id))) {
         f();
-    } else {
-        console.error("Cannot pass a non-integer ID.");
     }
 };

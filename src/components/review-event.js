@@ -7,25 +7,35 @@ export default function ReviewCard({ id, title, days, status }) {
     return (
         <Card>
             <ul>
-                <li>id</li>
-                <li>title</li>
-                <li>days</li>
-                <li>status</li>
+                <li>id: {id}</li>
+                <li>title: {title}</li>
+                <li>days: {days.toString()}</li>
+                <li>status: {status}</li>
             </ul>
-            <Button onClick={dispatch(reviewActions.delete([id]))}>
+            <Button onClick={() => dispatch(reviewActions.deleteAll())}>
+                Delete All
+            </Button>
+            <Button onClick={() => dispatch(reviewActions.delete([id]))}>
                 Delete
             </Button>
             <Button
-                onClick={dispatch(
-                    reviewActions.update(id, {
-                        title: "updated title",
-                        days: ["10-10-10", "20-20-20"]
-                    })
-                )}
+                onClick={() =>
+                    dispatch(
+                        reviewActions.update(id, {
+                            title: "updated title",
+                            days: ["10-10-10", "20-20-20"]
+                        })
+                    )
+                }
             >
                 Update some data
             </Button>
-            <Button onClick={dispatch(reviewActions.send([id]))}>Send</Button>
+            <Button onClick={() => dispatch(reviewActions.send([id]))}>
+                Send
+            </Button>
+            <Button onClick={() => dispatch(reviewActions.sendAll())}>
+                Send All
+            </Button>
         </Card>
     );
 }

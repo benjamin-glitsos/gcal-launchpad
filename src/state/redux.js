@@ -67,6 +67,12 @@ export const [reviewReducer, reviewActions] = createUpdater(
             });
         }
 
+        clear() {
+            return produce(this.state, draft => {
+                draft.new = this.empty.new;
+            });
+        }
+
         new() {
             return produce(this.state, draft => {
                 draft.new = this.empty.new;
@@ -90,12 +96,24 @@ export const [reviewReducer, reviewActions] = createUpdater(
             });
         }
 
-        // TODO: use saga for this
+        deleteAll() {
+            return this.empty;
+        }
+
         send(ids) {
             ids.forEach(id => {
-                console.log(id + this.codes.SEND_SUCCESS);
-                console.log(id + this.codes.SEND_FAILURE);
+                ifValidId(id, () => {
+                    // TODO: send saga actions from here
+                    console.log(id + this.codes.SEND_SUCCESS);
+                    console.log(id + this.codes.SEND_FAILURE);
+                });
             });
+            return this.state;
+        }
+
+        sendAll() {
+            this.send(Object.keys(this.state));
+            return this.state;
         }
     }
 );
