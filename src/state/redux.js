@@ -84,14 +84,15 @@ export const [reviewReducer, reviewActions] = createUpdater(
 
         delete(ids) {
             return produce(this.state, draft => {
-                ids.map(id => {
+                ids.forEach(id => {
                     ifValidId(id, () => delete draft[id]);
                 });
             });
         }
 
+        // TODO: use saga for this
         send(ids) {
-            ids.map(id => {
+            ids.forEach(id => {
                 console.log(id + this.codes.SEND_SUCCESS);
                 console.log(id + this.codes.SEND_FAILURE);
             });
