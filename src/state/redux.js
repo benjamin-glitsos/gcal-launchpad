@@ -45,14 +45,13 @@ export const [inputReducer, inputActions] = createUpdater(
 
 export const [reviewReducer, reviewActions] = createUpdater(
     class Review {
-        codes = {
-            EMPTY: "EMPTY",
-            REVIEW: "REVIEW",
-            SEND_SUCCESS: "SEND_SUCCESS",
-            SEND_FAILURE: "SEND_FAILURE"
+        empty = {
+            new: {
+                title: "",
+                days: [],
+                status: process.env.settings.symbols.review.EMPTY
+            }
         };
-
-        empty = { new: { title: "", days: [], status: this.codes.EMPTY } };
 
         state = this.empty;
 
@@ -62,7 +61,7 @@ export const [reviewReducer, reviewActions] = createUpdater(
             return produce(this.state, draft => {
                 draft.new = {
                     ...parser(s, { timeZone }),
-                    status: this.codes.REVIEW
+                    status: process.env.settings.symbols.review.REVIEW
                 };
             });
         }
@@ -100,19 +99,19 @@ export const [reviewReducer, reviewActions] = createUpdater(
             return this.empty;
         }
 
-        send(ids) {
-            ids.forEach(id => {
-                ifValidId(id, () => {
-                    // TODO: send saga actions from here
-                    console.log(id + this.codes.SEND_SUCCESS);
-                    console.log(id + this.codes.SEND_FAILURE);
-                });
-            });
+        send() {
             return this.state;
         }
 
         sendAll() {
-            this.send(Object.keys(this.state));
+            return this.state;
+        }
+
+        sendSuccess() {
+            return this.state;
+        }
+
+        sendFailure() {
             return this.state;
         }
     }

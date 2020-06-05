@@ -17,15 +17,9 @@ import {
 } from "arcsecond";
 import { cond } from "~/lib/utilities";
 
-export default function parser(s, settings) {
-    const symbols = {
-        today: "t",
-        day: "d",
-        week: "w",
-        month: "m",
-        year: "y"
-    };
+const symbols = process.env.settings.symbols.parser;
 
+export default function parser(s, settings) {
     const unchars = s => s.join("");
 
     const whitespaces = many(whitespace);
@@ -42,11 +36,11 @@ export default function parser(s, settings) {
         const future = momentUnit => now.add(optionalNumber, momentUnit);
         return cond([
             { case: x => !optionalNumber, return: now },
-            { case: isUnit(symbols.today), return: now },
-            { case: isUnit(symbols.day), return: future("days") },
-            { case: isUnit(symbols.week), return: future("weeks") },
-            { case: isUnit(symbols.month), return: future("months") },
-            { case: isUnit(symbols.year), return: future("years") },
+            { case: isUnit(symbols.TODAY), return: now },
+            { case: isUnit(symbols.DAY), return: future("days") },
+            { case: isUnit(symbols.WEEK), return: future("weeks") },
+            { case: isUnit(symbols.MONTH), return: future("months") },
+            { case: isUnit(symbols.YEAR), return: future("years") },
             { case: true, return: now }
         ])(true);
     };
