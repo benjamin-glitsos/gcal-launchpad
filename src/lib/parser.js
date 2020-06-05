@@ -24,6 +24,8 @@ export default function parser(s, settings) {
 
     const whitespaces = many(whitespace);
 
+    const whitespaces1 = many1(whitespace);
+
     const notWhitespaces = many1(anythingExcept(whitespace)).map(unchars);
 
     const words = sepBy1(whitespace)(notWhitespaces);
@@ -55,12 +57,20 @@ export default function parser(s, settings) {
         return createDay(optionalNumber, unit);
     });
 
+    const days = coroutine(function* () {
+        const dayValues = yield sepBy(sequenceOf([char(","), whitespaces]))(
+            day
+        ).map(ds => (ds.length === 0 ? [createDay(0, "d")] : ds));
+
+        yield whitespaces1;
+
+        return dayList;
+    });
+
     const event = coroutine(function* () {
         yield whitespaces;
 
-        const days = yield sepBy(sequenceOf([char(","), whitespaces]))(
-            day
-        ).map(ds => (ds.length === 0 ? [createDay(0, "d")] : ds));
+        const dayValues = yield possibly(days);
 
         yield whitespaces;
 
@@ -68,7 +78,7 @@ export default function parser(s, settings) {
 
         yield whitespaces;
 
-        return { title, days };
+        return { title, days: dayValues };
     });
 
     return event.fork(

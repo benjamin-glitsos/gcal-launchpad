@@ -31,9 +31,16 @@ const Index = () => {
     };
     return (
         <Fragment>
+            {/* TODO: make parser stop using the first letter unless it has a space */}
+            {/* after it */}
+            {/* TRY OUT THE FIX THAT IVE ALREADY MADE: BY USING WHITESPACE1 */}
             <Heading color="primary">{process.env.settings.title}</Heading>
             {Object.entries(reviewState)
-                .filter(([id, values]) => values.status !== "EMPTY")
+                .filter(
+                    ([id, values]) =>
+                        values.status !==
+                        process.env.settings.symbols.review.EMPTY
+                )
                 .map(([id, values]) => (
                     <ReviewEvent
                         {...{ id, ...values }}
