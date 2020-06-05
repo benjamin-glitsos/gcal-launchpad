@@ -49,13 +49,20 @@ export const [reviewReducer, reviewActions] = createUpdater(
             new: {
                 title: "",
                 days: [],
-                status: process.env.settings.symbols.review.EMPTY
+                status: process.env.settings.symbols.review.EMPTY,
+                isSelected: false
             }
         };
 
         state = this.empty;
 
         id = createId();
+
+        toggleSelect(id) {
+            return produce(this.state, draft => {
+                draft[id].isSelected = !draft[id].isSelected;
+            });
+        }
 
         parse(s, timeZone) {
             return produce(this.state, draft => {

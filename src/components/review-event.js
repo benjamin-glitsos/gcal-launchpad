@@ -1,8 +1,9 @@
 import { useDispatch } from "react-redux";
 import { Card, Button } from "rebass";
+import { Label, Checkbox } from "@rebass/forms";
 import { reviewActions } from "~/state/redux";
 
-export default function ReviewCard({ id, title, days, status }) {
+export default function ReviewCard({ id, title, days, status, isSelected }) {
     const dispatch = useDispatch();
     return (
         <Card>
@@ -12,6 +13,10 @@ export default function ReviewCard({ id, title, days, status }) {
                 <li>days: {days.toString()}</li>
                 <li>status: {status}</li>
             </ul>
+            <Label>
+                <Checkbox onClick={() => dispatch(reviewActions.toggleSelect(id)) />
+                Toggle Selected
+            </Label>
             <Button onClick={() => dispatch(reviewActions.deleteAll())}>
                 Delete All
             </Button>
