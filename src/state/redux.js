@@ -76,7 +76,7 @@ export const [reviewReducer, reviewActions] = createUpdater(
 
         update(id, j) {
             return produce(this.state, draft => {
-                this.validateId(id, () => {
+                validateId(id, () => {
                     draft[id] = { ...draft[id], ...j };
                 });
             });
@@ -85,7 +85,7 @@ export const [reviewReducer, reviewActions] = createUpdater(
         delete(ids) {
             return produce(this.state, draft => {
                 ids.map(id => {
-                    this.validateId(id, () => delete draft[id]);
+                    validateId(id, () => delete draft[id]);
                 });
             });
         }

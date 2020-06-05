@@ -5,11 +5,13 @@ import { Input } from "@rebass/forms";
 import { useUpdater } from "redux-lightweight";
 import { wrapper } from "~/state/store";
 import { inputActions, reviewActions, historyActions } from "~/state/redux";
+import ReviewEvent from "~/components/review-event";
 
 const Index = () => {
     const dispatch = useDispatch();
     const state = useSelector(state => state);
     const inputState = useSelector(state => state.input);
+    const reviewState = useSelector(state => state.review);
     const timeZone = useSelector(state => state.user.time_zone);
     const onChangeHandler = e => {
         e.preventDefault();
@@ -30,6 +32,11 @@ const Index = () => {
     return (
         <Fragment>
             <Heading color="primary">{process.env.settings.title}</Heading>
+            {Object.entries(reviewState)
+                .filter(([key, val]) => val.status !== "EMPTY")
+                .map(([key, val]) => (
+                    <ReviewEvent {...{ key, ...val }} />
+                ))}
             <Input
                 type="text"
                 placeholder="d, 2d, 2w buy some milk"
