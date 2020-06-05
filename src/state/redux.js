@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { createUpdater } from "redux-lightweight";
 import produce from "immer";
 import parser from "~/lib/parser";
+import { validateId, createId } from "~/lib/utilities";
 
 export const [userReducer, userActions] = createUpdater(
     class User {
@@ -55,14 +56,7 @@ export const [reviewReducer, reviewActions] = createUpdater(
 
         state = this.empty;
 
-        *createId() {
-            var index = 0;
-            while (true) {
-                yield index++;
-            }
-        }
-
-        id = this.createId();
+        id = createId();
 
         parse(s, timeZone) {
             return produce(this.state, draft => {
@@ -73,15 +67,34 @@ export const [reviewReducer, reviewActions] = createUpdater(
             });
         }
 
-        enter() {
+        new() {
             return produce(this.state, draft => {
-                draft.new = this.empty;
+                draft.new = this.empty.new;
                 draft[this.id.next().value] = this.state.new;
             });
         }
 
-        clear() {
-            return this.empty;
+        update(id, j) {
+            return produce(this.state, draft => {
+                this.validateId(id, () => {
+                    draft[id] = { ...draft[id], ...j };
+                });
+            });
+        }
+
+        delete(ids) {
+            return produce(this.state, draft => {
+                ids.map(id => {
+                    this.validateId(id, () => delete draft[id]);
+                });
+            });
+        }
+
+        send(ids) {
+            ids.map(id => {
+                console.log(id + this.codes.SEND_SUCCESS);
+                console.log(id + this.codes.SEND_FAILURE);
+            });
         }
     }
 );

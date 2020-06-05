@@ -23,7 +23,7 @@ const Index = () => {
     };
     const onKeyPressHandler = e => {
         if (e.key === "Enter") {
-            dispatch(reviewActions.enter());
+            dispatch(reviewActions.new());
             dispatch(inputActions.clear());
         }
     };
