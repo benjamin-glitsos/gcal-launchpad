@@ -31,6 +31,7 @@ module.exports = {
                 },
                 review: {
                     EMPTY: "EMPTY",
+                    EDITING: "EDITING",
                     REVIEW: "REVIEW",
                     SEND_SUCCESS: "SEND_SUCCESS",
                     SEND_FAILURE: "SEND_FAILURE"

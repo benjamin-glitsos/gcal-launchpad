@@ -87,6 +87,16 @@ export const [reviewReducer, reviewActions] = createUpdater(
             });
         }
 
+        manuallyCreateNew() {
+            return produce(this.state, draft => {
+                draft.new = {
+                    ...this.empty.new
+                    ...{ status: process.env.settings.symbols.review.EDITING }
+                };
+                draft[this.id.next().value] = this.state.new;
+            });
+        }
+
         update(id, j) {
             return produce(this.state, draft => {
                 ifValidId(id, () => {
