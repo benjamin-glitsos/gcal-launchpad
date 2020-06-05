@@ -40,8 +40,7 @@ function* sendReviewsSaga(ids) {
     try {
         ids.forEach(id => {
             ifValidId(id, () => {
-                console.log(id + process.env.settings.codes.review.SEND_SUCCESS);
-                console.log(id + process.env.settings.codes.review.SEND_FAILURE);
+                console.log(id + "send success");
             });
             yield put(reviewActions.sendSuccess());
         });
