@@ -17,13 +17,10 @@ export default function ReviewCard({ id, title, days, status }) {
             </Button>
             <Button
                 onClick={dispatch(
-                    reviewActions.update[
-                        (id,
-                        {
-                            title: "updated title",
-                            days: ["10-10-10", "20-20-20"]
-                        })
-                    ]
+                    reviewActions.update(id, {
+                        title: "updated title",
+                        days: ["10-10-10", "20-20-20"]
+                    })
                 )}
             >
                 Update some data
