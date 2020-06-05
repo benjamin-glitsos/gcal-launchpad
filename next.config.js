@@ -19,7 +19,7 @@ module.exports = {
     env: {
         settings: {
             title: "Google Calendar Launchpad",
-            reduxDebugMode: true,
+            reduxDebugMode: false,
             api: "http://localhost:3000/api/"
         }
     }

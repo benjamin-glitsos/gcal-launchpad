@@ -7,7 +7,9 @@ import parser from "~/lib/parser";
 export const [userReducer, userActions] = createUpdater(
     class User {
         state = {
-            username: "default_user"
+            username: "default_user",
+            app_id: "TEST",
+            time_zone: "Australia/Sydney"
         };
 
         update() {
@@ -42,20 +44,40 @@ export const [inputReducer, inputActions] = createUpdater(
 
 export const [reviewReducer, reviewActions] = createUpdater(
     class Review {
-        empty = [{ title: "", days: [] }];
+        codes = {
+            EMPTY: "EMPTY",
+            REVIEW: "REVIEW",
+            SEND_SUCCESS: "SEND_SUCCESS",
+            SEND_FAILURE: "SEND_FAILURE"
+        };
+
+        empty = { new: { title: "", days: [], status: this.codes.EMPTY } };
 
         state = this.empty;
 
+        *createId() {
+            var index = 0;
+            while (true) {
+                yield index++;
+            }
+        }
+
+        id = this.createId();
+
         parse(s, timeZone) {
-            return [parser(s, { timeZone })].concat(this.state.slice(1));
+            return produce(this.state, draft => {
+                draft.new = {
+                    ...parser(s, { timeZone }),
+                    status: this.codes.REVIEW
+                };
+            });
         }
 
         enter() {
-            if (Object.keys(this.state[0]).length > 0) {
-                return this.empty.concat(this.state);
-            } else {
-                return this.state;
-            }
+            return produce(this.state, draft => {
+                draft.new = this.empty;
+                draft[this.id.next().value] = this.state.new;
+            });
         }
 
         clear() {
