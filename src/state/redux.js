@@ -49,8 +49,9 @@ export const [reviewReducer, reviewActions] = createUpdater(
             new: {
                 title: "",
                 days: [],
+                isSelected: false,
                 status: process.env.settings.symbols.review.EMPTY,
-                isSelected: false
+                error: ""
             }
         };
 

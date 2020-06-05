@@ -43,6 +43,8 @@ function* sendReviewsSaga(ids) {
                 console.log(id + "send success");
             });
             yield put(reviewActions.sendSuccess());
+            // Then yield delay of a few seconds.
+           //  Then yield delete that item from the review pane
         });
     } catch (err) {
         console.error(err);
