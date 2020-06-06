@@ -33,6 +33,7 @@ module.exports = {
                     EMPTY: "EMPTY",
                     EDITING: "EDITING",
                     REVIEW: "REVIEW",
+                    SENDING: "SENDING",
                     SEND_SUCCESS: "SEND_SUCCESS",
                     SEND_FAILURE: "SEND_FAILURE"
                 }

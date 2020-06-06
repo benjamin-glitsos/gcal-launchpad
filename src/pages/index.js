@@ -40,6 +40,13 @@ const Index = () => {
             {/* Or not? */}
             {/* TODO: get google calendar api auth working and make an api that */}
             {/* posts the auth code returned to the user table of the database */}
+            {/* TODO: split redux classes into separate files and an index.js file for the root reducer */}
+            {/* TODO: instead of calendar dropdowns, for now just use this on the UI: */}
+            {/* IN: 1 days */}
+            {/* AND: 3 weeks */}
+            {/* (The number is editable and the unit is a dropdown) */}
+            {/* TODO: clicking on the review area will send the cursor to the input box? */}
+            {/* TODO: make the review area its own component */}
             <Heading color="primary">{process.env.settings.title}</Heading>
             {Object.entries(reviewState)
                 .filter(([id, values]) =>

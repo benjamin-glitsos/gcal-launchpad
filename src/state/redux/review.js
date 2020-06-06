@@ -1,47 +1,7 @@
-import { combineReducers } from "redux";
-import { useSelector } from "react-redux";
 import { createUpdater } from "redux-lightweight";
 import produce from "immer";
 import parser from "~/lib/parser";
 import { ifValidId, createId } from "~/lib/utilities";
-
-export const [userReducer, userActions] = createUpdater(
-    class User {
-        state = {
-            username: "default_user",
-            app_id: "TEST",
-            time_zone: "Australia/Sydney"
-        };
-
-        update() {
-            return this.state;
-        }
-
-        updateSuccess(data) {
-            return data[0];
-        }
-
-        updateFailure() {
-            return this.state;
-        }
-    }
-);
-
-export const [inputReducer, inputActions] = createUpdater(
-    class Input {
-        empty = "";
-
-        state = this.empty;
-
-        update(data) {
-            return data;
-        }
-
-        clear(data) {
-            return this.empty;
-        }
-    }
-);
 
 export const [reviewReducer, reviewActions] = createUpdater(
     class Review {
@@ -138,28 +98,3 @@ export const [reviewReducer, reviewActions] = createUpdater(
         }
     }
 );
-
-export const [historyReducer, historyActions] = createUpdater(
-    class History {
-        state = [];
-
-        update() {
-            return this.state;
-        }
-
-        updateSuccess(data) {
-            return data;
-        }
-
-        updateFailure(err) {
-            return this.state;
-        }
-    }
-);
-
-export const rootReducer = combineReducers({
-    user: userReducer,
-    input: inputReducer,
-    review: reviewReducer,
-    history: historyReducer
-});
