@@ -8,6 +8,7 @@ import { inputActions, reviewActions, historyActions } from "~/state/redux";
 import ReviewEvent from "~/components/review-event";
 
 const Index = () => {
+    const symbols = process.env.settings.symbols;
     const dispatch = useDispatch();
     const state = useSelector(state => state);
     const inputState = useSelector(state => state.input);
@@ -37,12 +38,14 @@ const Index = () => {
             {/* TODO: make button for selectAll and use that for the delete all, */}
             {/* send all operations? */}
             {/* Or not? */}
+            {/* TODO: get google calendar api auth working and make an api that */}
+            {/* posts the auth code returned to the user table of the database */}
             <Heading color="primary">{process.env.settings.title}</Heading>
             {Object.entries(reviewState)
-                .filter(
-                    ([id, values]) =>
-                        values.status !==
-                        process.env.settings.symbols.review.EMPTY
+                .filter(([id, values]) =>
+                    [symbols.review.REVIEW, symbols.review.EDITING].includes(
+                        values.status
+                    )
                 )
                 .map(([id, values]) => (
                     <ReviewEvent
