@@ -1,4 +1,3 @@
-import moment from "moment";
 import {
     sepBy,
     sepBy1,
@@ -15,9 +14,7 @@ import {
     regex,
     sequenceOf
 } from "arcsecond";
-import { cond } from "~/lib/utilities";
-
-const symbols = process.env.settings.symbols.parser;
+import { cond, createDay } from "~/lib/utilities";
 
 export default function parser(s, settings) {
     const unchars = s => s.join("");
@@ -32,39 +29,26 @@ export default function parser(s, settings) {
 
     const anything = regex(/^.*/);
 
-    const createDay = (optionalNumber = 0, unit) => {
-        const isUnit = s => unit === s;
-        const now = moment(new Date(), settings.timeZone);
-        const future = momentUnit => now.add(optionalNumber, momentUnit);
-        return cond([
-            { case: x => !optionalNumber, return: now },
-            { case: isUnit(symbols.TODAY), return: now },
-            { case: isUnit(symbols.DAY), return: future("days") },
-            { case: isUnit(symbols.WEEK), return: future("weeks") },
-            { case: isUnit(symbols.MONTH), return: future("months") },
-            { case: isUnit(symbols.YEAR), return: future("years") },
-            { case: true, return: now }
-        ])(true);
-    };
-
     const day = coroutine(function* () {
         const optionalNumber = yield possibly(digits);
 
-        const unit = yield choice(Object.values(symbols).map(c => char(c)));
+        const unit = yield choice(
+            Object.values(process.env.settings.symbols.parser).map(c => char(c))
+        );
 
         yield whitespaces;
 
-        return createDay(optionalNumber, unit);
+        return createDay(optionalNumber, unit, settings.timeZone);
     });
 
     const days = coroutine(function* () {
-        const dayValues = yield sepBy(sequenceOf([char(","), whitespaces]))(
-            day
-        );
+        const dayValues = yield sepBy1(
+            sequenceOf([whitespaces, char(","), whitespaces])
+        )(day);
 
         yield whitespaces1;
 
-        return dayList;
+        return dayValues;
     });
 
     const event = coroutine(function* () {
@@ -72,7 +56,7 @@ export default function parser(s, settings) {
 
         const dayValues = yield possibly(days).map(ds => {
             console.log(ds);
-            return !ds ? [createDay(0, "d")] : ds;
+            return !ds ? [createDay(0, "d", settings.timeZone)] : ds;
         });
 
         yield whitespaces;
