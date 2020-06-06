@@ -36,8 +36,6 @@ export default function parser(s, settings) {
             Object.values(process.env.settings.symbols.parser).map(c => char(c))
         );
 
-        yield whitespaces;
-
         return createDay(optionalNumber, unit, settings.timeZone);
     });
 
