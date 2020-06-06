@@ -14,9 +14,14 @@ export default function ReviewCard({ id, title, days, status, isSelected }) {
                 <li>status: {status}</li>
             </ul>
             <Label>
-                <Checkbox onClick={() => dispatch(reviewActions.toggleSelect(id)) />
+                <Checkbox
+                    onClick={() => dispatch(reviewActions.toggleSelect(id))}
+                />
                 Toggle Selected
             </Label>
+            <Button onClick={() => dispatch(reviewActions.manuallyCreateNew())}>
+                Manually Create New
+            </Button>
             <Button onClick={() => dispatch(reviewActions.deleteAll())}>
                 Delete All
             </Button>

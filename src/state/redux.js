@@ -67,10 +67,8 @@ export const [reviewReducer, reviewActions] = createUpdater(
 
         parse(s, timeZone) {
             return produce(this.state, draft => {
-                draft.new = {
-                    ...parser(s, { timeZone }),
-                    status: process.env.settings.symbols.review.REVIEW
-                };
+                draft.new.status = process.env.settings.symbols.review.REVIEW;
+                Object.assign(draft.new, parser(s, { timeZone }));
             });
         }
 
@@ -90,7 +88,7 @@ export const [reviewReducer, reviewActions] = createUpdater(
         manuallyCreateNew() {
             return produce(this.state, draft => {
                 draft.new = {
-                    ...this.empty.new
+                    ...this.empty.new,
                     ...{ status: process.env.settings.symbols.review.EDITING }
                 };
                 draft[this.id.next().value] = this.state.new;

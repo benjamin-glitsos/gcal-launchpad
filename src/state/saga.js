@@ -38,14 +38,14 @@ function* getHistorySaga() {
 
 function* sendReviewsSaga(ids) {
     try {
-        ids.forEach(id => {
-            ifValidId(id, () => {
-                console.log(id + "send success");
-            });
-            yield put(reviewActions.sendSuccess());
-            // Then yield delay of a few seconds.
-           //  Then yield delete that item from the review pane
-        });
+        // ids.forEach(id => {
+        //     ifValidId(id, () => {
+        //         console.log(id + "send success");
+        //     });
+        //     yield put(reviewActions.sendSuccess());
+        //     // Then yield delay of a few seconds.
+        //    //  Then yield delete that item from the review pane
+        // });
     } catch (err) {
         console.error(err);
         yield put(reviewActions.sendFailure());
@@ -53,7 +53,7 @@ function* sendReviewsSaga(ids) {
 }
 
 function* sendAllReviewsSaga() {
-    yield SendReviewsSaga(Object.keys(this.state));
+    // yield SendReviewsSaga(Object.keys(this.state));
 }
 
 function* rootSaga() {
