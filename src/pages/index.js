@@ -4,7 +4,11 @@ import { Heading } from "rebass";
 import { Input } from "@rebass/forms";
 import { useUpdater } from "redux-lightweight";
 import { wrapper } from "~/state/store";
-import { inputActions, reviewActions, historyActions } from "~/state/redux";
+import {
+    inputActions,
+    reviewActions,
+    historyActions
+} from "~/state/redux/input";
 import ReviewEvent from "~/components/review-event";
 
 const Index = () => {
@@ -40,7 +44,6 @@ const Index = () => {
             {/* Or not? */}
             {/* TODO: get google calendar api auth working and make an api that */}
             {/* posts the auth code returned to the user table of the database */}
-            {/* TODO: split redux classes into separate files and an index.js file for the root reducer */}
             {/* TODO: instead of calendar dropdowns, for now just use this on the UI: */}
             {/* IN: 1 days */}
             {/* AND: 3 weeks */}
