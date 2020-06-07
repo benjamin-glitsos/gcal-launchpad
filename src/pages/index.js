@@ -4,21 +4,15 @@ import { Heading } from "rebass";
 import { Input } from "@rebass/forms";
 import { useUpdater } from "redux-lightweight";
 import { wrapper } from "~/state/store";
-import {
-    inputActions,
-    reviewActions,
-    historyActions,
-    redux
-} from "~/state/redux/index";
+import { input, review } from "~/state/redux/index";
 import ReviewEvent from "~/components/review-event";
 
 const Index = () => {
-    console.log(redux);
     const symbols = process.env.settings.symbols;
     const dispatch = useDispatch();
     const state = useSelector(state => state);
-    const inputState = useSelector(state => state.input);
-    const reviewState = useSelector(state => state.review);
+    const [inputState, inputActions] = useUpdater(input.updater);
+    const [reviewState, reviewActions] = useUpdater(review.updater);
     const timeZone = useSelector(state => state.user.time_zone);
     const onChangeHandler = e => {
         e.preventDefault();

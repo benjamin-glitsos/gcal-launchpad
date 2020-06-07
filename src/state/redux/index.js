@@ -1,18 +1,20 @@
 import { combineReducers } from "redux";
 import { createUpdater } from "redux-lightweight";
-import factoryModules from "./factories/*.js";
+import updaterModules from "./updaters/*.js";
 import { uncapitalise, objectMap } from "~/lib/utilities";
 
-const factories = Object.fromEntries(
-    factoryModules.map(module => {
-        const factory = module.default;
-        return [uncapitalise(factory.name), factory];
+const updaters = Object.fromEntries(
+    updaterModules.map(module => {
+        const updater = module.default;
+        return [uncapitalise(updater.name), updater];
     })
 );
 
-export const redux = objectMap(factories, factory => {
-    const [reducer, actions] = createUpdater(factory);
-    return { reducer, actions, factory };
+const redux = objectMap(updaters, updater => {
+    const [reducer, actions] = createUpdater(updater);
+    return { reducer, actions, updater };
 });
+
+export default redux;
 
 export const rootReducer = combineReducers(objectMap(redux, x => x.reducer));
