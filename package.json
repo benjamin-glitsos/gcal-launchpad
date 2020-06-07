@@ -10,7 +10,6 @@
   "dependencies": {
     "@rebass/forms": "4.0.6",
     "arcsecond": "2.0.4",
-    "babel-plugin-transform-object-from-entries": "1.0.0",
     "conds": "0.0.1",
     "core-js": "3.6.5",
     "dotenv": "8.2.0",
