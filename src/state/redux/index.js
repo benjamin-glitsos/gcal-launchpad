@@ -1,25 +1,18 @@
 import { combineReducers } from "redux";
 import { createUpdater } from "redux-lightweight";
-import factories from "./factories/*.js";
+import factoryModules from "./factories/*.js";
+import { uncapitalise, objectMap } from "~/lib/utilities";
 
-export const redux = 
+const factories = Object.fromEntries(
+    factoryModules.map(module => {
+        const factory = module.default;
+        return [uncapitalise(factory.name), factory];
+    })
+);
 
-const redux = Object.entities({
-    user: User,
-    input: Input,
-    review: Review,
-    history: History
-}).map([name, factory] => {
-    const [actions, reducers] = createUpdater(factory);
-    return {
-        [name]: {
-        actions,
-        reducers
-        factory
-    }
-    }
+export const redux = objectMap(factories, factory => {
+    const [reducer, actions] = createUpdater(factory);
+    return { reducer, actions, factory };
 });
 
-// TODO: use a function for mapping over objects?
-
-export const rootReducer = combineReducers(redux.map(x => x.reducers));
+export const rootReducer = combineReducers(objectMap(redux, x => x.reducer));

@@ -7,11 +7,13 @@ import { wrapper } from "~/state/store";
 import {
     inputActions,
     reviewActions,
-    historyActions
-} from "~/state/redux/input";
+    historyActions,
+    redux
+} from "~/state/redux/index";
 import ReviewEvent from "~/components/review-event";
 
 const Index = () => {
+    console.log(redux);
     const symbols = process.env.settings.symbols;
     const dispatch = useDispatch();
     const state = useSelector(state => state);
