@@ -32,7 +32,6 @@ const Index = () => {
     return (
         <Fragment>
             {/* TODO: steps to MVP: */}
-            {/* - Refactoring redux */}
             {/* - Google calendar auth */}
             {/* - Google calendar insertEvent saga */}
             {/* - Making card contain "In: 1 days". But not editable yet */}

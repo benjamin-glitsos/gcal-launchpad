@@ -12,6 +12,7 @@
     "arcsecond": "2.0.4",
     "babel-plugin-transform-object-from-entries": "1.0.0",
     "conds": "0.0.1",
+    "core-js": "3.6.5",
     "dotenv": "8.2.0",
     "es6-promise": "4.1.1",
     "googleapis": "39.2.0",
