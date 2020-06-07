@@ -8,6 +8,11 @@ module.exports = {
 
         config.plugins.push(new webpack.EnvironmentPlugin(localEnv));
 
+        config.module.rules.push({
+            test: /\.(js|jsx)$/,
+            use: "webpack-import-glob-loader"
+        });
+
         if (!isServer) {
             config.node = {
                 fs: "empty"

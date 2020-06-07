@@ -1,12 +1,10 @@
 import { combineReducers } from "redux";
 import { createUpdater } from "redux-lightweight";
-import User from "./user";
-import Input from "./input";
-import Review from "./review";
-import History from "./history";
-// TODO: use import glob for webpack?
+import factories from "./factories/*.js";
 
-export const redux = Object.entities({
+export const redux = 
+
+const redux = Object.entities({
     user: User,
     input: Input,
     review: Review,
