@@ -1,6 +1,6 @@
 import { all, put, takeLatest, call, select } from "redux-saga/effects";
 import es6promise from "es6-promise";
-import { user, history, review } from "./redux";
+import { history, input, review, user } from "./redux";
 import querystring from "querystring";
 
 es6promise.polyfill();

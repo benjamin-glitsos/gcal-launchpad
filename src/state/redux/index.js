@@ -15,6 +15,6 @@ const redux = objectMap(updaters, updater => {
     return { reducer, actions, updater };
 });
 
-export default redux;
+export const { history, input, review, user } = redux;
 
 export const rootReducer = combineReducers(objectMap(redux, x => x.reducer));

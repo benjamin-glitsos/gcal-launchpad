@@ -2,7 +2,6 @@ import { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Heading } from "rebass";
 import { Input } from "@rebass/forms";
-import { useUpdater } from "redux-lightweight";
 import { wrapper } from "~/state/store";
 import { input, review } from "~/state/redux/index";
 import ReviewEvent from "~/components/review-event";
@@ -11,23 +10,23 @@ const Index = () => {
     const symbols = process.env.settings.symbols;
     const dispatch = useDispatch();
     const state = useSelector(state => state);
-    const [inputState, inputActions] = useUpdater(input.updater);
-    const [reviewState, reviewActions] = useUpdater(review.updater);
+    const inputState = useSelector(state => state.input);
+    const reviewState = useSelector(state => state.review);
     const timeZone = useSelector(state => state.user.time_zone);
     const onChangeHandler = e => {
         e.preventDefault();
         const value = e.target.value;
-        dispatch(inputActions.update(value));
+        dispatch(input.actions.update(value));
         if (value.length > 0) {
-            dispatch(reviewActions.parse(value, timeZone));
+            dispatch(review.actions.parse(value, timeZone));
         } else {
-            dispatch(reviewActions.clear());
+            dispatch(review.actions.clear());
         }
     };
     const onKeyPressHandler = e => {
         if (e.key === "Enter") {
-            dispatch(reviewActions.new());
-            dispatch(inputActions.clear());
+            dispatch(review.actions.new());
+            dispatch(input.actions.clear());
         }
     };
     return (
