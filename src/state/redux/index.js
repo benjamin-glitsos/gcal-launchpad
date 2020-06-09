@@ -9,8 +9,8 @@ const updaters = updaterModules.map(module => {
     return [uncapitalise(updater.name), { reducer, actions, updater }];
 });
 
-export const { history, input, review, user } = Object.fromEntries(updaters);
+export const { history, input, review, user } = fromEntries(updaters);
 
 export const rootReducer = combineReducers(
-    Object.fromEntries(updaters.map(([name, values]) => [name, values.reducer]))
+    fromEntries(updaters.map(([name, values]) => [name, values.reducer]))
 );
