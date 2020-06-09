@@ -1,7 +1,8 @@
 import { combineReducers } from "redux";
 import { createUpdater } from "redux-lightweight";
 import updaterModules from "./updaters/*.js";
-import { uncapitalise, fromEntries } from "~/lib/utilities";
+import { uncapitalise } from "~/lib/utilities";
+import { fromEntries } from "~/lib/polyfills";
 
 const updaters = updaterModules.map(module => {
     const updater = module.default;

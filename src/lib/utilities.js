@@ -3,13 +3,6 @@ import moment from "moment";
 
 export const uncapitalise = s => s.charAt(0).toLowerCase() + s.slice(1);
 
-export const fromEntries = iterable => {
-    return [...iterable].reduce((obj, [key, val]) => {
-        obj[key] = val;
-        return obj;
-    }, {});
-};
-
 export const cond = xs => conds(xs.map(x => [x.case, x.return]));
 
 export const anyMatches = xs => ys => xs.some(x => ys.includes(x));
