@@ -8,6 +8,8 @@ export default function ReviewCard({ id, title, days, status, isSelected }) {
     const dispatch = useDispatch();
     return (
         <Card>
+            {/* TODO: make this use cond so that it displays a different heading per status code */}
+            <h2>Create Event</h2>
             <ul>
                 <li>id: {id}</li>
                 <li>title: {title}</li>

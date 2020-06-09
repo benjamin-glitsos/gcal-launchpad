@@ -3,10 +3,11 @@ import moment from "moment";
 
 export const uncapitalise = s => s.charAt(0).toLowerCase() + s.slice(1);
 
-export const objectMap = (obj, fn) => {
-    return Object.fromEntries(
-        Object.entries(obj).map(([k, v], i) => [k, fn(v, k, i)])
-    );
+export const fromEntries = iterable => {
+    return [...iterable].reduce((obj, [key, val]) => {
+        obj[key] = val;
+        return obj;
+    }, {});
 };
 
 export const cond = xs => conds(xs.map(x => [x.case, x.return]));
