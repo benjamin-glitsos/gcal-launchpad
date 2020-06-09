@@ -3,8 +3,29 @@ import moment from "moment";
 
 export const uncapitalise = s => s.charAt(0).toLowerCase() + s.slice(1);
 
+function fromEntries (iterable) {
+	return [...iterable].reduce((obj, [key, val]) => {
+		obj[key] = val
+			return obj
+	}, {})
+}
+
+
+
+if (!Object.entries) {
+	Object.entries = function( obj ){
+		var ownProps = Object.keys( obj ),
+		ownValues = Object.values(obj),
+		i = ownProps.length,
+		resArray = new Array(i); // preallocate the Array
+		while (i--)
+			resArray[i] = [ownProps[i], ownValues[i]];
+		return resArray;
+	};
+}
+
 export const objectMap = (obj, fn) => {
-    return Object.fromEntries(
+    return fromEntries(
         Object.entries(obj).map(([k, v], i) => [k, fn(v, k, i)])
     );
 };

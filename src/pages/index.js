@@ -6,6 +6,18 @@ import { wrapper } from "~/state/store";
 import { input, review } from "~/state/redux/index";
 import ReviewEvent from "~/components/review-event";
 
+if (!Object.entries) {
+	Object.entries = function( obj ){
+		var ownProps = Object.keys( obj ),
+		ownValues = Object.values(obj),
+		i = ownProps.length,
+		resArray = new Array(i); // preallocate the Array
+		while (i--)
+			resArray[i] = [ownProps[i], ownValues[i]];
+		return resArray;
+	};
+}
+
 const Index = () => {
     const symbols = process.env.settings.symbols;
     const dispatch = useDispatch();

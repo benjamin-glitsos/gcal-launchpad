@@ -3,7 +3,15 @@ import { createUpdater } from "redux-lightweight";
 import updaterModules from "./updaters/*.js";
 import { uncapitalise, objectMap } from "~/lib/utilities";
 
-const updaters = Object.fromEntries(
+
+function fromEntries (iterable) {
+	return [...iterable].reduce((obj, [key, val]) => {
+		obj[key] = val
+			return obj
+	}, {})
+}
+
+const updaters = fromEntries(
     updaterModules.map(module => {
         const updater = module.default;
         return [uncapitalise(updater.name), updater];
