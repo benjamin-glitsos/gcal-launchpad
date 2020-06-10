@@ -36,13 +36,10 @@ const Index = () => {
             {/* - Google calendar insertEvent saga */}
             {/* - Making card contain "In: 1 days". But not editable yet */}
             {/* - Theming */}
-            {/* - Hosting */}
 
             {/* TODO: make button for selectAll and use that for the delete all, */}
             {/* send all operations? */}
             {/* Or not? */}
-            {/* TODO: get google calendar api auth working and make an api that */}
-            {/* posts the auth code returned to the user table of the database */}
             {/* TODO: instead of calendar dropdowns, for now just use this on the UI: */}
             {/* IN: 1 days */}
             {/* AND: 3 weeks */}
