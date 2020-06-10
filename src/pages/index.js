@@ -1,5 +1,6 @@
 import { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Head from "next/head";
 import { Heading } from "rebass";
 import { Input } from "@rebass/forms";
 import { wrapper } from "~/state/store";
@@ -47,6 +48,10 @@ const Index = () => {
             {/* (The number is editable and the unit is a dropdown) */}
             {/* TODO: clicking on the review area will send the cursor to the input box? */}
             {/* TODO: make the review area its own component */}
+            <Head>
+                <title>{process.env.settings.title}</title>
+                {/* <script src="https://apis.google.com/js/api.js"></script> */}
+            </Head>
             <Heading color="primary">{process.env.settings.title}</Heading>
             {Object.entries(reviewState)
                 .filter(([id, values]) =>

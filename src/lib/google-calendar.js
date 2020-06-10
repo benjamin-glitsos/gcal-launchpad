@@ -1,17 +1,16 @@
 const fs = require("fs");
-const readline = require("readline");
-const { google } = require("googleapis");
+import readline from "readline";
+import { google } from "googleapis";
 
 const SCOPES = ["https://www.googleapis.com/auth/calendar"];
 const CREDENTIALS_PATH = "credentials.json";
 const TOKEN_PATH = "token.json";
 
-function authorize(credentials, callback) {
-    const { client_secret, client_id, redirect_uris } = credentials.web;
+function authorize(callback) {
     const oAuth2Client = new google.auth.OAuth2(
-        client_id,
-        client_secret,
-        redirect_uris[0]
+        process.env.GCAL_CLIENT_ID,
+        process.env.GCAL_CLIENT_SECRET,
+        process.env.GCAL_REDIRECT_URI
     );
 
     fs.readFile(TOKEN_PATH, (err, token) => {
@@ -71,9 +70,4 @@ function listEvents(auth) {
     );
 }
 
-export const listEvents2 = () => {
-    fs.readFile(CREDENTIALS_PATH, (err, content) => {
-        if (err) return console.log("Error loading client secret file:", err);
-        authorize(JSON.parse(content), listEvents);
-    });
-};
+export const listEvents2 = () => authorize(listEvents);

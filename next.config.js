@@ -15,13 +15,13 @@ module.exports = {
 
         if (!isServer) {
             config.node = {
-                fs: "empty"
+                ...config.node,
+                fs: "empty",
+                child_process: "empty",
+                net: "empty",
+                tls: "empty"
             };
         }
-
-        config.externals = {
-            googleapis: "googleapis"
-        };
 
         return config;
     },
