@@ -1,29 +1,32 @@
-const fs = require("fs");
-import readline from "readline";
 import { google } from "googleapis";
+const fs = require("fs");
 
-const SCOPES = ["https://www.googleapis.com/auth/calendar"];
-const CREDENTIALS_PATH = "credentials.json";
 const TOKEN_PATH = "token.json";
 
-function authorize(callback) {
+const authorize = callback => {
     const oAuth2Client = new google.auth.OAuth2(
         process.env.GCAL_CLIENT_ID,
         process.env.GCAL_CLIENT_SECRET,
         process.env.GCAL_REDIRECT_URI
     );
 
+    // TODO: put getAccessToken into this one function.
+    // TODO: remove readline. just console log the url to get authenticated
+    // TODO: use env file instead of token.json file
+    // TODO: then remove fs require at top of this file
+    // TODO: export this authorise function as default function. To use in your apis.
+
     fs.readFile(TOKEN_PATH, (err, token) => {
         if (err) return getAccessToken(oAuth2Client, callback);
         oAuth2Client.setCredentials(JSON.parse(token));
         callback(oAuth2Client);
     });
-}
+};
 
-function getAccessToken(oAuth2Client, callback) {
+const getAccessToken = (oAuth2Client, callback) => {
     const authUrl = oAuth2Client.generateAuthUrl({
         access_type: "offline",
-        scope: SCOPES
+        scope: [process.env.GCAL_SCOPE]
     });
     console.log("Authorize this app by visiting this url:", authUrl);
     const rl = readline.createInterface({
@@ -42,9 +45,9 @@ function getAccessToken(oAuth2Client, callback) {
             callback(oAuth2Client);
         });
     });
-}
+};
 
-function listEvents(auth) {
+const listEvents = auth => {
     const calendar = google.calendar({ version: "v3", auth });
     calendar.events.list(
         {
@@ -68,6 +71,6 @@ function listEvents(auth) {
             }
         }
     );
-}
+};
 
 export const listEvents2 = () => authorize(listEvents);
