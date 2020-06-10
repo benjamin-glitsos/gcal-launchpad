@@ -12,7 +12,7 @@ const Index = () => {
     const state = useSelector(state => state);
     const inputState = useSelector(state => state.input);
     const reviewState = useSelector(state => state.review);
-    const timeZone = useSelector(state => state.user.time_zone);
+    const timeZone = "Sydney/Australia";
     const onChangeHandler = e => {
         e.preventDefault();
         const value = e.target.value;
@@ -50,18 +50,18 @@ const Index = () => {
             {/* TODO: clicking on the review area will send the cursor to the input box? */}
             {/* TODO: make the review area its own component */}
             <Heading color="primary">{process.env.settings.title}</Heading>
-            {Object.entries(reviewState)
-                .filter(([id, values]) =>
-                    [symbols.review.REVIEW, symbols.review.EDITING].includes(
-                        values.status
-                    )
-                )
-                .map(([id, values]) => (
-                    <ReviewEvent
-                        {...{ id, ...values }}
-                        key={id + values.title}
-                    />
-                ))}
+            {/* {Object.entries(reviewState) */}
+            {/*     .filter(([id, values]) => */}
+            {/*         [symbols.review.REVIEW, symbols.review.EDITING].includes( */}
+            {/*             values.status */}
+            {/*         ) */}
+            {/*     ) */}
+            {/*     .map(([id, values]) => ( */}
+            {/*         <ReviewEvent */}
+            {/*             {...{ id, ...values }} */}
+            {/*             key={id + values.title} */}
+            {/*         /> */}
+            {/*     ))} */}
             <Input
                 type="text"
                 placeholder="d, 2d, 2w buy some milk"

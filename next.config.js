@@ -25,7 +25,7 @@ module.exports = {
         settings: {
             title: "Google Calendar Launchpad",
             reduxDebugMode: false,
-            api: "http://localhost:3000/api/",
+            api: "http://localhost:3001/api/",
             symbols: {
                 parser: {
                     TODAY: "t",
