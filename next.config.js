@@ -19,6 +19,10 @@ module.exports = {
             };
         }
 
+        config.externals = {
+            googleapis: "googleapis"
+        };
+
         return config;
     },
     env: {
