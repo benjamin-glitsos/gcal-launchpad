@@ -1,4 +1,6 @@
 export default class History {
+    static title = "history";
+
     state = [];
 
     update() {

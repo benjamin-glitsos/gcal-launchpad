@@ -3,6 +3,8 @@ import parser from "~/lib/parser";
 import { ifValidId, createId } from "~/lib/utilities";
 
 export default class Review {
+    static title = "review";
+
     empty = {
         new: {
             title: "",

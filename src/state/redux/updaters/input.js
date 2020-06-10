@@ -1,4 +1,6 @@
 export default class Input {
+    static title = "input";
+
     empty = "";
 
     state = this.empty;

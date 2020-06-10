@@ -1,6 +1,8 @@
 import produce from "immer";
 
 export default class User {
+    static title = "user";
+
     state = {
         username: "default_user",
         app_id: "TEST",
