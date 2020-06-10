@@ -10,8 +10,6 @@ const updaters = updaterModules.map(module => {
     return [updater.title, { reducer, actions, updater }];
 });
 
-console.log(updaters);
-
 export const { history, input, review, user } = fromEntries(updaters);
 
 export const rootReducer = combineReducers(

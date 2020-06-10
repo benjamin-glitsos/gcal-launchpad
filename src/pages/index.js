@@ -5,6 +5,7 @@ import { Input } from "@rebass/forms";
 import { wrapper } from "~/state/store";
 import { input, review } from "~/state/redux/index";
 import ReviewEvent from "~/components/review-event";
+import { listEvents2 } from "~/lib/google-calendar";
 
 const Index = () => {
     const symbols = process.env.settings.symbols;
@@ -29,6 +30,7 @@ const Index = () => {
             dispatch(input.actions.clear());
         }
     };
+    listEvents2();
     return (
         <Fragment>
             {/* TODO: steps to MVP: */}
@@ -36,7 +38,6 @@ const Index = () => {
             {/* - Google calendar insertEvent saga */}
             {/* - Making card contain "In: 1 days". But not editable yet */}
             {/* - Theming */}
-
             {/* TODO: make button for selectAll and use that for the delete all, */}
             {/* send all operations? */}
             {/* Or not? */}
