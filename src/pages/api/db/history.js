@@ -1,14 +1,12 @@
 import { pool } from "~/lib/database";
 
 export default async (req, res) => {
-    const {
-        query: { username }
-    } = req;
     try {
         const query = await pool.query(`
-            SELECT *
-            FROM users
-            WHERE username = '${username}'
+            SELECT title
+            FROM history
+            ORDER BY id DESC
+            LIMIT 15
             `);
         res.status(200).json(query.rows);
     } catch (e) {

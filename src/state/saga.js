@@ -1,33 +1,14 @@
 import { all, put, takeLatest, call, select } from "redux-saga/effects";
 import es6promise from "es6-promise";
 import { history, input, review, user } from "./redux";
-import querystring from "querystring";
+import { fetchApi } from "~/lib/utilities";
 
 es6promise.polyfill();
-
-function* getUserSaga() {
-    try {
-        const username = yield select(state => state.user.username);
-        const res = yield fetch(process.env.settings.api + "user/" + username);
-        const data = yield res.json();
-        yield put(user.actions.updateSuccess(data));
-    } catch (err) {
-        console.error(err);
-        yield put(user.actions.updateFailure());
-    }
-}
 
 function* getHistorySaga() {
     try {
         const username = yield select(state => state.user.username);
-        const res = yield fetch(
-            [
-                process.env.settings.api,
-                "history",
-                "?",
-                querystring.stringify({ username })
-            ].join("")
-        );
+        const res = yield fetchApi(["db", "history"], {});
         const data = yield res.json();
         yield put(history.actions.updateSuccess(data));
     } catch (err) {
@@ -58,12 +39,10 @@ function* sendAllReviewsSaga() {
 
 function* rootSaga() {
     yield all([
-        call(getUserSaga),
         call(getHistorySaga),
-        takeLatest(history.actions.update.type, getHistorySaga),
-        takeLatest(user.actions.update.type, getUserSaga),
-        takeLatest(review.actions.send.type, sendReviewsSaga),
-        takeLatest(review.actions.sendAll.type, sendAllReviewsSaga)
+        takeLatest(history.actions.update.type, getHistorySaga)
+        // takeLatest(review.actions.send.type, sendReviewsSaga),
+        // takeLatest(review.actions.sendAll.type, sendAllReviewsSaga)
     ]);
 }
 
