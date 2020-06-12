@@ -31,7 +31,7 @@ module.exports = {
             title: "Google Calendar Launchpad",
             reduxDebugMode: false,
             timeZone: "Sydney/Australia",
-            api: "http://localhost:3001/api/",
+            apiPath: ["http://localhost:3001", "api"],
             symbols: {
                 parser: {
                     TODAY: "t",
