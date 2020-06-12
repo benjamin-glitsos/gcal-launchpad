@@ -6,7 +6,7 @@ import { Input } from "@rebass/forms";
 import { wrapper } from "~/state/store";
 import { input, review } from "~/state/redux/index";
 import ReviewEvent from "~/components/review-event";
-import { listEvents2 } from "~/lib/google-calendar";
+import { listEvents } from "~/lib/google-calendar";
 
 const Index = () => {
     const symbols = process.env.settings.symbols;
@@ -14,13 +14,12 @@ const Index = () => {
     const state = useSelector(state => state);
     const inputState = useSelector(state => state.input);
     const reviewState = useSelector(state => state.review);
-    const timeZone = useSelector(state => state.user.time_zone);
     const onChangeHandler = e => {
         e.preventDefault();
         const value = e.target.value;
         dispatch(input.actions.update(value));
         if (value.length > 0) {
-            dispatch(review.actions.parse(value, timeZone));
+            dispatch(review.actions.parse(value));
         } else {
             dispatch(review.actions.clear());
         }
@@ -31,9 +30,11 @@ const Index = () => {
             dispatch(input.actions.clear());
         }
     };
-    listEvents2();
+    listEvents();
     return (
         <Fragment>
+            {/* NOTE: to get npm pg working on server, you may need to do: sudo apt install libpq-dev */}
+
             {/* TODO: steps to MVP: */}
             {/* - Google calendar auth */}
             {/* - Google calendar insertEvent saga */}

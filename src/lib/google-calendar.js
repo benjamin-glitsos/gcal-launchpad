@@ -8,12 +8,38 @@ export default function auth() {
     );
 
     oAuth2Client.setCredentials({
-        process.env.GCAL_TOKEN_ACCESS_TOKEN,
-        process.env.GCAL_TOKEN_REFRESH_TOKEN,
-        process.env.GCAL_TOKEN_SCOPE,
-        process.env.GCAL_TOKEN_TOKEN_TYPE,
-        process.env.GCAL_TOKEN_EXPIRY_DATE
+        access_token: process.env.GCAL_TOKEN_ACCESS_TOKEN,
+        refresh_token: process.env.GCAL_TOKEN_REFRESH_TOKEN,
+        scope: process.env.GCAL_TOKEN_SCOPE,
+        token_type: process.env.GCAL_TOKEN_TOKEN_TYPE,
+        expiry_date: process.env.GCAL_TOKEN_EXPIRY_DATE
     });
 
     return oAuth2Client;
 }
+
+export const listEvents = () => {
+    const calendar = google.calendar({ version: "v3", auth });
+    calendar.events.list(
+        {
+            calendarId: "primary",
+            timeMin: new Date().toISOString(),
+            maxResults: 10,
+            singleEvents: true,
+            orderBy: "startTime"
+        },
+        (err, res) => {
+            if (err) return console.log("The API returned an error: " + err);
+            const events = res.data.items;
+            if (events.length) {
+                console.log("Upcoming 10 events:");
+                events.map((event, i) => {
+                    const start = event.start.dateTime || event.start.date;
+                    console.log(`${start} - ${event.summary}`);
+                });
+            } else {
+                console.log("No upcoming events found.");
+            }
+        }
+    );
+};

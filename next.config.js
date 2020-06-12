@@ -18,6 +18,7 @@ module.exports = {
                 ...config.node,
                 fs: "empty",
                 child_process: "empty",
+                dns: "empty",
                 net: "empty",
                 tls: "empty"
             };
@@ -29,6 +30,7 @@ module.exports = {
         settings: {
             title: "Google Calendar Launchpad",
             reduxDebugMode: false,
+            timeZone: "Sydney/Australia",
             api: "http://localhost:3001/api/",
             symbols: {
                 parser: {

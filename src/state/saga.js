@@ -1,13 +1,12 @@
 import { all, put, takeLatest, call, select } from "redux-saga/effects";
 import es6promise from "es6-promise";
-import { history, input, review, user } from "./redux";
-import { fetchApi } from "~/lib/utilities";
+import { history, input, review } from "./redux";
+import { fetchApi } from "~/lib/database";
 
 es6promise.polyfill();
 
 function* getHistorySaga() {
     try {
-        const username = yield select(state => state.user.username);
         const res = yield fetchApi(["db", "history"], {});
         const data = yield res.json();
         yield put(history.actions.updateSuccess(data));
