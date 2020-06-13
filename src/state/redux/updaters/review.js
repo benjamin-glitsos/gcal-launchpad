@@ -81,7 +81,7 @@ export default class Review {
         return this.empty;
     }
 
-    send({ id, title, date }) {
+    send({ id, title, dates }) {
         return produce(this.state, draft => {
             draft[id].status = process.env.settings.symbols.review.SENDING;
         });

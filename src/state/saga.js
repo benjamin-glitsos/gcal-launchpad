@@ -16,13 +16,18 @@ function* getHistorySaga() {
     }
 }
 
-function* sendReviewsSaga({ payload: [{ id, title, date }] }) {
+function* sendReviewsSaga({ payload: [{ id, title, dates }] }) {
     try {
-        const res = yield fetchApi(["gcal", "create-event"], {
-            title,
-            date
-        });
-        const data = yield res.json();
+        const ress = yield all(
+            dates.map(date =>
+                call(function* () {
+                    yield fetchApi(["gcal", "create-event"], {
+                        title,
+                        date
+                    });
+                })
+            )
+        );
         yield put(review.actions.sendSuccess(id));
     } catch (err) {
         console.error(err);

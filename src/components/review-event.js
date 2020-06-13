@@ -3,53 +3,49 @@ import { useUpdater } from "redux-lightweight";
 import { Card, Button } from "rebass";
 import { Label, Checkbox } from "@rebass/forms";
 import { review } from "~/state/redux";
+import { cond, anyMatches } from "~/lib/utilities";
 
 export default function ReviewCard({ id, title, days, status, isSelected }) {
     const dispatch = useDispatch();
+    const symbols = process.env.settings.symbols.review;
     return (
         <Card>
-            {/* TODO: make this use cond so that it displays a different heading per status code */}
-            <h2>Create Event</h2>
+            <h2>
+                {cond([
+                    {
+                        case: anyMatches([symbols.EDITING, symbols.REVIEW]),
+                        return: "Create Event"
+                    },
+                    {
+                        case: anyMatches([symbols.SENDING]),
+                        return: "Sending..."
+                    },
+                    {
+                        case: anyMatches([symbols.SEND_SUCCESS]),
+                        return: "Done"
+                    },
+                    {
+                        case: anyMatches([symbols.SEND_FAILURE]),
+                        return: "Failed to Create Event"
+                    },
+                    {
+                        case: true,
+                        return: "Event"
+                    }
+                ])(status)}
+            </h2>
             <ul>
                 <li>id: {id}</li>
                 <li>title: {title}</li>
                 <li>days: {days.toString()}</li>
                 <li>status: {status}</li>
             </ul>
-            <Label>
-                <Checkbox
-                    onClick={() => dispatch(review.actions.toggleSelect(id))}
-                />
-                Toggle Selected
-            </Label>
-            <Button
-                onClick={() => dispatch(review.actions.manuallyCreateNew())}
-            >
-                Manually Create New
-            </Button>
-            <Button onClick={() => dispatch(review.actions.deleteAll())}>
-                Delete All
-            </Button>
             <Button onClick={() => dispatch(review.actions.delete([id]))}>
                 Delete
             </Button>
             <Button
                 onClick={() =>
-                    dispatch(
-                        review.actions.update(id, {
-                            title: "updated title",
-                            days: ["10-10-10", "20-20-20"]
-                        })
-                    )
-                }
-            >
-                Update some data
-            </Button>
-            <Button
-                onClick={() =>
-                    dispatch(
-                        review.actions.send({ id, title, date: "2020-06-14" })
-                    )
+                    dispatch(review.actions.send({ id, title, dates: days }))
                 }
             >
                 Send

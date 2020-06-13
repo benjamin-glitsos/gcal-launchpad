@@ -14,7 +14,7 @@ import {
     regex,
     sequenceOf
 } from "arcsecond";
-import { cond, createDay } from "~/lib/utilities";
+import { createDay } from "~/lib/utilities";
 
 const unchars = s => s.join("");
 
