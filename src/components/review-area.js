@@ -17,7 +17,7 @@ export default function ReviewArea() {
                           key={id + values.title}
                       />
                   ))
-                : "Create an event"}
+                : "Review area"}
         </Box>
     );
 }

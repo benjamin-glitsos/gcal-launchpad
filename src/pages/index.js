@@ -17,8 +17,6 @@ const Index = () => {
             {/* IN: 1 days */}
             {/* AND: 3 weeks */}
             {/* (The number is editable and the unit is a dropdown) */}
-            {/* TODO: clicking on the review area will send the cursor to the input box? */}
-            {/* TODO: make the review area its own component */}
             <Head>
                 <title>{process.env.settings.title}</title>
             </Head>
