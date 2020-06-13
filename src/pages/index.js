@@ -6,7 +6,7 @@ import ReviewEvent from "~/components/review-event";
 import ReviewArea from "~/components/review-area";
 import EventInput from "~/components/event-input";
 
-const Index = () => {
+export default function Index() {
     const state = useSelector(state => state);
     return (
         <Fragment>
@@ -28,6 +28,4 @@ const Index = () => {
             </pre>
         </Fragment>
     );
-};
-
-export default Index;
+}

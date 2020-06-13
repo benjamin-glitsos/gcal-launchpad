@@ -31,7 +31,12 @@ module.exports = {
             title: "Google Calendar Launchpad",
             reduxDebugMode: true,
             timeZone: "Australia/Sydney",
-            apiPath: ["http://localhost:3001", "api"],
+            apiPath: [
+                process.env.NODE_ENV === "production"
+                    ? "https://cal.benglitsos.com.au/"
+                    : "http://localhost:3001",
+                "api"
+            ],
             symbols: {
                 parser: {
                     TODAY: "t",
