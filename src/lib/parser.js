@@ -14,7 +14,33 @@ import {
     regex,
     sequenceOf
 } from "arcsecond";
-import { createDay } from "~/lib/utilities";
+import moment from "moment";
+import { cond } from "~/lib/utilities";
+
+export const createDay = (optionalNumber, unit, timeZone) => {
+    const symbols = process.env.settings.symbols.parser;
+    const isUnit = s => unit === s;
+    const now = moment(new Date(), timeZone);
+    const future = momentUnit => now.add(optionalNumber, momentUnit);
+    const internationalFormat = m => m.format("YYYY-MM-DD");
+    return {
+        in: {
+            number: optionalNumber,
+            unit
+        },
+        date: internationalFormat(
+            cond([
+                { case: x => !optionalNumber, return: now },
+                { case: isUnit(symbols.TODAY), return: now },
+                { case: isUnit(symbols.DAY), return: future("days") },
+                { case: isUnit(symbols.WEEK), return: future("weeks") },
+                { case: isUnit(symbols.MONTH), return: future("months") },
+                { case: isUnit(symbols.YEAR), return: future("years") },
+                { case: true, return: now }
+            ])(true)
+        )
+    };
+};
 
 const unchars = s => s.join("");
 
@@ -35,7 +61,7 @@ const day = coroutine(function* () {
         Object.values(process.env.settings.symbols.parser).map(c => char(c))
     );
 
-    return createDay(optionalNumber, unit, process.env.settings.timeZone);
+    return createDay(optionalNumber || 0, unit, process.env.settings.timeZone);
 });
 
 const days = coroutine(function* () {

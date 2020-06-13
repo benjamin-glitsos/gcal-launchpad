@@ -9,7 +9,6 @@ export default class Review {
         new: {
             title: "",
             days: [],
-            isSelected: false,
             status: process.env.settings.symbols.review.EMPTY,
             error: ""
         }
@@ -19,16 +18,10 @@ export default class Review {
 
     id = createId();
 
-    toggleSelect(id) {
-        return produce(this.state, draft => {
-            draft[id].isSelected = !draft[id].isSelected;
-        });
-    }
-
-    parse(s, timeZone) {
+    parse(s) {
         return produce(this.state, draft => {
             draft.new.status = process.env.settings.symbols.review.REVIEW;
-            Object.assign(draft.new, parser(s, { timeZone }));
+            Object.assign(draft.new, parser(s));
         });
     }
 
@@ -45,30 +38,6 @@ export default class Review {
         });
     }
 
-    manuallyCreateNew() {
-        return produce(this.state, draft => {
-            draft.new = {
-                ...this.empty.new,
-                ...{ status: process.env.settings.symbols.review.EDITING }
-            };
-            draft[this.id.next().value] = this.state.new;
-        });
-    }
-
-    update(id, j) {
-        return produce(this.state, draft => {
-            ifValidId(id, () => {
-                draft[id] = { ...draft[id], ...j };
-            });
-        });
-    }
-
-    updateDay({ reviewId, dayIndex, dayValue }) {
-        return produce(this.state, draft => {
-            draft.days[dayIndex] = dayValue;
-        });
-    }
-
     delete(ids) {
         return produce(this.state, draft => {
             ids.forEach(id => {
@@ -77,11 +46,7 @@ export default class Review {
         });
     }
 
-    deleteAll() {
-        return this.empty;
-    }
-
-    send({ id, title, dates }) {
+    send({ id, title, days }) {
         return produce(this.state, draft => {
             draft[id].status = process.env.settings.symbols.review.SENDING;
         });
@@ -99,3 +64,39 @@ export default class Review {
         });
     }
 }
+
+// isSelected: false,
+
+// toggleSelect(id) {
+//     return produce(this.state, draft => {
+//         draft[id].isSelected = !draft[id].isSelected;
+//     });
+// }
+
+// manuallyCreateNew() {
+//     return produce(this.state, draft => {
+//         draft.new = {
+//             ...this.empty.new,
+//             ...{ status: process.env.settings.symbols.review.EDITING }
+//         };
+//         draft[this.id.next().value] = this.state.new;
+//     });
+// }
+
+// update(id, j) {
+//     return produce(this.state, draft => {
+//         ifValidId(id, () => {
+//             draft[id] = { ...draft[id], ...j };
+//         });
+//     });
+// }
+//
+// updateDay({ reviewId, dayIndex, dayValue }) {
+//     return produce(this.state, draft => {
+//         draft.days[dayIndex] = dayValue;
+//     });
+// }
+
+// deleteAll() {
+//     return this.empty;
+// }

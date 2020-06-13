@@ -45,7 +45,7 @@ export default function ReviewCard({ id, title, days, status, isSelected }) {
             </Button>
             <Button
                 onClick={() =>
-                    dispatch(review.actions.send({ id, title, dates: days }))
+                    dispatch(review.actions.send({ id, title, days }))
                 }
             >
                 Send

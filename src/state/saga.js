@@ -16,10 +16,10 @@ function* getHistorySaga() {
     }
 }
 
-function* sendReviewsSaga({ payload: [{ id, title, dates }] }) {
+function* sendReviewsSaga({ payload: [{ id, title, days }] }) {
     try {
         const ress = yield all(
-            dates.map(date =>
+            days.map(({ date }) =>
                 call(function* () {
                     yield fetchApi(["gcal", "create-event"], {
                         title,
