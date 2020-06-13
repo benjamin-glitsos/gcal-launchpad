@@ -1,6 +1,6 @@
-import { all, put, takeLatest, call, select } from "redux-saga/effects";
+import { all, put, takeLatest, call } from "redux-saga/effects";
 import es6promise from "es6-promise";
-import { history, input, review } from "./redux";
+import { history, review } from "./redux";
 import { fetchApi } from "~/lib/database";
 
 es6promise.polyfill();
@@ -16,32 +16,25 @@ function* getHistorySaga() {
     }
 }
 
-function* sendReviewsSaga(ids) {
+function* sendReviewsSaga({ payload: [{ id, title, date }] }) {
     try {
-        // ids.forEach(id => {
-        //     ifValidId(id, () => {
-        //         console.log(id + "send success");
-        //     });
-        //     yield put(review.actions.sendSuccess());
-        //     // Then yield delay of a few seconds.
-        //    //  Then yield delete that item from the review pane
-        // });
+        const res = yield fetchApi(["gcal", "create-event"], {
+            title,
+            date
+        });
+        const data = yield res.json();
+        yield put(review.actions.sendSuccess(id));
     } catch (err) {
         console.error(err);
-        yield put(review.actions.sendFailure());
+        yield put(review.actions.sendFailure(id));
     }
-}
-
-function* sendAllReviewsSaga() {
-    // yield SendReviewsSaga(Object.keys(this.state));
 }
 
 function* rootSaga() {
     yield all([
         call(getHistorySaga),
-        takeLatest(history.actions.update.type, getHistorySaga)
-        // takeLatest(review.actions.send.type, sendReviewsSaga),
-        // takeLatest(review.actions.sendAll.type, sendAllReviewsSaga)
+        takeLatest(history.actions.update.type, getHistorySaga),
+        takeLatest(review.actions.send.type, sendReviewsSaga)
     ]);
 }
 

@@ -81,19 +81,21 @@ export default class Review {
         return this.empty;
     }
 
-    send() {
-        return this.state;
+    send({ id, title, date }) {
+        return produce(this.state, draft => {
+            draft[id].status = process.env.settings.symbols.review.SENDING;
+        });
     }
 
-    sendAll() {
-        return this.state;
+    sendSuccess(id) {
+        return produce(this.state, draft => {
+            draft[id].status = process.env.settings.symbols.review.SEND_SUCCESS;
+        });
     }
 
-    sendSuccess() {
-        return this.state;
-    }
-
-    sendFailure() {
-        return this.state;
+    sendFailure(id) {
+        return produce(this.state, draft => {
+            draft[id].status = process.env.settings.symbols.review.SEND_FAILURE;
+        });
     }
 }

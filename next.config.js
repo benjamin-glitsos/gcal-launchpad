@@ -29,7 +29,7 @@ module.exports = {
     env: {
         settings: {
             title: "Google Calendar Launchpad",
-            reduxDebugMode: false,
+            reduxDebugMode: true,
             timeZone: "Australia/Sydney",
             apiPath: ["http://localhost:3001", "api"],
             symbols: {

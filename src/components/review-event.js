@@ -45,13 +45,15 @@ export default function ReviewCard({ id, title, days, status, isSelected }) {
             >
                 Update some data
             </Button>
-            <Button onClick={() => dispatch(review.actions.send([id]))}>
+            <Button
+                onClick={() =>
+                    dispatch(
+                        review.actions.send({ id, title, date: "2020-06-14" })
+                    )
+                }
+            >
                 Send
             </Button>
-            <Button onClick={() => dispatch(review.actions.sendAll())}>
-                Send All
-            </Button>
-            <Button onClick={() => listEvents()}>List Events</Button>
         </Card>
     );
 }
