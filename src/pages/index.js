@@ -2,7 +2,6 @@ import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import Head from "next/head";
 import { Heading } from "rebass";
-import ReviewEvent from "~/components/review-event";
 import ReviewArea from "~/components/review-area";
 import EventInput from "~/components/event-input";
 

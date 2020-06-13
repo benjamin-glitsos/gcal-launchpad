@@ -1,6 +1,6 @@
 import { Box } from "rebass";
 import { useSelector } from "react-redux";
-import ReviewEvent from "~/components/review-event";
+import ReviewCard from "~/components/review-card";
 
 export default function ReviewArea() {
     const symbols = process.env.settings.symbols;
@@ -12,7 +12,7 @@ export default function ReviewArea() {
         <Box>
             {events.length > 0
                 ? events.map(([id, values]) => (
-                      <ReviewEvent
+                      <ReviewCard
                           {...{ id, ...values }}
                           key={id + values.title}
                       />
