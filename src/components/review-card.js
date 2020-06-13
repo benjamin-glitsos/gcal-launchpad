@@ -34,12 +34,14 @@ export default function ReviewCard({ id, title, days, status, isSelected }) {
                     }
                 ])(status)}
             </h2>
-            <ul>
-                <li>id: {id}</li>
-                <li>title: {title}</li>
-                <li>days: {days.toString()}</li>
-                <li>status: {status}</li>
-            </ul>
+            <p>{title}</p>
+            {days.map(({ in: { number, unit } }, i) => (
+                <p>
+                    <span>{(i === 0 ? "In" : "And").toUpperCase()}</span>
+                    <span>{number}</span>
+                    <span>{unit}</span>
+                </p>
+            ))}
             <Button onClick={() => dispatch(review.actions.delete([id]))}>
                 Delete
             </Button>
