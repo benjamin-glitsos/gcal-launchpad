@@ -9,8 +9,8 @@ export default async (req, res) => {
             LIMIT 15
             `);
         res.status(200).json(query.rows);
-    } catch (e) {
-        console.error(e);
+    } catch (err) {
+        console.error(err);
         res.status(500).end();
     }
 };

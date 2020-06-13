@@ -51,10 +51,9 @@ const days = coroutine(function* () {
 const event = coroutine(function* () {
     yield whitespaces;
 
-    const dayValues = yield possibly(days).map(ds => {
-        console.log(ds);
-        return !ds ? [createDay(0, "d", process.env.settings.timeZone)] : ds;
-    });
+    const dayValues = yield possibly(days).map(ds =>
+        !ds ? [createDay(0, "d", process.env.settings.timeZone)] : ds
+    );
 
     yield whitespaces;
 

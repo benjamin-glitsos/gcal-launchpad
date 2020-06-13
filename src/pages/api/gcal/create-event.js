@@ -27,27 +27,19 @@ export default async (req, res) => {
     const {
         query: { title, date }
     } = req;
-    const calendar = google.calendar({ version: "v3", auth });
-    calendar.events.insert(
-        {
+    try {
+        const calendar = google.calendar({ version: "v3", auth });
+        const query = await calendar.events.insert({
             auth,
             calendarId: process.env.GCAL_CALENDAR_ID,
             resource: {
                 summary: title,
                 ...allDayEvent(date)
             }
-        },
-        (err, event) => {
-            if (!err) {
-                res.status(200).json(event);
-                return;
-            } else {
-                console.error(
-                    `There was an error contacting the Calendar service: ${err}`
-                );
-                res.status(500).end();
-                return;
-            }
-        }
-    );
+        });
+        res.status(200).json(query);
+    } catch (err) {
+        console.error(err);
+        res.status(500).end();
+    }
 };
