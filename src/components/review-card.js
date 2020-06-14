@@ -43,17 +43,23 @@ export default function ReviewCard({ id, title, days, status, isSelected }) {
                     <span>{period}</span>
                 </p>
             ))}
-            {/* TODO: button bar should map over a list of titles, conditions to display based on status (they return a boolean), and onClick actions */}
-            <Button onClick={() => dispatch(review.actions.delete([id]))}>
-                Delete
-            </Button>
-            <Button
-                onClick={() =>
-                    dispatch(review.actions.send({ id, title, days }))
+            {[
+                {
+                    title: "Delete",
+                    isDisplayed: true,
+                    onClick: () => dispatch(review.actions.delete([id]))
+                },
+                {
+                    title: "Send",
+                    isDisplayed: true,
+                    onClick: () =>
+                        dispatch(review.actions.send({ id, title, days }))
                 }
-            >
-                Send
-            </Button>
+            ]
+                .filter(({ isDisplayed }) => isDisplayed)
+                .map(({ title, onClick }) => (
+                    <Button onClick={onClick}>{title}</Button>
+                ))}
         </Card>
     );
 }
