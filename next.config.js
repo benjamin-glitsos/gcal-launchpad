@@ -33,7 +33,7 @@ module.exports = {
             timeZone: "Australia/Sydney",
             apiPath: [
                 process.env.NODE_ENV === "production"
-                    ? "https://cal.benglitsos.com.au/"
+                    ? "https://cal.benglitsos.com.au"
                     : "http://localhost:3001",
                 "api"
             ],
