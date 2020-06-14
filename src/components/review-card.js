@@ -1,13 +1,13 @@
 import { useDispatch } from "react-redux";
-import { useUpdater } from "redux-lightweight";
-import { Card, Button } from "rebass";
-import { Label, Checkbox } from "@rebass/forms";
+import { Card } from "rebass";
+import { Label } from "@rebass/forms";
 import { review } from "~/state/redux";
 import { cond, anyMatches } from "~/lib/utilities";
+import ButtonBar from "~/components/button-bar";
 
 export default function ReviewCard({ id, title, days, status, isSelected }) {
-    const dispatch = useDispatch();
     const symbols = process.env.settings.symbols.review;
+    const dispatch = useDispatch();
     return (
         <Card>
             <h2>
@@ -43,23 +43,21 @@ export default function ReviewCard({ id, title, days, status, isSelected }) {
                     <span>{period}</span>
                 </p>
             ))}
-            {[
-                {
-                    title: "Delete",
-                    isDisplayed: true,
-                    onClick: () => dispatch(review.actions.delete([id]))
-                },
-                {
-                    title: "Send",
-                    isDisplayed: true,
-                    onClick: () =>
-                        dispatch(review.actions.send({ id, title, days }))
-                }
-            ]
-                .filter(({ isDisplayed }) => isDisplayed)
-                .map(({ title, onClick }) => (
-                    <Button onClick={onClick}>{title}</Button>
-                ))}
+            <ButtonBar
+                list={[
+                    {
+                        title: "Delete",
+                        isDisplayed: true,
+                        onClick: () => dispatch(review.actions.delete([id]))
+                    },
+                    {
+                        title: "Send",
+                        isDisplayed: true,
+                        onClick: () =>
+                            dispatch(review.actions.send({ id, title, days }))
+                    }
+                ]}
+            />
         </Card>
     );
 }

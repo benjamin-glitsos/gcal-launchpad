@@ -46,6 +46,10 @@ export default class Review {
         });
     }
 
+    deleteAll() {
+        return this.empty;
+    }
+
     send({ id, title, days }) {
         return produce(this.state, draft => {
             draft[id].status = process.env.settings.symbols.review.SENDING;
@@ -95,8 +99,4 @@ export default class Review {
 //     return produce(this.state, draft => {
 //         draft.days[dayIndex] = dayValue;
 //     });
-// }
-
-// deleteAll() {
-//     return this.empty;
 // }
