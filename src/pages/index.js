@@ -10,12 +10,9 @@ export default function Index() {
     return (
         <Fragment>
             {/* TODO: steps to MVP: */}
-            {/* - Making card contain "In: 1 days". But not editable yet */}
+            {/* * Make the send success timeout work */}
+            {/* * Info popup using: MDX, rebass, saga, cookies (react-cookie?) */}
             {/* - Theming */}
-            {/* TODO: instead of calendar dropdowns, for now just use this on the UI: */}
-            {/* IN: 1 days */}
-            {/* AND: 3 weeks */}
-            {/* (The number is editable and the unit is a dropdown) */}
             <Head>
                 <title>{process.env.settings.title}</title>
             </Head>

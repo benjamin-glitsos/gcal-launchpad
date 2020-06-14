@@ -38,7 +38,7 @@ export default function ReviewCard({ id, title, days, status, isSelected }) {
             {days.map(({ in: { number, period } }, i) => (
                 <p key={number + period + i}>
                     <span>{(i === 0 ? "In" : "And").toUpperCase()}</span>
-                    <span>{number}</span>
+                    {number > 0 && <span>{number}</span>}
                     <span>{period}</span>
                 </p>
             ))}

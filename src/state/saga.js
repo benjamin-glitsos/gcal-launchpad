@@ -1,4 +1,4 @@
-import { all, put, takeLatest, call } from "redux-saga/effects";
+import { all, put, takeLatest, call, delay } from "redux-saga/effects";
 import es6promise from "es6-promise";
 import { history, review } from "./redux";
 import { fetchApi } from "~/lib/database";
@@ -25,6 +25,8 @@ function* sendReviewsSaga({ payload: [{ id, title, days }] }) {
                         title,
                         date
                     });
+                    yield delay(process.env.settings.deletionDelay);
+                    yield put(review.actions.delete(id));
                 })
             )
         );

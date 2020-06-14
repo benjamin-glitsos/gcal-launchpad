@@ -5,8 +5,8 @@ import ReviewCard from "~/components/review-card";
 export default function ReviewArea() {
     const symbols = process.env.settings.symbols;
     const reviewState = useSelector(state => state.review);
-    const events = Object.entries(reviewState).filter(([id, values]) =>
-        [symbols.review.REVIEW, symbols.review.EDITING].includes(values.status)
+    const events = Object.entries(reviewState).filter(
+        ([id, { status }]) => status !== symbols.review.EMPTY
     );
     return (
         <Box>

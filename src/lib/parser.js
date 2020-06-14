@@ -43,16 +43,18 @@ const symbols = new Symbols();
 export const createDay = (number, period) => {
     const now = moment(new Date(), process.env.settings.timeZone);
     const internationalFormat = m => m.format("YYYY-MM-DD");
-    const numberToAdd = number === 0 ? 1 : number;
+    const ifToday = (a, b) => (period === symbols.keyValues.TODAY ? a : b);
+    const nonZeroNumber = number === 0 ? 1 : number;
     return {
         in: {
-            number: numberToAdd,
+            number: ifToday(0, nonZeroNumber),
             period: symbols.periodPluralFromValue(period)
         },
         date: internationalFormat(
-            period === symbols.keyValues.TODAY
-                ? now
-                : now.add(numberToAdd, symbols.periodFromValue(period))
+            ifToday(
+                now,
+                now.add(nonZeroNumber, symbols.periodFromValue(period))
+            )
         )
     };
 };
