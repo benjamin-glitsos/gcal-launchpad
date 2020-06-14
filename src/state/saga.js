@@ -25,12 +25,12 @@ function* sendReviewsSaga({ payload: [{ id, title, days }] }) {
                         title,
                         date
                     });
-                    yield delay(process.env.settings.deletionDelay);
-                    yield put(review.actions.delete(id));
                 })
             )
         );
         yield put(review.actions.sendSuccess(id));
+        yield delay(process.env.settings.deletionDelay);
+        yield put(review.actions.delete([id]));
     } catch (err) {
         console.error(err);
         yield put(review.actions.sendFailure(id));

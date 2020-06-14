@@ -11,6 +11,7 @@ export default function ReviewCard({ id, title, days, status, isSelected }) {
     return (
         <Card>
             <h2>
+                {/* TODO: should be aware of multiple events to use plural. use pluralise package? */}
                 {cond([
                     {
                         case: anyMatches([symbols.EDITING, symbols.REVIEW]),
@@ -42,6 +43,7 @@ export default function ReviewCard({ id, title, days, status, isSelected }) {
                     <span>{period}</span>
                 </p>
             ))}
+            {/* TODO: button bar should map over a list of titles, conditions to display based on status (they return a boolean), and onClick actions */}
             <Button onClick={() => dispatch(review.actions.delete([id]))}>
                 Delete
             </Button>
