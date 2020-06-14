@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Card } from "rebass";
 import { Label } from "@rebass/forms";
+import pluralise from "pluralise";
 import { input, review } from "~/state/redux";
 import { cond, anyMatches } from "~/lib/utilities";
 import ButtonBar from "~/components/button-bar";
@@ -8,14 +9,14 @@ import ButtonBar from "~/components/button-bar";
 export default function ReviewCard({ id, title, days, status, isSelected }) {
     const symbols = process.env.settings.symbols.review;
     const dispatch = useDispatch();
+    const pluraliseDays = s => pluralise(days.length, s);
     return (
         <Card>
             <h2>
-                {/* TODO: should be aware of multiple events to use plural. use pluralise package? */}
                 {cond([
                     {
                         case: anyMatches([symbols.EDITING, symbols.REVIEW]),
-                        return: "Create Event"
+                        return: pluraliseDays("Create Event")
                     },
                     {
                         case: anyMatches([symbols.SENDING]),
@@ -27,11 +28,11 @@ export default function ReviewCard({ id, title, days, status, isSelected }) {
                     },
                     {
                         case: anyMatches([symbols.SEND_FAILURE]),
-                        return: "Failed to Create Event"
+                        return: pluraliseDays("Failed to Create Event")
                     },
                     {
                         case: true,
-                        return: "Event"
+                        return: pluraliseDays("Event")
                     }
                 ])(status)}
             </h2>

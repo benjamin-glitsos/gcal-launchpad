@@ -15,6 +15,7 @@ import {
     sequenceOf
 } from "arcsecond";
 import moment from "moment";
+import pluralise from "pluralise";
 import { invertObj } from "~/lib/utilities";
 
 class Symbols {
@@ -29,13 +30,6 @@ class Symbols {
     periodFromValue(value) {
         return this.valueKeys[value].toLowerCase();
     }
-
-    periodPluralFromValue(value) {
-        return (
-            this.periodFromValue(value) +
-            (value === this.keyValues.TODAY ? "" : "s")
-        );
-    }
 }
 
 const symbols = new Symbols();
@@ -45,16 +39,14 @@ export const createDay = (number, period) => {
     const internationalFormat = m => m.format("YYYY-MM-DD");
     const ifToday = (a, b) => (period === symbols.keyValues.TODAY ? a : b);
     const nonZeroNumber = number === 0 ? 1 : number;
+    const periodValue = symbols.periodFromValue(period);
     return {
         in: {
             number: ifToday(0, nonZeroNumber),
-            period: symbols.periodPluralFromValue(period)
+            period: ifToday(periodValue, pluralise(number, periodValue))
         },
         date: internationalFormat(
-            ifToday(
-                now,
-                now.add(nonZeroNumber, symbols.periodFromValue(period))
-            )
+            ifToday(now, now.add(nonZeroNumber, periodValue))
         )
     };
 };
