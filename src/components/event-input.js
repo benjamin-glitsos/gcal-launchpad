@@ -27,8 +27,7 @@ export default function EventInput() {
             value={inputState}
             onChange={onChangeHandler}
             onKeyPress={onKeyPressHandler}
-            color="primary"
-            my={4}
+            variant="mainInput"
         />
     );
 }

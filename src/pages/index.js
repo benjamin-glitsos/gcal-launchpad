@@ -10,13 +10,14 @@ export default function Index() {
     return (
         <Fragment>
             {/* TODO: steps to MVP: */}
-            {/* * Make the send success timeout work */}
             {/* * Info popup using: MDX, rebass, saga, cookies (react-cookie?) */}
             {/* - Theming */}
             <Head>
                 <title>{process.env.settings.title}</title>
             </Head>
-            <Heading color="primary">{process.env.settings.title}</Heading>
+            <Heading variant="mainHeading">
+                {process.env.settings.title}
+            </Heading>
             <EventInput />
             <ReviewArea />
             <pre>

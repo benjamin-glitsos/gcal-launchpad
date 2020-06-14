@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { Card } from "rebass";
+import { Heading, Card } from "rebass";
 import { Label } from "@rebass/forms";
 import pluralise from "pluralise";
 import { input, review } from "~/state/redux";
@@ -12,7 +12,7 @@ export default function ReviewCard({ id, title, days, status, isSelected }) {
     const pluraliseDays = s => pluralise(days.length, s);
     return (
         <Card>
-            <h2>
+            <Heading>
                 {cond([
                     {
                         case: anyMatches([symbols.EDITING, symbols.REVIEW]),
@@ -35,7 +35,7 @@ export default function ReviewCard({ id, title, days, status, isSelected }) {
                         return: pluraliseDays("Event")
                     }
                 ])(status)}
-            </h2>
+            </Heading>
             <p>{title}</p>
             {days.map(({ in: { number, period } }, i) => (
                 <p key={number + period + i}>
