@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Card } from "rebass";
 import { Label } from "@rebass/forms";
-import { review } from "~/state/redux";
+import { input, review } from "~/state/redux";
 import { cond, anyMatches } from "~/lib/utilities";
 import ButtonBar from "~/components/button-bar";
 
@@ -48,10 +48,19 @@ export default function ReviewCard({ id, title, days, status, isSelected }) {
                     {
                         title: "Delete",
                         isDisplayed: true,
-                        onClick: () => dispatch(review.actions.delete([id]))
+                        onClick: () =>
+                            status === symbols.EDITING
+                                ? [
+                                      review.actions.clear(),
+                                      input.actions.clear()
+                                  ].forEach(dispatch)
+                                : dispatch(review.actions.delete([id]))
                     },
                     {
-                        title: "Send",
+                        title:
+                            status === symbols.SEND_FAILURE
+                                ? "Retry Sending"
+                                : "Send",
                         isDisplayed: true,
                         onClick: () =>
                             dispatch(review.actions.send({ id, title, days }))

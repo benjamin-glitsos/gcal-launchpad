@@ -12,18 +12,19 @@ export default function ReviewArea() {
     const events = Object.entries(reviewState).filter(
         ([id, { status }]) => status !== symbols.review.EMPTY
     );
+    const hasEvents = events.length > 0;
     return (
         <Box>
             <ButtonBar
                 list={[
                     {
                         title: "Delete All",
-                        isDisplayed: true,
+                        isDisplayed: hasEvents,
                         onClick: () => dispatch(review.actions.deleteAll())
                     }
                 ]}
             />
-            {events.length > 0
+            {hasEvents
                 ? events.map(([id, values]) => (
                       <ReviewCard
                           {...{ id, ...values }}

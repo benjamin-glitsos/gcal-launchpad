@@ -20,7 +20,7 @@ export default class Review {
 
     parse(s) {
         return produce(this.state, draft => {
-            draft.new.status = process.env.settings.symbols.review.REVIEW;
+            draft.new.status = process.env.settings.symbols.review.EDITING;
             Object.assign(draft.new, parser(s));
         });
     }
@@ -34,7 +34,10 @@ export default class Review {
     new() {
         return produce(this.state, draft => {
             draft.new = this.empty.new;
-            draft[this.id.next().value] = this.state.new;
+            draft[this.id.next().value] = {
+                ...this.state.new,
+                status: process.env.settings.symbols.review.REVIEW
+            };
         });
     }
 

@@ -17,8 +17,7 @@ export default function EventInput() {
     };
     const onKeyPressHandler = e => {
         if (e.key === "Enter") {
-            dispatch(review.actions.new());
-            dispatch(input.actions.clear());
+            [review.actions.new(), input.actions.clear()].forEach(dispatch);
         }
     };
     return (
