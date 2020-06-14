@@ -11,8 +11,8 @@ export default {
         }
     },
     fonts: (() => {
-        const fonts = "Google Sans, Roboto, Arial, sans-serif";
-        return { body: fonts, heading: fonts };
+        const defaults = "Google Sans, Roboto, Arial, sans-serif";
+        return { body: defaults, heading: defaults };
     })(),
     lineHeights: {
         body: 1.5,
@@ -22,14 +22,14 @@ export default {
         default: 4
     },
     shadows: {
-        card: "0 0 4px rgba(0, 0, 0, .125)"
+        default: "0 0 4px rgba(0, 0, 0, .125)"
     },
     text: {
-        heading: {
+        h1: {
             color: "primary"
         },
-        mainHeading: {
-            color: "primary"
+        h2: {
+            fontSize: 3
         }
     },
     buttons: {
@@ -43,6 +43,7 @@ export default {
     },
     forms: {
         mainInput: {
+            color: "primary",
             fontSize: 3,
             px: 3,
             py: 2,

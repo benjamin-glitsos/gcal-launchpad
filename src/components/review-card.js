@@ -12,7 +12,7 @@ export default function ReviewCard({ id, title, days, status, isSelected }) {
     const pluraliseDays = s => pluralise(days.length, s);
     return (
         <Card>
-            <Heading>
+            <Heading variant="h2">
                 {cond([
                     {
                         case: anyMatches([symbols.EDITING, symbols.REVIEW]),

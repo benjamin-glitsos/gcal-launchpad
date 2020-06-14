@@ -15,9 +15,7 @@ export default function Index() {
             <Head>
                 <title>{process.env.settings.title}</title>
             </Head>
-            <Heading variant="mainHeading">
-                {process.env.settings.title}
-            </Heading>
+            <Heading variant="h1">{process.env.settings.title}</Heading>
             <EventInput />
             <ReviewArea />
             <pre>
