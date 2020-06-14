@@ -15,29 +15,44 @@ import {
     sequenceOf
 } from "arcsecond";
 import moment from "moment";
-import { cond } from "~/lib/utilities";
+import { invertObj } from "~/lib/utilities";
 
-export const createDay = (optionalNumber, unit, timeZone) => {
-    const symbols = process.env.settings.symbols.parser;
-    const isUnit = s => unit === s;
-    const now = moment(new Date(), timeZone);
-    const future = momentUnit => now.add(optionalNumber, momentUnit);
+class Symbols {
+    parserSymbols = process.env.settings.symbols.parser;
+    keyValues = this.parserSymbols;
+    valueKeys = invertObj(this.parserSymbols);
+    keys = Object.keys(this.parserSymbols);
+    values = Object.values(this.parserSymbols);
+    periods = this.keys.map(key => key.toLowerCase());
+    periodPlural = this.periods.map(period => period + "s");
+
+    periodFromValue(value) {
+        return this.valueKeys[value].toLowerCase();
+    }
+
+    periodPluralFromValue(value) {
+        return (
+            this.periodFromValue(value) +
+            (value === this.keyValues.TODAY ? "" : "s")
+        );
+    }
+}
+
+const symbols = new Symbols();
+
+export const createDay = (number, period) => {
+    const now = moment(new Date(), process.env.settings.timeZone);
     const internationalFormat = m => m.format("YYYY-MM-DD");
+    const numberToAdd = number === 0 ? 1 : number;
     return {
         in: {
-            number: optionalNumber,
-            unit
+            number: numberToAdd,
+            period: symbols.periodPluralFromValue(period)
         },
         date: internationalFormat(
-            cond([
-                { case: x => !optionalNumber, return: now },
-                { case: isUnit(symbols.TODAY), return: now },
-                { case: isUnit(symbols.DAY), return: future("days") },
-                { case: isUnit(symbols.WEEK), return: future("weeks") },
-                { case: isUnit(symbols.MONTH), return: future("months") },
-                { case: isUnit(symbols.YEAR), return: future("years") },
-                { case: true, return: now }
-            ])(true)
+            period === symbols.keyValues.TODAY
+                ? now
+                : now.add(numberToAdd, symbols.periodFromValue(period))
         )
     };
 };
@@ -57,11 +72,9 @@ const anything = regex(/^.*/);
 const day = coroutine(function* () {
     const optionalNumber = yield possibly(digits);
 
-    const unit = yield choice(
-        Object.values(process.env.settings.symbols.parser).map(c => char(c))
-    );
+    const period = yield choice(symbols.values.map(c => char(c)));
 
-    return createDay(optionalNumber || 0, unit, process.env.settings.timeZone);
+    return createDay(optionalNumber || 0, period);
 });
 
 const days = coroutine(function* () {
@@ -78,7 +91,7 @@ const event = coroutine(function* () {
     yield whitespaces;
 
     const dayValues = yield possibly(days).map(ds =>
-        !ds ? [createDay(0, "d", process.env.settings.timeZone)] : ds
+        !ds ? [createDay(0, "t")] : ds
     );
 
     yield whitespaces;

@@ -16,3 +16,10 @@ export const ifValidId = (id, f) => {
         f();
     }
 };
+
+export const invertObj = obj => {
+    return Object.keys(obj).reduce((ret, key) => {
+        ret[obj[key]] = key;
+        return ret;
+    }, {});
+};
