@@ -9,11 +9,11 @@
     },
     "dependencies": {
         "@rebass/forms": "4.0.6",
-        "@rebass/preset": "4.0.5",
         "@rebass/preset-material": "4.0.5",
         "arcsecond": "2.0.4",
         "conds": "0.0.1",
         "core-js": "3.6.5",
+        "deepmerge": "4.2.2",
         "dns": "0.2.2",
         "dotenv": "8.2.0",
         "es6-promise": "4.1.1",
