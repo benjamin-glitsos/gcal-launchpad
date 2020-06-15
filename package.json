@@ -9,6 +9,8 @@
     },
     "dependencies": {
         "@rebass/forms": "4.0.6",
+        "@rebass/preset": "4.0.5",
+        "@rebass/preset-material": "4.0.5",
         "arcsecond": "2.0.4",
         "conds": "0.0.1",
         "core-js": "3.6.5",

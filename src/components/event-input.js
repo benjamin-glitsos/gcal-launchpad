@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Input } from "@rebass/forms";
 import { input, review } from "~/state/redux/index";
 
-export default function EventInput() {
+export default function EventInput({ placeholder }) {
     const inputState = useSelector(state => state.input);
     const dispatch = useDispatch();
     const onChangeHandler = e => {
@@ -23,7 +23,7 @@ export default function EventInput() {
     return (
         <Input
             type="text"
-            placeholder="d, 2d, 2w buy some milk"
+            placeholder={placeholder}
             value={inputState}
             onChange={onChangeHandler}
             onKeyPress={onKeyPressHandler}

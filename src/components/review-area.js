@@ -5,7 +5,7 @@ import { review } from "~/state/redux";
 import ButtonBar from "~/components/button-bar";
 import ReviewCard from "~/components/review-card";
 
-export default function ReviewArea() {
+export default function ReviewArea({ placeholder }) {
     const symbols = process.env.settings.symbols;
     const dispatch = useDispatch();
     const reviewState = useSelector(state => state.review);
@@ -31,7 +31,7 @@ export default function ReviewArea() {
                           key={id + values.title}
                       />
                   ))
-                : "Review area"}
+                : placeholder}
         </Box>
     );
 }

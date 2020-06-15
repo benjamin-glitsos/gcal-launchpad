@@ -16,8 +16,8 @@ export default function Index() {
                 <title>{process.env.settings.title}</title>
             </Head>
             <Heading variant="h1">{process.env.settings.title}</Heading>
-            <EventInput />
-            <ReviewArea />
+            <EventInput placeholder="d, 2d, 2w buy some milk" />
+            <ReviewArea placeholder="Review area" />
             <pre>
                 <code>{JSON.stringify(state, null, 4)}</code>
             </pre>
