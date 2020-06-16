@@ -5,14 +5,23 @@ import { fetchApi } from "~/lib/database";
 
 es6promise.polyfill();
 
-function* getHistory(length) {
+function* getHistory({ payload: [length] }) {
     try {
         const res = yield fetchApi(["db", "history"], { length });
         const data = yield res.json();
-        yield put(history.actions.updateSuccess(data));
+        yield put(
+            history.actions.update({
+                message: process.env.messages.SUCCESS,
+                value: data
+            })
+        );
     } catch (err) {
         console.error(err);
-        yield put(history.actions.updateFailure());
+        yield put(
+            history.actions.update({
+                message: process.env.messages.FAILURE
+            })
+        );
     }
 }
 
@@ -49,7 +58,7 @@ function* sendReviews({ payload: [{ id, title, days }] }) {
 
 function* rootSaga() {
     yield all([
-        call(getHistory, process.env.settings.historyListLength),
+        call(getHistory, { payload: [process.env.settings.historyListLength] }),
         takeLatest(history.actions.add.type, addHistory),
         takeLatest(review.actions.send.type, sendReviews)
     ]);

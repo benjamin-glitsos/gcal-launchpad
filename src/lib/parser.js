@@ -19,7 +19,7 @@ import pluralise from "pluralise";
 import { invertObj } from "~/lib/utilities";
 
 class Symbols {
-    parserSymbols = process.env.settings.symbols.parser;
+    parserSymbols = process.env.settings.messages.parser;
     keyValues = this.parserSymbols;
     valueKeys = invertObj(this.parserSymbols);
     keys = Object.keys(this.parserSymbols);
@@ -32,14 +32,14 @@ class Symbols {
     }
 }
 
-const symbols = new Symbols();
+const messages = new Symbols();
 
 export const createDay = (number, period) => {
     const now = moment(new Date(), process.env.settings.timeZone);
     const internationalFormat = m => m.format("YYYY-MM-DD");
-    const ifToday = (a, b) => (period === symbols.keyValues.TODAY ? a : b);
+    const ifToday = (a, b) => (period === messages.keyValues.TODAY ? a : b);
     const nonZeroNumber = number === 0 ? 1 : number;
-    const periodValue = symbols.periodFromValue(period);
+    const periodValue = messages.periodFromValue(period);
     return {
         in: {
             number: ifToday(0, nonZeroNumber),
@@ -66,7 +66,7 @@ const anything = regex(/^.*/);
 const day = coroutine(function* () {
     const optionalNumber = yield possibly(digits);
 
-    const period = yield choice(symbols.values.map(c => char(c)));
+    const period = yield choice(messages.values.map(c => char(c)));
 
     return createDay(optionalNumber || 0, period);
 });

@@ -3,7 +3,7 @@ import { Heading, Card } from "rebass";
 import { Label } from "@rebass/forms";
 import pluralise from "pluralise";
 import { input, review, history } from "~/state/redux";
-import { cond, anyMatches } from "~/lib/utilities";
+import { cond, anyMatches, isEqual } from "~/lib/utilities";
 import ButtonBar from "~/components/button-bar";
 
 export default function ReviewCard({
@@ -14,7 +14,7 @@ export default function ReviewCard({
     status,
     isSelected
 }) {
-    const symbols = process.env.settings.symbols.review;
+    const messages = process.env.settings.messages.review;
     const dispatch = useDispatch();
     const pluraliseDays = s => pluralise(days.length, s);
     return (
@@ -22,19 +22,19 @@ export default function ReviewCard({
             <Heading variant="h2">
                 {cond([
                     {
-                        case: anyMatches([symbols.EDITING, symbols.REVIEW]),
+                        case: anyMatches([messages.EDITING, messages.REVIEW]),
                         return: pluraliseDays("Create Event")
                     },
                     {
-                        case: anyMatches([symbols.SENDING]),
+                        case: isEqual(messages.SEND),
                         return: "Sending..."
                     },
                     {
-                        case: anyMatches([symbols.SEND_SUCCESS]),
+                        case: isEqual(messages.SUCCESS),
                         return: "Done"
                     },
                     {
-                        case: anyMatches([symbols.SEND_FAILURE]),
+                        case: isEqual(messages.FAILURE),
                         return: pluraliseDays("Failed to Create Event")
                     },
                     {
@@ -57,7 +57,7 @@ export default function ReviewCard({
                         title: "Delete",
                         isDisplayed: true,
                         onClick: () =>
-                            status === symbols.EDITING
+                            status === messages.EDITING
                                 ? [
                                       review.actions.clear(),
                                       input.actions.clear()
@@ -66,7 +66,7 @@ export default function ReviewCard({
                     },
                     {
                         title:
-                            status === symbols.SEND_FAILURE
+                            status === messages.FAILURE
                                 ? "Retry Sending"
                                 : "Send",
                         isDisplayed: true,

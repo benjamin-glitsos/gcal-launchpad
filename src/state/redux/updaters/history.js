@@ -1,33 +1,32 @@
 import produce from "immer";
+import { sagaReducer } from "~/lib/state";
 
 export default class History {
     static title = "history";
 
     state = [];
 
-    update(length) {
-        return this.state;
-    }
-
-    updateSuccess(data) {
-        return data;
-    }
-
-    updateFailure() {
-        return this.state;
-    }
-
-    add(input) {
-        return this.state;
-    }
-
-    addSuccess(input) {
-        return produce(this.state, draft => {
-            draft.unshift(input);
+    update({ message, data }) {
+        return sagaReducer({
+            message,
+            data,
+            ifSend: this.state,
+            ifSuccess: this.state,
+            ifFailure: this.state,
+            ifElse: this.state
         });
     }
 
-    addFailure() {
-        return this.state;
+    add({ message, data }) {
+        return sagaReducer({
+            message,
+            data,
+            ifSend: this.state,
+            ifSuccess: produce(this.state, draft => {
+                draft.unshift(input);
+            }),
+            ifFailure: this.state,
+            ifElse: this.state
+        });
     }
 }

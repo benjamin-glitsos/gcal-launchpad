@@ -38,24 +38,20 @@ module.exports = {
                 "api"
             ],
             deletionDelay: 3000,
-            historyListLength: 10,
-            symbols: {
-                parser: {
-                    TODAY: "t",
-                    DAY: "d",
-                    WEEK: "w",
-                    MONTH: "m",
-                    YEAR: "y"
-                },
-                review: {
-                    EMPTY: "EMPTY",
-                    EDITING: "EDITING",
-                    REVIEW: "REVIEW",
-                    SENDING: "SENDING",
-                    SEND_SUCCESS: "SEND_SUCCESS",
-                    SEND_FAILURE: "SEND_FAILURE"
-                }
-            }
+            historyListLength: 10
+        },
+        messages: {
+            TODAY: "t",
+            DAY: "d",
+            WEEK: "w",
+            MONTH: "m",
+            YEAR: "y",
+            EMPTY: "EMPTY",
+            EDITING: "EDITING",
+            REVIEW: "REVIEW",
+            SEND: "SEND",
+            SUCCESS: "SUCCESS",
+            FAILURE: "FAILURE"
         }
     }
 };

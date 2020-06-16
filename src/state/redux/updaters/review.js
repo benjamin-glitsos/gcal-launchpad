@@ -1,6 +1,7 @@
 import produce from "immer";
 import parser from "~/lib/parser";
 import { ifValidId, createId } from "~/lib/utilities";
+import { sagaReducer } from "~/lib/state";
 
 export default class Review {
     static title = "review";
@@ -10,7 +11,7 @@ export default class Review {
             input: "",
             title: "",
             days: [],
-            status: process.env.settings.symbols.review.EMPTY
+            status: process.env.settings.messages.review.EMPTY
         }
     };
 
@@ -26,7 +27,7 @@ export default class Review {
 
     parse(s) {
         return produce(this.state, draft => {
-            draft.new.status = process.env.settings.symbols.review.EDITING;
+            draft.new.status = process.env.settings.messages.review.EDITING;
             Object.assign(draft.new, parser(s));
         });
     }
@@ -42,7 +43,7 @@ export default class Review {
             draft.new = this.empty.new;
             draft[this.id.next().value] = {
                 ...this.state.new,
-                status: process.env.settings.symbols.review.REVIEW
+                status: process.env.settings.messages.review.REVIEW
             };
         });
     }
@@ -59,21 +60,20 @@ export default class Review {
         return this.empty;
     }
 
-    send({ id, title, days }) {
-        return produce(this.state, draft => {
-            draft[id].status = process.env.settings.symbols.review.SENDING;
-        });
-    }
-
-    sendSuccess(id) {
-        return produce(this.state, draft => {
-            draft[id].status = process.env.settings.symbols.review.SEND_SUCCESS;
-        });
-    }
-
-    sendFailure(id) {
-        return produce(this.state, draft => {
-            draft[id].status = process.env.settings.symbols.review.SEND_FAILURE;
+    send({ message, data }) {
+        return sagaReducer({
+            message,
+            data,
+            ifSend: produce(this.state, draft => {
+                draft[id].status = process.env.settings.messages.review.SEND;
+            }),
+            ifSuccess: produce(this.state, draft => {
+                draft[id].status = process.env.settings.messages.review.SUCCESS;
+            }),
+            ifFailure: produce(this.state, draft => {
+                draft[id].status = process.env.settings.messages.review.FAILURE;
+            }),
+            ifElse: this.state
         });
     }
 }
