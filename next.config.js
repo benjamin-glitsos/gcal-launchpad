@@ -38,6 +38,7 @@ module.exports = {
                 "api"
             ],
             deletionDelay: 3000,
+            historyListLength: 10,
             symbols: {
                 parser: {
                     TODAY: "t",

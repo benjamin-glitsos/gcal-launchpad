@@ -29,7 +29,7 @@ export default function Index() {
                 ]}
             />
             <ReviewArea />
-            <HistoryList length={10} />
+            <HistoryList />
             <pre>
                 <code>{JSON.stringify(state, null, 4)}</code>
             </pre>

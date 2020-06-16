@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Heading, Link } from "rebass";
 import { input } from "~/state/redux";
 
-export default function HistoryList({ length }) {
+export default function HistoryList() {
     const dispatch = useDispatch();
     const [historyState, inputState] = useSelector(state => [
         state.history,
