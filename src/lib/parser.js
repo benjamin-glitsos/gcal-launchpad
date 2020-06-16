@@ -19,11 +19,10 @@ import pluralise from "pluralise";
 import { invertObj } from "~/lib/utilities";
 
 class Symbols {
-    parserSymbols = process.env.settings.messages;
     keyValues = this.parserSymbols;
-    valueKeys = invertObj(this.parserSymbols);
-    keys = Object.keys(this.parserSymbols);
-    values = Object.values(this.parserSymbols);
+    valueKeys = invertObj(process.env.messages);
+    keys = Object.keys(process.env.messages);
+    values = Object.values(process.env.messages);
     periods = this.keys.map(key => key.toLowerCase());
     periodPlural = this.periods.map(period => period + "s");
 

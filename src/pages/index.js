@@ -10,6 +10,7 @@ export default function Index() {
     const state = useSelector(state => state);
     return (
         <Fragment>
+            {/* TODO: Try using the redux-lightweight handler otherwise remove the class from that export */}
             {/* TODO: steps to MVP: */}
             {/* * Info popup using: MDX, rebass, saga, cookies (react-cookie?) */}
             {/* - Theming */}

@@ -8,10 +8,10 @@ export default class Review {
 
     empty = {
         new: {
+            status: process.env.settings.messages.EMPTY,
             input: "",
             title: "",
-            days: [],
-            status: process.env.settings.messages.EMPTY
+            days: []
         }
     };
 
@@ -48,11 +48,9 @@ export default class Review {
         });
     }
 
-    delete(ids) {
+    delete(id) {
         return produce(this.state, draft => {
-            ids.forEach(id => {
-                ifValidId(id, () => delete draft[id]);
-            });
+            ifValidId(id, () => delete draft[id]);
         });
     }
 

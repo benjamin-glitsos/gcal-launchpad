@@ -12,15 +12,13 @@ function* getHistory({ payload: [length] }) {
         yield put(
             history.actions.update({
                 message: process.env.messages.SUCCESS,
-                value: data
+                data
             })
         );
     } catch (err) {
         console.error(err);
         yield put(
-            history.actions.update({
-                message: process.env.messages.FAILURE
-            })
+            history.actions.update({ message: process.env.messages.FAILURE })
         );
     }
 }
@@ -49,7 +47,7 @@ function* sendReviews({ payload: [{ id, title, days }] }) {
         );
         yield put(review.actions.sendSuccess(id));
         yield delay(process.env.settings.deletionDelay);
-        yield put(review.actions.delete([id]));
+        yield put(review.actions.delete(id));
     } catch (err) {
         console.error(err);
         yield put(review.actions.sendFailure(id));
