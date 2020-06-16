@@ -28,7 +28,7 @@ export default function ReviewArea() {
                 {events.map(([id, values]) => (
                     <ReviewCard
                         {...{ id, ...values }}
-                        key={id + values.title}
+                        key={values.title + id}
                     />
                 ))}
             </Box>

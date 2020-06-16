@@ -5,9 +5,11 @@ import { fetchApi } from "~/lib/database";
 
 es6promise.polyfill();
 
-function* getHistory() {
+function* getHistory({ payload }) {
     try {
-        const res = yield fetchApi(["db", "history"], {});
+        console.log(payload);
+        const length = 10;
+        const res = yield fetchApi(["db", "history"], { length });
         const data = yield res.json();
         yield put(history.actions.updateSuccess(data));
     } catch (err) {
@@ -50,7 +52,7 @@ function* sendReviews({ payload: [{ id, title, days }] }) {
 
 function* rootSaga() {
     yield all([
-        call(getHistory),
+        call(getHistory, 10),
         takeLatest(history.actions.update.type, getHistory),
         takeLatest(history.actions.add.type, addHistory),
         takeLatest(review.actions.send.type, sendReviews)

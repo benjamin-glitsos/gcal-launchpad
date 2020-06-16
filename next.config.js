@@ -37,7 +37,7 @@ module.exports = {
                     : "http://localhost:3001",
                 "api"
             ],
-            deletionDelay: 4000,
+            deletionDelay: 3000,
             symbols: {
                 parser: {
                     TODAY: "t",

@@ -5,7 +5,7 @@ export default class History {
 
     state = [];
 
-    update() {
+    update(length) {
         return this.state;
     }
 

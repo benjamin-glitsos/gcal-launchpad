@@ -4,6 +4,7 @@ import Head from "next/head";
 import { Heading } from "rebass";
 import ReviewArea from "~/components/review-area";
 import EventInput from "~/components/event-input";
+import HistoryList from "~/components/history-list";
 
 export default function Index() {
     const state = useSelector(state => state);
@@ -28,6 +29,7 @@ export default function Index() {
                 ]}
             />
             <ReviewArea />
+            <HistoryList length={10} />
             <pre>
                 <code>{JSON.stringify(state, null, 4)}</code>
             </pre>
