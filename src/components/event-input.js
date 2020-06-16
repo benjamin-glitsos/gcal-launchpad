@@ -3,8 +3,12 @@ import { Input } from "@rebass/forms";
 import { input, review } from "~/state/redux/index";
 
 export default function EventInput({ placeholder }) {
-    const inputState = useSelector(state => state.input);
+    const [inputState, reviewState] = useSelector(state => [
+        state.input,
+        state.review
+    ]);
     const dispatch = useDispatch();
+    const reviewStateIsEmpty = Object.keys(reviewState).length === 1;
     const onChangeHandler = e => {
         e.preventDefault();
         const value = e.target.value;
@@ -23,7 +27,7 @@ export default function EventInput({ placeholder }) {
     return (
         <Input
             type="text"
-            placeholder={placeholder}
+            placeholder={reviewStateIsEmpty ? placeholder : "Add another ..."}
             value={inputState}
             onChange={onChangeHandler}
             onKeyPress={onKeyPressHandler}
