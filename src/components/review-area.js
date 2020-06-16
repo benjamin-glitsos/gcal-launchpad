@@ -5,7 +5,7 @@ import { review } from "~/state/redux";
 import ButtonBar from "~/components/button-bar";
 import ReviewCard from "~/components/review-card";
 
-export default function ReviewArea({ placeholder }) {
+export default function ReviewArea() {
     const symbols = process.env.settings.symbols;
     const dispatch = useDispatch();
     const reviewState = useSelector(state => state.review);
@@ -14,24 +14,24 @@ export default function ReviewArea({ placeholder }) {
     );
     const hasEvents = events.length > 0;
     return (
-        <Box>
-            <ButtonBar
-                list={[
-                    {
-                        title: "Delete All",
-                        isDisplayed: hasEvents,
-                        onClick: () => dispatch(review.actions.deleteAll())
-                    }
-                ]}
-            />
-            {hasEvents
-                ? events.map(([id, values]) => (
-                      <ReviewCard
-                          {...{ id, ...values }}
-                          key={id + values.title}
-                      />
-                  ))
-                : placeholder}
-        </Box>
+        hasEvents && (
+            <Box>
+                <ButtonBar
+                    list={[
+                        {
+                            title: "Delete All",
+                            isDisplayed: hasEvents,
+                            onClick: () => dispatch(review.actions.deleteAll())
+                        }
+                    ]}
+                />
+                {events.map(([id, values]) => (
+                    <ReviewCard
+                        {...{ id, ...values }}
+                        key={id + values.title}
+                    />
+                ))}
+            </Box>
+        )
     );
 }

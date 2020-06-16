@@ -16,8 +16,18 @@ export default function Index() {
                 <title>{process.env.settings.title}</title>
             </Head>
             <Heading variant="h1">{process.env.settings.title}</Heading>
-            <EventInput placeholder="d, 2d, 2w buy some milk" />
-            <ReviewArea placeholder="Review area" />
+            <EventInput
+                placeholders={[
+                    "work out today, or else...",
+                    "d, 2d buy some milk",
+                    "2w go to meeting",
+                    "4d, 3y finish that book",
+                    "t, m, 2m, 3m, 4m buy in bulk",
+                    "t, d do it today, or maybe tomorrow",
+                    "100d challenge is finished"
+                ]}
+            />
+            <ReviewArea />
             <pre>
                 <code>{JSON.stringify(state, null, 4)}</code>
             </pre>

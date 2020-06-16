@@ -23,3 +23,5 @@ export const invertObj = obj => {
         return ret;
     }, {});
 };
+
+export const randomItem = ls => ls[Math.floor(Math.random() * ls.length)];
