@@ -1,22 +1,22 @@
 import { cond, isEqual } from "~/lib/utilities";
 
-export const sagaReducer = ({ message, data, ifSend, ifSuccess, ifFailure, ifElse }) => {
+export const sagaReducer = ({ message, data, onSend, onSuccess, onFailure, onOtherwise }) => {
     return cond([
         {
             case: isEqual(process.env.messages.SEND),
-            return: ifSend
+            return: onSend
         }
         {
             case: isEqual(process.env.messages.SUCCESS),
-            return: ifSuccess
+            return: onSuccess
         },
         {
             case: isEqual(process.env.messages.FAILURE),
-            return: ifFailure
+            return: onFailure
         },
         {
             case: true,
-            return: ifElse
+            return: onOtherwise
         }
     ])(message);
 }

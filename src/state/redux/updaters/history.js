@@ -10,10 +10,10 @@ export default class History {
         return sagaReducer({
             message,
             data,
-            ifSend: this.state,
-            ifSuccess: this.state,
-            ifFailure: this.state,
-            ifElse: this.state
+            onSend: this.state,
+            onSuccess: this.state,
+            onFailure: this.state,
+            onOtherwise: this.state
         });
     }
 
@@ -21,12 +21,12 @@ export default class History {
         return sagaReducer({
             message,
             data,
-            ifSend: this.state,
-            ifSuccess: produce(this.state, draft => {
+            onSend: this.state,
+            onSuccess: produce(this.state, draft => {
                 draft.unshift(input);
             }),
-            ifFailure: this.state,
-            ifElse: this.state
+            onFailure: this.state,
+            onOtherwise: this.state
         });
     }
 }

@@ -62,16 +62,16 @@ export default class Review {
         return sagaReducer({
             message,
             data,
-            ifSend: produce(this.state, draft => {
+            onSend: produce(this.state, draft => {
                 draft[id].status = process.env.messages.SEND;
             }),
-            ifSuccess: produce(this.state, draft => {
+            onSuccess: produce(this.state, draft => {
                 draft[id].status = process.env.messages.SUCCESS;
             }),
-            ifFailure: produce(this.state, draft => {
+            onFailure: produce(this.state, draft => {
                 draft[id].status = process.env.messages.FAILURE;
             }),
-            ifElse: this.state
+            onOtherwise: this.state
         });
     }
 }
