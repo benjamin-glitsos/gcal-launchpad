@@ -14,7 +14,7 @@ export default function ReviewCard({
     status,
     isSelected
 }) {
-    const messages = process.env.settings.messages.review;
+    const messages = process.env.settings.messages;
     const dispatch = useDispatch();
     const pluraliseDays = s => pluralise(days.length, s);
     return (

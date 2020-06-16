@@ -19,7 +19,7 @@ import pluralise from "pluralise";
 import { invertObj } from "~/lib/utilities";
 
 class Symbols {
-    parserSymbols = process.env.settings.messages.parser;
+    parserSymbols = process.env.settings.messages;
     keyValues = this.parserSymbols;
     valueKeys = invertObj(this.parserSymbols);
     keys = Object.keys(this.parserSymbols);

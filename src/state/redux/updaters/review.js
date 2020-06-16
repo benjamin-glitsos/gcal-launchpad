@@ -11,7 +11,7 @@ export default class Review {
             input: "",
             title: "",
             days: [],
-            status: process.env.settings.messages.review.EMPTY
+            status: process.env.settings.messages.EMPTY
         }
     };
 
@@ -27,7 +27,7 @@ export default class Review {
 
     parse(s) {
         return produce(this.state, draft => {
-            draft.new.status = process.env.settings.messages.review.EDITING;
+            draft.new.status = process.env.settings.messages.EDITING;
             Object.assign(draft.new, parser(s));
         });
     }
@@ -43,7 +43,7 @@ export default class Review {
             draft.new = this.empty.new;
             draft[this.id.next().value] = {
                 ...this.state.new,
-                status: process.env.settings.messages.review.REVIEW
+                status: process.env.settings.messages.REVIEW
             };
         });
     }
@@ -65,13 +65,13 @@ export default class Review {
             message,
             data,
             ifSend: produce(this.state, draft => {
-                draft[id].status = process.env.settings.messages.review.SEND;
+                draft[id].status = process.env.messages.SEND;
             }),
             ifSuccess: produce(this.state, draft => {
-                draft[id].status = process.env.settings.messages.review.SUCCESS;
+                draft[id].status = process.env.messages.SUCCESS;
             }),
             ifFailure: produce(this.state, draft => {
-                draft[id].status = process.env.settings.messages.review.FAILURE;
+                draft[id].status = process.env.messages.FAILURE;
             }),
             ifElse: this.state
         });
