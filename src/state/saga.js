@@ -5,7 +5,7 @@ import { fetchApi } from "~/lib/database";
 
 es6promise.polyfill();
 
-function* getHistorySaga() {
+function* getHistory() {
     try {
         const res = yield fetchApi(["db", "history"], {});
         const data = yield res.json();
@@ -16,7 +16,18 @@ function* getHistorySaga() {
     }
 }
 
-function* sendReviewsSaga({ payload: [{ id, title, days }] }) {
+function* addHistory({ payload: [input] }) {
+    try {
+        console.log(input);
+        const res = yield fetchApi(["db", "history", "add"], { input });
+        yield put(history.actions.addSuccess(input));
+    } catch (err) {
+        console.error(err);
+        yield put(history.actions.addFailure());
+    }
+}
+
+function* sendReviews({ payload: [{ id, title, days }] }) {
     try {
         const ress = yield all(
             days.map(({ date }) =>
@@ -39,9 +50,10 @@ function* sendReviewsSaga({ payload: [{ id, title, days }] }) {
 
 function* rootSaga() {
     yield all([
-        call(getHistorySaga),
-        takeLatest(history.actions.update.type, getHistorySaga),
-        takeLatest(review.actions.send.type, sendReviewsSaga)
+        call(getHistory),
+        takeLatest(history.actions.update.type, getHistory),
+        takeLatest(history.actions.add.type, addHistory),
+        takeLatest(review.actions.send.type, sendReviews)
     ]);
 }
 

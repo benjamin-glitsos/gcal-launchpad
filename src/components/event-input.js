@@ -14,7 +14,10 @@ export default function EventInput({ placeholder }) {
         const value = e.target.value;
         dispatch(input.actions.update(value));
         if (value.length > 0) {
-            dispatch(review.actions.parse(value));
+            [
+                review.actions.updateInput(inputState),
+                review.actions.parse(value)
+            ].forEach(dispatch);
         } else {
             dispatch(review.actions.clear());
         }

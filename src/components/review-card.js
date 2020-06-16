@@ -2,11 +2,18 @@ import { useDispatch } from "react-redux";
 import { Heading, Card } from "rebass";
 import { Label } from "@rebass/forms";
 import pluralise from "pluralise";
-import { input, review } from "~/state/redux";
+import { input, review, history } from "~/state/redux";
 import { cond, anyMatches } from "~/lib/utilities";
 import ButtonBar from "~/components/button-bar";
 
-export default function ReviewCard({ id, title, days, status, isSelected }) {
+export default function ReviewCard({
+    id,
+    input,
+    title,
+    days,
+    status,
+    isSelected
+}) {
     const symbols = process.env.settings.symbols.review;
     const dispatch = useDispatch();
     const pluraliseDays = s => pluralise(days.length, s);
@@ -64,7 +71,10 @@ export default function ReviewCard({ id, title, days, status, isSelected }) {
                                 : "Send",
                         isDisplayed: true,
                         onClick: () =>
-                            dispatch(review.actions.send({ id, title, days }))
+                            [
+                                review.actions.send({ id, title, days }),
+                                history.actions.add(input)
+                            ].forEach(dispatch)
                     }
                 ]}
             />

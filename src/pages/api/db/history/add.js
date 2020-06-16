@@ -1,13 +1,13 @@
 import { pool } from "~/lib/database";
 
 export default async (req, res) => {
+    const {
+        query: { input }
+    } = req;
     try {
-        const query = await pool.query(`
-            SELECT input
-            FROM history
-            ORDER BY id DESC
-            LIMIT 10
-            `);
+        const query = await pool.query(
+            `INSERT INTO history(input) VALUES ('${input}')`
+        );
         console.log(query.rows);
         res.status(200).json(query.rows);
     } catch (err) {

@@ -7,16 +7,22 @@ export default class Review {
 
     empty = {
         new: {
+            input: "",
             title: "",
             days: [],
-            status: process.env.settings.symbols.review.EMPTY,
-            error: ""
+            status: process.env.settings.symbols.review.EMPTY
         }
     };
 
     state = this.empty;
 
     id = createId();
+
+    updateInput(s) {
+        return produce(this.state, draft => {
+            draft.new.input = s;
+        });
+    }
 
     parse(s) {
         return produce(this.state, draft => {
@@ -71,35 +77,3 @@ export default class Review {
         });
     }
 }
-
-// isSelected: false,
-
-// toggleSelect(id) {
-//     return produce(this.state, draft => {
-//         draft[id].isSelected = !draft[id].isSelected;
-//     });
-// }
-
-// manuallyCreateNew() {
-//     return produce(this.state, draft => {
-//         draft.new = {
-//             ...this.empty.new,
-//             ...{ status: process.env.settings.symbols.review.EDITING }
-//         };
-//         draft[this.id.next().value] = this.state.new;
-//     });
-// }
-
-// update(id, j) {
-//     return produce(this.state, draft => {
-//         ifValidId(id, () => {
-//             draft[id] = { ...draft[id], ...j };
-//         });
-//     });
-// }
-//
-// updateDay({ reviewId, dayIndex, dayValue }) {
-//     return produce(this.state, draft => {
-//         draft.days[dayIndex] = dayValue;
-//     });
-// }
