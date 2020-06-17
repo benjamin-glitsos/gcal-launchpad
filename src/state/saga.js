@@ -5,28 +5,28 @@ import { fetchApi } from "~/lib/database";
 
 es6promise.polyfill();
 
-function* updateHistory({ payload: [length] }) {
+function* updateHistorySaga({ payload: [length] }) {
     try {
         const res = yield fetchApi(["db", "history"], { length });
         const data = yield res.json();
-        yield put(history.actions.updateSuccess());
+        yield put(history.actions.updateSuccess(data));
     } catch (err) {
         console.error(err);
         yield put(history.actions.updateFailure());
     }
 }
 
-function* addHistory({ payload: [input] }) {
+function* addHistorySaga({ payload: [input] }) {
     try {
         yield fetchApi(["db", "history", "add"], { input });
-        yield put(history.actions.addSuccess(input));
+        yield put(history.actions.addSuccess());
     } catch (err) {
         console.error(err);
         yield put(history.actions.addFailure());
     }
 }
 
-function* sendReviews({ payload: [{ id, title, days }] }) {
+function* sendReviewsSaga({ payload: [{ id, title, days }] }) {
     try {
         yield all(
             days.map(({ date }) =>
@@ -39,6 +39,12 @@ function* sendReviews({ payload: [{ id, title, days }] }) {
             )
         );
         yield put(review.actions.sendSuccess(id));
+        yield call(addHistorySaga, {
+            payload: [title]
+        });
+        yield call(updateHistorySaga, {
+            payload: [process.env.settings.historyListLength]
+        });
         yield delay(process.env.settings.deletionDelay);
         yield put(review.actions.delete(id));
     } catch (err) {
@@ -49,12 +55,12 @@ function* sendReviews({ payload: [{ id, title, days }] }) {
 
 function* rootSaga() {
     yield all([
-        call(updateHistory, {
+        call(updateHistorySaga, {
             payload: [process.env.settings.historyListLength]
         }),
-        takeLatest(history.actions.update.type, updateHistory),
-        takeLatest(history.actions.add.type, addHistory),
-        takeLatest(review.actions.send.type, sendReviews)
+        takeLatest(history.actions.update.type, updateHistorySaga),
+        takeLatest(history.actions.add.type, addHistorySaga),
+        takeLatest(review.actions.send.type, sendReviewsSaga)
     ]);
 }
 

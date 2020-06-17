@@ -44,7 +44,7 @@ module.exports = {
             EMPTY: "EMPTY",
             EDITING: "EDITING",
             REVIEW: "REVIEW",
-            SEND: "SEND",
+            REQUEST: "REQUEST",
             SUCCESS: "SUCCESS",
             FAILURE: "FAILURE"
         },

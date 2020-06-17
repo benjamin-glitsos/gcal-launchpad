@@ -5,12 +5,12 @@ export default class History {
 
     state = [];
 
-    update(data) {
+    update(length) {
         return this.state;
     }
 
-    updateSuccess() {
-        return this.state;
+    updateSuccess(data) {
+        return data;
     }
 
     updateFailure() {
@@ -22,9 +22,7 @@ export default class History {
     }
 
     addSuccess() {
-        return produce(this.state, draft => {
-            draft.unshift(input);
-        });
+        return this.state;
     }
 
     addFailure() {

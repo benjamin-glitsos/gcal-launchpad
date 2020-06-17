@@ -59,7 +59,7 @@ export default class Review {
 
     send({ id, title, days }) {
         return produce(this.state, draft => {
-            draft[id].status = process.env.messages.SEND;
+            draft[id].status = process.env.messages.REQUEST;
         });
     }
 
