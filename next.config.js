@@ -40,7 +40,6 @@ module.exports = {
             historyListLength: 10
         },
         messages: {
-            EMPTY: "EMPTY",
             EDITING: "EDITING",
             REVIEW: "REVIEW",
             REQUEST: "REQUEST",

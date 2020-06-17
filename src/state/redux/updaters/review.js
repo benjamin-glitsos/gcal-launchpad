@@ -14,9 +14,9 @@ export default class Review {
         }
     };
 
-    state = this.empty;
-
     id = createId();
+
+    state = this.empty;
 
     updateInput(s) {
         return produce(this.state, draft => {
@@ -49,7 +49,11 @@ export default class Review {
 
     delete(id) {
         return produce(this.state, draft => {
-            delete draft[id];
+            if (id === "new") {
+                draft.new = this.empty.new;
+            } else {
+                delete draft[id];
+            }
         });
     }
 
