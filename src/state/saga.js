@@ -26,7 +26,7 @@ function* addHistorySaga({ payload: [input] }) {
     }
 }
 
-function* sendReviewsSaga({ payload: [{ id, title, days }] }) {
+function* sendReviewsSaga({ payload: [{ id, input, title, days }] }) {
     try {
         yield all(
             days.map(({ date }) =>
@@ -40,7 +40,7 @@ function* sendReviewsSaga({ payload: [{ id, title, days }] }) {
         );
         yield put(review.actions.sendSuccess(id));
         yield call(addHistorySaga, {
-            payload: [title]
+            payload: [input]
         });
         yield call(updateHistorySaga, {
             payload: [process.env.settings.historyListLength]

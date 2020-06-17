@@ -19,16 +19,13 @@ export default function ReviewArea() {
                     list={[
                         {
                             title: "Delete All",
-                            isDisplayed: hasEvents,
+                            isDisplayed: true,
                             onClick: () => dispatch(review.actions.deleteAll())
                         }
                     ]}
                 />
-                {events.map(([id, values]) => (
-                    <ReviewCard
-                        {...{ id, ...values }}
-                        key={values.title + id}
-                    />
+                {events.map(([id, values], i) => (
+                    <ReviewCard {...{ id, ...values }} key={values.title + i} />
                 ))}
             </Box>
         )

@@ -13,12 +13,6 @@ export function* createId() {
     }
 }
 
-export const ifValidId = (id, f) => {
-    if (!Number.isNaN(parseInt(id))) {
-        f();
-    }
-};
-
 export const invertObj = obj => {
     return Object.keys(obj).reduce((ret, key) => {
         ret[obj[key]] = key;

@@ -1,6 +1,6 @@
 import produce from "immer";
 import parser from "~/lib/parser";
-import { ifValidId, createId } from "~/lib/utilities";
+import { createId } from "~/lib/utilities";
 
 export default class Review {
     static title = "review";
@@ -49,7 +49,7 @@ export default class Review {
 
     delete(id) {
         return produce(this.state, draft => {
-            ifValidId(id, () => delete draft[id]);
+            delete draft[id];
         });
     }
 
@@ -57,7 +57,7 @@ export default class Review {
         return this.empty;
     }
 
-    send({ id, title, days }) {
+    send({ id, input, title, days }) {
         return produce(this.state, draft => {
             draft[id].status = process.env.messages.REQUEST;
         });

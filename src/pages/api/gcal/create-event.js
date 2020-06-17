@@ -24,22 +24,26 @@ const auth = (() => {
 })();
 
 export default async (req, res) => {
-    const {
-        query: { title, date }
-    } = req;
-    try {
-        const calendar = google.calendar({ version: "v3", auth });
-        const query = await calendar.events.insert({
-            auth,
-            calendarId: process.env.GCAL_CALENDAR_ID,
-            resource: {
-                summary: title,
-                ...allDayEvent(date)
-            }
-        });
-        res.status(200).json(query);
-    } catch (err) {
-        console.error(err);
-        res.status(500).end();
+    if (!process.env.TEST_MODE) {
+        const {
+            query: { title, date }
+        } = req;
+        try {
+            const calendar = google.calendar({ version: "v3", auth });
+            const query = await calendar.events.insert({
+                auth,
+                calendarId: process.env.GCAL_CALENDAR_ID,
+                resource: {
+                    summary: title,
+                    ...allDayEvent(date)
+                }
+            });
+            res.status(200).json(query);
+        } catch (err) {
+            console.error(err);
+            res.status(500).end();
+        }
+    } else {
+        res.status(200).end();
     }
 };

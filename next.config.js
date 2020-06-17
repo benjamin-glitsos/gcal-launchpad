@@ -29,8 +29,6 @@ module.exports = {
     env: {
         settings: {
             title: "Google Calendar Launchpad",
-            reduxDebugMode: true,
-            timeZone: "Australia/Sydney",
             apiPath: [
                 process.env.NODE_ENV === "production"
                     ? "https://cal.benglitsos.com.au"
