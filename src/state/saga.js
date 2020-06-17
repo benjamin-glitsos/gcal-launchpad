@@ -2,6 +2,7 @@ import { all, put, takeLatest, call, delay, select } from "redux-saga/effects";
 import es6promise from "es6-promise";
 import { history, review } from "./redux";
 import { fetchApi } from "~/lib/database";
+import { fromEntries } from "~/lib/polyfills";
 
 es6promise.polyfill();
 
@@ -38,7 +39,6 @@ function* sendReviewsSaga({ payload: [{ id, input, title, days }] }) {
                 })
             )
         );
-        yield put(review.actions.sendSuccess(id));
         yield call(addHistorySaga, {
             payload: [input]
         });
@@ -47,6 +47,7 @@ function* sendReviewsSaga({ payload: [{ id, input, title, days }] }) {
         });
         yield delay(process.env.settings.deletionDelay);
         yield put(review.actions.delete(id));
+        yield put(review.actions.sendSuccess(id));
     } catch (err) {
         console.error(err);
         yield put(review.actions.sendFailure(id));
@@ -55,11 +56,15 @@ function* sendReviewsSaga({ payload: [{ id, input, title, days }] }) {
 
 function* sendAllReviewsSaga() {
     try {
-        const allReviewIds = yield [select(review.selectors.all)].map(reviews =>
-            Object.keys(reviews)
+        const allReviews = yield select(review.selectors.all);
+        const allReviewsList = fromEntries(allReviews).filter(
+            ([id, review]) => id !== "new"
         );
+        console.log(allReviewsList);
         yield all(
-            allReviewIds.forEach(id => call(sendReviewsSaga, { payload: [id] }))
+            allReviewsList.forEach(([id, review]) =>
+                call(sendReviewsSaga, { payload: [{ id, ...review }] })
+            )
         );
         yield put(review.actions.sendAllSuccess());
     } catch (err) {

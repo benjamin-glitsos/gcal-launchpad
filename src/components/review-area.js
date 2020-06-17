@@ -7,10 +7,7 @@ import ReviewCard from "~/components/review-card";
 
 export default function ReviewArea() {
     const dispatch = useDispatch();
-    const reviewState = useSelector(state => state.review);
-    const events = Object.entries(reviewState).filter(
-        ([id, { status }]) => status !== process.env.messages.EMPTY
-    );
+    const events = Object.entries(useSelector(review.selectors.allExceptEmpty));
     const hasEvents = events.length > 0;
     return (
         hasEvents && (

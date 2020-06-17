@@ -6,7 +6,12 @@ export default class Review {
     static title = "review";
 
     static selectors = {
-        all: state => state.review
+        all: state => state.review,
+        allExceptEmpty: state => produce(state, draft => {
+            if (draft.new.status === process.env.messages.EMPTY) {
+                delete draft.new;
+            }
+        });
     };
 
     empty = {
