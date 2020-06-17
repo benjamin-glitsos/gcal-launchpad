@@ -21,6 +21,11 @@ export default function ReviewArea() {
                             title: "Delete All",
                             isDisplayed: true,
                             onClick: () => dispatch(review.actions.deleteAll())
+                        },
+                        {
+                            title: "Send All",
+                            isDisplayed: true,
+                            onClick: () => dispatch(review.actions.sendAll())
                         }
                     ]}
                 />

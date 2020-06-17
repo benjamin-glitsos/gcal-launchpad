@@ -78,4 +78,16 @@ export default class Review {
             draft[data.id].status = process.env.messages.FAILURE;
         });
     }
+
+    sendAll() {
+        return this.state;
+    }
+
+    sendAllSuccess() {
+        return this.state;
+    }
+
+    sendAllFailure() {
+        return this.state;
+    }
 }

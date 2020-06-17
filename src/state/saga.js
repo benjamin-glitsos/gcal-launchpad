@@ -1,4 +1,4 @@
-import { all, put, takeLatest, call, delay } from "redux-saga/effects";
+import { all, put, takeLatest, call, delay, select } from "redux-saga/effects";
 import es6promise from "es6-promise";
 import { history, review } from "./redux";
 import { fetchApi } from "~/lib/database";
@@ -29,7 +29,7 @@ function* addHistorySaga({ payload: [input] }) {
 function* sendReviewsSaga({ payload: [{ id, input, title, days }] }) {
     try {
         yield all(
-            days.map(({ date }) =>
+            days.forEach(({ date }) =>
                 call(function* () {
                     yield fetchApi(["gcal", "create-event"], {
                         title,
@@ -53,6 +53,21 @@ function* sendReviewsSaga({ payload: [{ id, input, title, days }] }) {
     }
 }
 
+function* sendAllReviewsSaga() {
+    try {
+        const allReviewIds = yield [
+            select(state => state.review)
+        ].map(reviews => Object.keys(reviews));
+        yield all(
+            allReviewIds.forEach(id => call(sendReviewsSaga, { payload: [id] }))
+        );
+        yield put(review.actions.sendAllSuccess());
+    } catch (err) {
+        console.error(err);
+        yield put(review.actions.sendAllFailure());
+    }
+}
+
 function* rootSaga() {
     yield all([
         call(updateHistorySaga, {
@@ -60,7 +75,8 @@ function* rootSaga() {
         }),
         takeLatest(history.actions.update.type, updateHistorySaga),
         takeLatest(history.actions.add.type, addHistorySaga),
-        takeLatest(review.actions.send.type, sendReviewsSaga)
+        takeLatest(review.actions.send.type, sendReviewsSaga),
+        takeLatest(review.actions.sendAll.type, sendAllReviewsSaga)
     ]);
 }
 
