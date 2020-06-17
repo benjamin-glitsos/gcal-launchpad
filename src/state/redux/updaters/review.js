@@ -5,6 +5,10 @@ import { createId } from "~/lib/utilities";
 export default class Review {
     static title = "review";
 
+    static selectors = {
+        all: state => state.review
+    };
+
     empty = {
         new: {
             status: process.env.messages.EMPTY,

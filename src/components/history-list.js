@@ -1,14 +1,12 @@
 import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Heading, Link } from "rebass";
-import { input } from "~/state/redux";
+import { input, history } from "~/state/redux";
 
 export default function HistoryList() {
     const dispatch = useDispatch();
-    const [historyState, inputState] = useSelector(state => [
-        state.history,
-        state.input
-    ]);
+    const inputState = useSelector(input.selectors.all);
+    const historyState = useSelector(history.selectors.all);
     return (
         <Fragment>
             <Heading>Recent Events</Heading>

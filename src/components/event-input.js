@@ -4,10 +4,8 @@ import { input, review } from "~/state/redux/index";
 import { randomItem } from "~/lib/utilities";
 
 export default function EventInput({ placeholders }) {
-    const [inputState, reviewState] = useSelector(state => [
-        state.input,
-        state.review
-    ]);
+    const inputState = useSelector(input.selectors.all);
+    const reviewState = useSelector(review.selectors.all);
     const dispatch = useDispatch();
     const reviewStateIsEmpty = Object.keys(reviewState).length === 1;
     const placeholder = reviewStateIsEmpty

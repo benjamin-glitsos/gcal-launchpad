@@ -55,9 +55,9 @@ function* sendReviewsSaga({ payload: [{ id, input, title, days }] }) {
 
 function* sendAllReviewsSaga() {
     try {
-        const allReviewIds = yield [
-            select(state => state.review)
-        ].map(reviews => Object.keys(reviews));
+        const allReviewIds = yield [select(review.selectors.all)].map(reviews =>
+            Object.keys(reviews)
+        );
         yield all(
             allReviewIds.forEach(id => call(sendReviewsSaga, { payload: [id] }))
         );

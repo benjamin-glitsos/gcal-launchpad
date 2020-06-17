@@ -3,6 +3,10 @@ import produce from "immer";
 export default class History {
     static title = "history";
 
+    static selectors = {
+        all: state => state.history
+    };
+
     state = [];
 
     update(length) {

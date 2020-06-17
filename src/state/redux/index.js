@@ -6,8 +6,10 @@ import { fromEntries } from "~/lib/polyfills";
 
 const updaters = updaterModules.map(module => {
     const updater = module.default;
+    const title = updater.title;
+    const selectors = updater.selectors;
     const [reducer, actions] = createUpdater(updater);
-    return [updater.title, { reducer, actions, updater }];
+    return [title, { selectors, reducer, actions }];
 });
 
 export const { history, input, review } = fromEntries(updaters);
