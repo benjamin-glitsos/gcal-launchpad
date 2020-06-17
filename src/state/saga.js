@@ -56,10 +56,8 @@ function* sendReviewsSaga({ payload: [{ id, input, title, days }] }) {
 
 function* sendAllReviewsSaga() {
     try {
-        const allReviews = yield select(review.selectors.all);
-        const allReviewsList = fromEntries(allReviews).filter(
-            ([id, review]) => id !== "new"
-        );
+        const allReviews = yield select(review.selectors.allExceptEmpty);
+        const allReviewsList = fromEntries(allReviews);
         console.log(allReviewsList);
         yield all(
             allReviewsList.forEach(([id, review]) =>
