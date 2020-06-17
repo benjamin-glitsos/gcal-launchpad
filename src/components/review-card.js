@@ -7,8 +7,7 @@ import { input, review, history } from "~/state/redux";
 import { cond, anyMatches, isEqual } from "~/lib/utilities";
 import ButtonBar from "~/components/button-bar";
 
-const ConditionalHeading = ({ days }) => {
-    const messages = process.env.messages;
+const ConditionalHeading = ({ messages, days }) => {
     const pluraliseDays = s => pluralise(days.length, s);
     return (
         <Heading variant="h2">
@@ -52,16 +51,21 @@ const DaysDisplay = ({ days }) => (
     </Fragment>
 );
 
-const EventButtonBar = ({ id, title, days }) => {
+const EventButtonBar = ({ messages, id, title, days }) => {
     const dispatch = useDispatch();
     return (
         <ButtonBar
             list={[
                 {
-                    title: "Delete",
+                    title: anyMatches(
+                        [status],
+                        [messages.SUCCESS, messages.FAILURE]
+                    )
+                        ? "Close"
+                        : "Delete",
                     isDisplayed: true,
                     onClick: () =>
-                        status === process.env.messages.EDITING
+                        status === messages.EDITING
                             ? [
                                   review.actions.clear(),
                                   input.actions.clear()
@@ -70,12 +74,19 @@ const EventButtonBar = ({ id, title, days }) => {
                 },
                 {
                     title:
-                        status === process.env.messages.FAILURE
-                            ? "Retry Sending"
-                            : "Send",
-                    isDisplayed: true,
+                        status === messages.FAILURE ? "Retry Sending" : "Send",
+                    isDisplayed: status !== messages.SUCCESS,
                     onClick: () =>
                         dispatch(review.actions.send({ id, title, days }))
+                },
+                {
+                    title: "Open Calendar",
+                    isDisplayed: status === messages.SUCCESS,
+                    onClick: () =>
+                        window.open(
+                            process.env.setting.googleCalendarUrl,
+                            "_blank"
+                        )
                 }
             ]}
         />
@@ -83,12 +94,18 @@ const EventButtonBar = ({ id, title, days }) => {
 };
 
 export default function ReviewCard({ id, title, days, status }) {
+    const messages = process.env.messages;
     return (
         <Card>
-            <ConditionalHeading days={days} />
+            <ConditionalHeading messages={messages} days={days} />
             <EventTitle title={title} />
             <DaysDisplay days={days} />
-            <EventButtonBar id={id} title={title} days={days} />
+            <EventButtonBar
+                messages={messages}
+                id={id}
+                title={title}
+                days={days}
+            />
         </Card>
     );
 }

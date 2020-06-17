@@ -37,6 +37,7 @@ module.exports = {
                     : "http://localhost:3001",
                 "api"
             ],
+            googleCalendarUrl: "https://calendar.google.com/",
             deletionDelay: 3000,
             historyListLength: 10
         },
