@@ -19,7 +19,7 @@ export default function EventInput({ placeholders }) {
         dispatch(input.actions.update(value));
         if (value.length > 0) {
             [
-                review.actions.updateInput(inputState),
+                review.actions.updateInput(value),
                 review.actions.parse(value)
             ].forEach(dispatch);
         } else {
