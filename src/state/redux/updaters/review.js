@@ -1,7 +1,6 @@
 import produce from "immer";
 import parser from "~/lib/parser";
 import { ifValidId, createId } from "~/lib/utilities";
-import { sagaReducer } from "~/lib/state";
 
 export default class Review {
     static title = "review";
@@ -58,20 +57,21 @@ export default class Review {
         return this.empty;
     }
 
-    send({ message, data }) {
-        return sagaReducer({
-            message,
-            data,
-            onSend: produce(this.state, draft => {
-                draft[id].status = process.env.messages.SEND;
-            }),
-            onSuccess: produce(this.state, draft => {
-                draft[id].status = process.env.messages.SUCCESS;
-            }),
-            onFailure: produce(this.state, draft => {
-                draft[id].status = process.env.messages.FAILURE;
-            }),
-            onOtherwise: this.state
+    send({ id, title, days }) {
+        return produce(this.state, draft => {
+            draft[id].status = process.env.messages.SEND;
+        });
+    }
+
+    sendSuccess(id) {
+        return produce(this.state, draft => {
+            draft[id].status = process.env.messages.SUCCESS;
+        });
+    }
+
+    sendFailure(id) {
+        return produce(this.state, draft => {
+            draft[data.id].status = process.env.messages.FAILURE;
         });
     }
 }

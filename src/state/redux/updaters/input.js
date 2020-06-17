@@ -9,7 +9,7 @@ export default class Input {
         return data;
     }
 
-    clear(data) {
+    clear() {
         return this.empty;
     }
 }

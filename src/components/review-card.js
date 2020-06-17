@@ -6,14 +6,7 @@ import { input, review, history } from "~/state/redux";
 import { cond, anyMatches, isEqual } from "~/lib/utilities";
 import ButtonBar from "~/components/button-bar";
 
-export default function ReviewCard({
-    id,
-    input,
-    title,
-    days,
-    status,
-    isSelected
-}) {
+export default function ReviewCard({ id, title, days, status }) {
     const messages = process.env.messages;
     const dispatch = useDispatch();
     const pluraliseDays = s => pluralise(days.length, s);

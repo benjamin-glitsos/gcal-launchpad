@@ -5,27 +5,20 @@ import { fetchApi } from "~/lib/database";
 
 es6promise.polyfill();
 
-function* getHistory({ payload: [length] }) {
+function* updateHistory({ payload: [length] }) {
     try {
         const res = yield fetchApi(["db", "history"], { length });
         const data = yield res.json();
-        yield put(
-            history.actions.update({
-                message: process.env.messages.SUCCESS,
-                data
-            })
-        );
+        yield put(history.actions.updateSuccess());
     } catch (err) {
         console.error(err);
-        yield put(
-            history.actions.update({ message: process.env.messages.FAILURE })
-        );
+        yield put(history.actions.updateFailure());
     }
 }
 
 function* addHistory({ payload: [input] }) {
     try {
-        const res = yield fetchApi(["db", "history", "add"], { input });
+        yield fetchApi(["db", "history", "add"], { input });
         yield put(history.actions.addSuccess(input));
     } catch (err) {
         console.error(err);
@@ -35,7 +28,7 @@ function* addHistory({ payload: [input] }) {
 
 function* sendReviews({ payload: [{ id, title, days }] }) {
     try {
-        const ress = yield all(
+        yield all(
             days.map(({ date }) =>
                 call(function* () {
                     yield fetchApi(["gcal", "create-event"], {
@@ -56,7 +49,10 @@ function* sendReviews({ payload: [{ id, title, days }] }) {
 
 function* rootSaga() {
     yield all([
-        call(getHistory, { payload: [process.env.settings.historyListLength] }),
+        call(updateHistory, {
+            payload: [process.env.settings.historyListLength]
+        }),
+        takeLatest(history.actions.update.type, updateHistory),
         takeLatest(history.actions.add.type, addHistory),
         takeLatest(review.actions.send.type, sendReviews)
     ]);
