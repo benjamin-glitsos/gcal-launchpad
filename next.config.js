@@ -41,17 +41,19 @@ module.exports = {
             historyListLength: 10
         },
         messages: {
-            TODAY: "t",
-            DAY: "d",
-            WEEK: "w",
-            MONTH: "m",
-            YEAR: "y",
             EMPTY: "EMPTY",
             EDITING: "EDITING",
             REVIEW: "REVIEW",
             SEND: "SEND",
             SUCCESS: "SUCCESS",
             FAILURE: "FAILURE"
+        },
+        parserSymbols: {
+            TODAY: "t",
+            DAY: "d",
+            WEEK: "w",
+            MONTH: "m",
+            YEAR: "y"
         }
     }
 };

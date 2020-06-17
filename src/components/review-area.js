@@ -6,11 +6,10 @@ import ButtonBar from "~/components/button-bar";
 import ReviewCard from "~/components/review-card";
 
 export default function ReviewArea() {
-    const messages = process.env.settings.messages;
     const dispatch = useDispatch();
     const reviewState = useSelector(state => state.review);
     const events = Object.entries(reviewState).filter(
-        ([id, { status }]) => status !== messages.review.EMPTY
+        ([id, { status }]) => status !== process.env.messages.EMPTY
     );
     const hasEvents = events.length > 0;
     return (

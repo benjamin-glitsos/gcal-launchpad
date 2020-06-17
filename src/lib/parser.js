@@ -19,10 +19,11 @@ import pluralise from "pluralise";
 import { invertObj } from "~/lib/utilities";
 
 class Symbols {
+    parserSymbols = process.env.parserSymbols;
     keyValues = this.parserSymbols;
-    valueKeys = invertObj(process.env.messages);
-    keys = Object.keys(process.env.messages);
-    values = Object.values(process.env.messages);
+    valueKeys = invertObj(this.parserSymbols);
+    keys = Object.keys(this.parserSymbols);
+    values = Object.values(this.parserSymbols);
     periods = this.keys.map(key => key.toLowerCase());
     periodPlural = this.periods.map(period => period + "s");
 
@@ -31,14 +32,14 @@ class Symbols {
     }
 }
 
-const messages = new Symbols();
+const symbols = new Symbols();
 
 export const createDay = (number, period) => {
     const now = moment(new Date(), process.env.settings.timeZone);
     const internationalFormat = m => m.format("YYYY-MM-DD");
-    const ifToday = (a, b) => (period === messages.keyValues.TODAY ? a : b);
+    const ifToday = (a, b) => (period === symbols.keyValues.TODAY ? a : b);
     const nonZeroNumber = number === 0 ? 1 : number;
-    const periodValue = messages.periodFromValue(period);
+    const periodValue = symbols.periodFromValue(period);
     return {
         in: {
             number: ifToday(0, nonZeroNumber),
@@ -65,7 +66,7 @@ const anything = regex(/^.*/);
 const day = coroutine(function* () {
     const optionalNumber = yield possibly(digits);
 
-    const period = yield choice(messages.values.map(c => char(c)));
+    const period = yield choice(symbols.values.map(c => char(c)));
 
     return createDay(optionalNumber || 0, period);
 });

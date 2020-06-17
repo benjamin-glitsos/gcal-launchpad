@@ -8,7 +8,7 @@ export default class Review {
 
     empty = {
         new: {
-            status: process.env.settings.messages.EMPTY,
+            status: process.env.messages.EMPTY,
             input: "",
             title: "",
             days: []
@@ -27,7 +27,7 @@ export default class Review {
 
     parse(s) {
         return produce(this.state, draft => {
-            draft.new.status = process.env.settings.messages.EDITING;
+            draft.new.status = process.env.messages.EDITING;
             Object.assign(draft.new, parser(s));
         });
     }
@@ -43,7 +43,7 @@ export default class Review {
             draft.new = this.empty.new;
             draft[this.id.next().value] = {
                 ...this.state.new,
-                status: process.env.settings.messages.REVIEW
+                status: process.env.messages.REVIEW
             };
         });
     }
