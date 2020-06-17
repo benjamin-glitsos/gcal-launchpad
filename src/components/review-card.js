@@ -32,7 +32,7 @@ const ConditionalHeading = ({ messages, status, days }) => {
                     case: true,
                     return: pluraliseDays("Event")
                 }
-            ])(status)}
+            ])([status])}
         </Heading>
     );
 };

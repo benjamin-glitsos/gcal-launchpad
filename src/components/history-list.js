@@ -17,6 +17,7 @@ export default function HistoryList() {
                     onClick={() => dispatch(input.actions.update(historyInput))}
                     style={{
                         fontWeight:
+                            // TODO: use emotion for all styling
                             historyInput === inputState ? "bold" : "normal"
                     }}
                     key={historyInput + i}
