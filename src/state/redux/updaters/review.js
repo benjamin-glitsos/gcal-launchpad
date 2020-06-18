@@ -7,12 +7,17 @@ export default class Review {
 
     static selectors = {
         all: state => state.review,
-        allExceptEmpty: state =>
-            produce(state.review, draft => {
-                if (draft.new.status === process.env.messages.EMPTY) {
-                    delete draft.new;
-                }
-            })
+        events: state =>
+            Object.entries(
+                produce(state.review, draft => {
+                    if (draft.new.status === process.env.messages.EMPTY) {
+                        delete draft.new;
+                    }
+                })
+            ).map(([id, data]) => ({
+                id,
+                ...data
+            }))
     };
 
     empty = {
@@ -89,15 +94,15 @@ export default class Review {
         });
     }
 
-    sendAll() {
+    sendMultiple() {
         return this.state;
     }
 
-    sendAllSuccess() {
+    sendMultipleSuccess() {
         return this.state;
     }
 
-    sendAllFailure() {
+    sendMultipleFailure() {
         return this.state;
     }
 }

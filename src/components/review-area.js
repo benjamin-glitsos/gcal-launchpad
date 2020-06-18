@@ -7,7 +7,7 @@ import ReviewCard from "~/components/review-card";
 
 export default function ReviewArea() {
     const dispatch = useDispatch();
-    const events = Object.entries(useSelector(review.selectors.allExceptEmpty));
+    const events = useSelector(review.selectors.events);
     const hasEvents = events.length > 0;
     return (
         hasEvents && (
@@ -22,12 +22,13 @@ export default function ReviewArea() {
                         {
                             title: "Send All",
                             isDisplayed: true,
-                            onClick: () => dispatch(review.actions.sendAll())
+                            onClick: () =>
+                                dispatch(review.actions.sendMultiple(events))
                         }
                     ]}
                 />
-                {events.map(([id, values], i) => (
-                    <ReviewCard {...{ id, ...values }} key={values.title + i} />
+                {events.map((event, i) => (
+                    <ReviewCard {...{ ...event }} key={event.title + i} />
                 ))}
             </Box>
         )

@@ -54,20 +54,15 @@ function* sendReviewsSaga({ payload: [{ id, input, title, days }] }) {
     }
 }
 
-function* sendAllReviewsSaga() {
+function* sendMultipleReviewsSaga({ payload: [events] }) {
     try {
-        const allReviews = yield select(review.selectors.allExceptEmpty);
-        const allReviewsList = fromEntries(allReviews);
-        console.log(allReviewsList);
         yield all(
-            allReviewsList.forEach(([id, review]) =>
-                call(sendReviewsSaga, { payload: [{ id, ...review }] })
-            )
+            events.forEach(event => call(sendReviewsSaga, { payload: [event] }))
         );
-        yield put(review.actions.sendAllSuccess());
+        yield put(review.actions.sendMultipleSuccess());
     } catch (err) {
         console.error(err);
-        yield put(review.actions.sendAllFailure());
+        yield put(review.actions.sendMultipleFailure());
     }
 }
 
@@ -79,7 +74,7 @@ function* rootSaga() {
         takeLatest(history.actions.update.type, updateHistorySaga),
         takeLatest(history.actions.add.type, addHistorySaga),
         takeLatest(review.actions.send.type, sendReviewsSaga),
-        takeLatest(review.actions.sendAll.type, sendAllReviewsSaga)
+        takeLatest(review.actions.sendMultiple.type, sendMultipleReviewsSaga)
     ]);
 }
 
