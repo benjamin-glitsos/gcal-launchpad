@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Heading, Link } from "rebass";
-import { input, history } from "~/state/redux";
+import { input, history, review } from "~/state/redux";
 
 export default function HistoryList({ title }) {
     const dispatch = useDispatch();
@@ -12,7 +12,13 @@ export default function HistoryList({ title }) {
             <Heading>{title}</Heading>
             {historyState.map((historyInput, i) => (
                 <Link
-                    onClick={() => dispatch(input.actions.update(historyInput))}
+                    onClick={() =>
+                        [
+                            review.actions.new(),
+                            input.actions.update(historyInput),
+                            review.actions.parse(historyInput)
+                        ].forEach(dispatch)
+                    }
                     key={historyInput + i}
                 >
                     {historyInput}

@@ -14,6 +14,7 @@ export default function Index() {
         <Fragment>
             {/* TODO: steps to MVP: */}
             {/* - clicking on history event should add current input to review and then add new input to review area (without inputting into input bar?) */}
+            {/* handle review.new on an empty input bar for both components that use this method */}
             {/* - styling */}
             <Head>
                 <title>{process.env.settings.title}</title>
