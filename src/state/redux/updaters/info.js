@@ -1,8 +1,8 @@
-export default class Popup {
-    static title = "popup";
+export default class Info {
+    static title = "info";
 
     static selectors = {
-        isShown: state => state.popup
+        isShown: state => state.info
     };
 
     empty = false;
@@ -17,15 +17,19 @@ export default class Popup {
         return false;
     }
 
-    popup() {
+    toggle() {
+        return !this.state;
+    }
+
+    info() {
         return this.state;
     }
 
-    popupSuccess() {
+    infoSuccess() {
         return this.state;
     }
 
-    popupFailure() {
+    infoFailure() {
         return this.state;
     }
 }

@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Card } from "rebass";
-import { popup } from "~/state/redux/index";
+import { info } from "~/state/redux/index";
 import Info from "~/components/info.mdx";
 import ButtonBar from "~/components/button-bar";
 
-export default function InfoPopup({ title }) {
-    const isShown = useSelector(popup.selectors.isShown);
+export default function InfoCard() {
+    const isShown = useSelector(info.selectors.isShown);
     const dispatch = useDispatch();
     return (
         isShown && (
@@ -16,7 +16,7 @@ export default function InfoPopup({ title }) {
                         {
                             title: "Close",
                             isDisplayed: true,
-                            onClick: () => dispatch(popup.actions.hide())
+                            onClick: () => dispatch(info.actions.hide())
                         }
                     ]}
                 />

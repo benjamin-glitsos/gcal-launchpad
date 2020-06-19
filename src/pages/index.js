@@ -5,7 +5,7 @@ import { Heading } from "rebass";
 import ReviewArea from "~/components/review-area";
 import EventInput from "~/components/event-input";
 import HistoryList from "~/components/history-list";
-import InfoPopup from "~/components/info-popup";
+import InfoCard from "~/components/info-card";
 import InfoLink from "~/components/info-link";
 
 export default function Index() {
@@ -13,15 +13,13 @@ export default function Index() {
     return (
         <Fragment>
             {/* TODO: steps to MVP: */}
-            {/* * Info popup using: rebass, saga, cookies (react-cookie?) */}
-            {/* - Theming */}
-            {/* TODO: clicking on history event should add current input to review and then add new input to review area (without inputting into input bar?) */}
+            {/* - clicking on history event should add current input to review and then add new input to review area (without inputting into input bar?) */}
+            {/* - styling */}
             <Head>
                 <title>{process.env.settings.title}</title>
             </Head>
-            <InfoPopup title="Info" />
             <Heading variant="h1">{process.env.settings.title}</Heading>
-            <InfoLink />
+            <InfoLink title="Info" />
             <EventInput
                 placeholders={[
                     "work out today, or else...",
@@ -34,6 +32,7 @@ export default function Index() {
                 ]}
             />
             <ReviewArea />
+            <InfoCard />
             <HistoryList title="Recent Events" />
             <pre>
                 <code>{JSON.stringify(state, null, 4)}</code>

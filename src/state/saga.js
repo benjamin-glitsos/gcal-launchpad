@@ -1,7 +1,7 @@
 import { all, put, takeLatest, call, delay, select } from "redux-saga/effects";
 import es6promise from "es6-promise";
 import Cookies from "universal-cookie";
-import { history, review, popup } from "./redux";
+import { history, review, info } from "./redux";
 import { fetchApi } from "~/lib/database";
 import { fromEntries } from "~/lib/polyfills";
 
@@ -69,23 +69,23 @@ function* sendMultipleReviewsSaga({ payload: [events] }) {
     }
 }
 
-function* popupSaga() {
+function* infoSaga() {
     try {
-        const COOKIE_NAME = "gcallaunchpad__infopopup";
+        const COOKIE_NAME = "gcal_launchpad___info_show";
         if (cookies.get(COOKIE_NAME) !== "yes") {
-            yield put(popup.actions.show());
+            yield put(info.actions.show());
         }
         yield cookies.set(COOKIE_NAME, "yes", { expires: 3 });
-        yield put(popup.actions.popupSuccess());
+        yield put(info.actions.infoSuccess());
     } catch (err) {
         console.error(err);
-        yield put(popup.actions.popupFailure());
+        yield put(info.actions.infoFailure());
     }
 }
 
 function* rootSaga() {
     yield all([
-        call(popupSaga),
+        call(infoSaga),
         call(updateHistorySaga, {
             payload: [process.env.settings.historyListLength]
         }),
@@ -93,7 +93,7 @@ function* rootSaga() {
         takeLatest(history.actions.add.type, addHistorySaga),
         takeLatest(review.actions.send.type, sendReviewsSaga),
         takeLatest(review.actions.sendMultiple.type, sendMultipleReviewsSaga),
-        takeLatest(popup.actions.popup.type, popupSaga)
+        takeLatest(info.actions.info.type, infoSaga)
     ]);
 }
 

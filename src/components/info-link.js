@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "rebass";
-import { popup } from "~/state/redux/index";
+import { info } from "~/state/redux/index";
 
-export default function InfoLink() {
+export default function InfoLink({ title }) {
     const dispatch = useDispatch();
-    return <Link onClick={() => dispatch(popup.actions.popup())}>Info</Link>;
+    return <Link onClick={() => dispatch(info.actions.toggle())}>{title}</Link>;
 }
