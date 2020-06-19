@@ -53,6 +53,9 @@ module.exports = withMDX()({
             WEEK: "w",
             MONTH: "m",
             YEAR: "y"
+        },
+        cookies: {
+            INFO_SHOW: "gcal_launchpad___info_show"
         }
     }
 });

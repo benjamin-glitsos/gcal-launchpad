@@ -71,11 +71,10 @@ function* sendMultipleReviewsSaga({ payload: [events] }) {
 
 function* infoSaga() {
     try {
-        const COOKIE_NAME = "gcal_launchpad___info_show";
-        if (cookies.get(COOKIE_NAME) !== "yes") {
+        if (cookies.get(process.env.cookies.INFO_SHOW) !== "yes") {
             yield put(info.actions.show());
         }
-        yield cookies.set(COOKIE_NAME, "yes", { expires: 3 });
+        yield cookies.set(process.env.cookies.INFO_SHOW, "yes", { expires: 3 });
         yield put(info.actions.infoSuccess());
     } catch (err) {
         console.error(err);
