@@ -4,5 +4,5 @@ import { popup } from "~/state/redux/index";
 
 export default function InfoLink() {
     const dispatch = useDispatch();
-    return <Link onClick={() => dispatch(popup.actions.show())}>Info</Link>;
+    return <Link onClick={() => dispatch(popup.actions.popup())}>Info</Link>;
 }

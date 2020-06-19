@@ -16,4 +16,16 @@ export default class Popup {
     hide() {
         return false;
     }
+
+    popup() {
+        return this.state;
+    }
+
+    popupSuccess() {
+        return this.state;
+    }
+
+    popupFailure() {
+        return this.state;
+    }
 }
