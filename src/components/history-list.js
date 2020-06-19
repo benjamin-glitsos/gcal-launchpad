@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Heading, Link } from "rebass";
 import { input, history } from "~/state/redux";
 
-export default function HistoryList() {
+export default function HistoryList({ title }) {
     const dispatch = useDispatch();
     const inputState = useSelector(input.selectors.all);
     const historyState = useSelector(history.selectors.all);
     return (
         <Fragment>
-            <Heading>Recent Events</Heading>
+            <Heading>{title}</Heading>
             {historyState.map((historyInput, i) => (
                 <Link
                     onClick={() => dispatch(input.actions.update(historyInput))}

@@ -12,7 +12,7 @@ const updaters = updaterModules.map(module => {
     return [title, { selectors, reducer, actions }];
 });
 
-export const { history, input, review } = fromEntries(updaters);
+export const { popup, input, review, history } = fromEntries(updaters);
 
 export const rootReducer = combineReducers(
     fromEntries(updaters.map(([name, values]) => [name, values.reducer]))
