@@ -29,7 +29,6 @@ function* addHistorySaga({ payload: [input] }) {
 
 function* sendReviewsSaga({ payload: [{ id, input, title, days }] }) {
     try {
-        console.log(id, input, title, days);
         yield all(
             days.map(({ date }) =>
                 call(function* () {
@@ -40,15 +39,15 @@ function* sendReviewsSaga({ payload: [{ id, input, title, days }] }) {
                 })
             )
         );
+        yield put(review.actions.sendSuccess(id));
+        yield delay(process.env.settings.deletionDelay);
+        yield put(review.actions.delete(id));
         yield call(addHistorySaga, {
             payload: [input]
         });
         yield call(updateHistorySaga, {
             payload: [process.env.settings.historyListLength]
         });
-        yield delay(process.env.settings.deletionDelay);
-        yield put(review.actions.delete(id));
-        yield put(review.actions.sendSuccess(id));
     } catch (err) {
         console.error(err);
         yield put(review.actions.sendFailure(id));
