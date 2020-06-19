@@ -29,8 +29,9 @@ function* addHistorySaga({ payload: [input] }) {
 
 function* sendReviewsSaga({ payload: [{ id, input, title, days }] }) {
     try {
+        console.log(id, input, title, days);
         yield all(
-            days.forEach(({ date }) =>
+            days.map(({ date }) =>
                 call(function* () {
                     yield fetchApi(["gcal", "create-event"], {
                         title,
@@ -57,7 +58,7 @@ function* sendReviewsSaga({ payload: [{ id, input, title, days }] }) {
 function* sendMultipleReviewsSaga({ payload: [events] }) {
     try {
         yield all(
-            events.forEach(event => call(sendReviewsSaga, { payload: [event] }))
+            events.map(event => call(sendReviewsSaga, { payload: [event] }))
         );
         yield put(review.actions.sendMultipleSuccess());
     } catch (err) {
