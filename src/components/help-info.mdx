@@ -1,26 +1,34 @@
+import { Heading } from "rebass";
+
 This app allows you to make Google Calendar events more quickly by parsing a simple shorthand notation that looks like this:
 
 ```
 t, d, 2d, 3w buy some bananas
 ```
 
-This will create the same event today (`t`), in one day (`d`), in two days (`2d`) and in three weeks (`3w`).
+This will create the same event today (`t`), in one day (`d`), in two days (`2d`) and in three weeks (`3w`). But it won't create the event yet, it will add it to the review area.
 
-But before the event is created, it enters a review area where you can decide whether you want to send it to calendar or delete it.
+You can now press the enter key if you want to add additional events.
 
-After inputting your event notation, you can press enter to start adding additional events to the review area.
+In the review area, you can choose to delete or send events. Just note that it will send to the calendar defined in the environment file, not your personal calendar (for security reasons).
 
-Also, you can re-add past events to your review area by clicking on them.
+You can also re-add past events to your review area by clicking on them.
 
-**This project uses:**
+<Heading>This project uses:</Heading>
 
-* React
-* Redux state management stream
-* Saga asynchronous stream
-* Arcsecond monadic parser combinator library
-* Google Calendar API
-* PostgreSQL database
-* Rebass/ThemeUI CSS framework
-* Emotion CSS library
-* Functional Programming paradigm
+* [NextJs](https://nextjs.org/) web framework
+* [React](https://reactjs.org/) UI framework
+* [Redux](https://redux.js.org/) state management stream
+* [Saga](https://redux-saga.js.org/) asynchronous stream
+* [Arcsecond](https://www.npmjs.com/package/arcsecond) monadic parser combinator library
+* [Google Calendar API](https://developers.google.com/calendar)
+* [PostgreSQL](https://www.postgresql.org/) database
+* [Rebass](https://rebassjs.org/)/[ThemeUI](https://theme-ui.com/) CSS framework
+* [Emotion](https://emotion.sh/) CSS library
+* [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/), [ES6](http://es6-features.org/), [NodeJs](https://nodejs.org/en/)
+* Functional Programming principles
 * UX Design
+
+<Heading>View the code on GitHub:</Heading>
+
+[benjamin-glitsos/gcal-launchpad](https://github.com/benjamin-glitsos/gcal-launchpad)
