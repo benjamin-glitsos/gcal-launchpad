@@ -8,6 +8,8 @@
         "start": "next start -p 3001"
     },
     "dependencies": {
+        "@mdx-js/loader": "1.6.6",
+        "@next/mdx": "9.4.4",
         "@rebass/forms": "4.0.6",
         "@rebass/preset-material": "4.0.5",
         "arcsecond": "2.0.4",

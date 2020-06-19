@@ -1,8 +1,9 @@
 const webpack = require("webpack");
+const withMDX = require("@next/mdx");
 const path = require("path");
 const { parsed: localEnv } = require("dotenv").config();
 
-module.exports = {
+module.exports = withMDX()({
     webpack(config, { isServer }) {
         config.resolve.alias["~"] = path.resolve(__dirname, "src");
 
@@ -54,4 +55,4 @@ module.exports = {
             YEAR: "y"
         }
     }
-};
+});

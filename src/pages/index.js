@@ -5,18 +5,20 @@ import { Heading } from "rebass";
 import ReviewArea from "~/components/review-area";
 import EventInput from "~/components/event-input";
 import HistoryList from "~/components/history-list";
+import HelpInfo from "~/components/help-info.mdx";
 
 export default function Index() {
     const state = useSelector(state => state);
     return (
         <Fragment>
-            {/* TODO: Try using the redux-lightweight handler otherwise remove the class from that export */}
             {/* TODO: steps to MVP: */}
             {/* * Info popup using: MDX, rebass, saga, cookies (react-cookie?) */}
             {/* - Theming */}
+            {/* TODO: clicking on history event should add current input to review and then add new input to review area (without inputting into input bar?) */}
             <Head>
                 <title>{process.env.settings.title}</title>
             </Head>
+            <HelpInfo />
             <Heading variant="h1">{process.env.settings.title}</Heading>
             <EventInput
                 placeholders={[
