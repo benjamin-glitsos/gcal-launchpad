@@ -6,6 +6,7 @@ const custom = {
         text: "#3c4043",
         background: "#fff",
         primary: "#1a73e8",
+        secondary: "#039BE5",
         none: "none",
         modes: {
             sending: {},

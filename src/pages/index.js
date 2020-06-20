@@ -13,7 +13,7 @@ export default function Index() {
             <Head>
                 <title>{process.env.settings.title}</title>
             </Head>
-            <Flex my={2}>
+            <Flex my={2} alignItems="center">
                 <Box width={1 / 2}>
                     <Heading variant="h1">{process.env.settings.title}</Heading>
                 </Box>

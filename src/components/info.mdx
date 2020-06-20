@@ -1,14 +1,16 @@
-import { Heading } from "rebass";
+import { Heading, Flex, Box } from "rebass";
+import Link from "~/components/link";
+import Code from "~/components/code";
 
 <Heading>Info</Heading>
 
 This app allows you to make Google Calendar events more quickly by parsing a simple shorthand notation that looks like this:
 
-```
-t, d, 2d, 3w buy some bananas
-```
+<Code type="pre">
+    t, d, 2d, 3w buy some bananas
+</Code>
 
-This will create the same event today (`t`), in one day (`d`), in two days (`2d`) and in three weeks (`3w`). But it won't create the event yet, it will add it to the review area.
+This will create the same event today (<Code>t</Code>), in one day (<Code>d</Code>), in two days (<Code>2d</Code>) and in three weeks (<Code>3w</Code>). But it won't create the event yet, it will add it to the review area.
 
 You can now press the enter key if you want to add additional events.
 
@@ -16,23 +18,28 @@ In the review area, you can choose to delete or send events. Just note that it w
 
 You can also re-add past events to your review area by clicking on them.
 
-Click the *info* link on the top-right at any time to re-open this dialogue.
+Click the *info* button on the top-right at any time to re-open this dialogue.
 
 <Heading>This project uses:</Heading>
 
-* [NextJs](https://nextjs.org/) web framework
-* [React](https://reactjs.org/) UI framework
-* [Redux](https://redux.js.org/) state management stream
-* [Saga](https://redux-saga.js.org/) asynchronous stream
-* [Arcsecond](https://www.npmjs.com/package/arcsecond) monadic parser combinator library
-* [Google Calendar API](https://developers.google.com/calendar)
-* [PostgreSQL](https://www.postgresql.org/) database
+<Flex width={1} flexWrap="wrap">
+    <Box width={[1, 1 / 2, 1 / 4]}>
+    </Box>
+</Flex>
+
+* <Link href="https://nextjs.org/">NextJs</Link> web framework
+* <Link href="https://reactjs.org/">React</Link> UI framework
+* <Link href="https://redux.js.org/">Redux</Link> state management stream
+* <Link href="https://redux-saga.js.org/">Saga</Link> asynchronous stream
+* <Link href="https://www.npmjs.com/package/arcsecond">Arcsecond</Link> monadic parser combinator library
+* <Link href="https://developers.google.com/calendar">Google Calendar API</Link>
+* <Link href="https://www.postgresql.org/">PostgreSQL</Link> database
 * Browser Cookies
-* [Rebass](https://rebassjs.org/), [ThemeUI](https://theme-ui.com/) and [Styled System](https://styled-system.com/) CSS frameworks
-* [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/), [ES6](http://es6-features.org/), [NodeJs](https://nodejs.org/en/)
+* <Link href="https://rebassjs.org/">Rebass</Link> (<Link href="https://theme-ui.com/">ThemeUI</Link> and <Link href="https://styled-system.com/">Styled System</Link>) CSS framework
+* <Link href="https://webpack.js.org/">Webpack</Link>, <Link href="https://babeljs.io/">Babel</Link>, <Link href="http://es6-features.org/">ES6</Link>, <Link href="https://nodejs.org/en/">NodeJs</Link>
 * Functional Programming principles
 * UX Design
 
 <Heading>View the code on GitHub:</Heading>
 
-[benjamin-glitsos/gcal-launchpad](https://github.com/benjamin-glitsos/gcal-launchpad)
+<Link href="https://github.com/benjamin-glitsos/gcal-launchpad">benjamin-glitsos/gcal-launchpad</Link>
