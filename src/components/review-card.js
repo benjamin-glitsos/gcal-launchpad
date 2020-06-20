@@ -51,7 +51,14 @@ const DaysDisplay = ({ days }) => (
     </Fragment>
 );
 
-const EventButtonBar = ({ messages, status, id, input, title, days }) => {
+const EventButtonBar = ({
+    messages,
+    status,
+    id,
+    input: inputText,
+    title,
+    days
+}) => {
     const dispatch = useDispatch();
     return (
         <ButtonBar
@@ -80,7 +87,12 @@ const EventButtonBar = ({ messages, status, id, input, title, days }) => {
                     isDisplayed: status !== messages.SUCCESS,
                     onClick: () =>
                         dispatch(
-                            review.actions.send({ id, input, title, days })
+                            review.actions.send({
+                                id,
+                                input: inputText,
+                                title,
+                                days
+                            })
                         )
                 },
                 {
