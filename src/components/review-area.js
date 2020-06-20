@@ -1,5 +1,6 @@
+import { Fragment } from "react";
 import { useDispatch } from "react-redux";
-import { Box } from "rebass";
+import { Flex, Box } from "rebass";
 import { useSelector } from "react-redux";
 import { review } from "~/state/redux";
 import ButtonBar from "~/components/button-bar";
@@ -11,28 +12,42 @@ export default function ReviewArea() {
     const hasEvents = events.length > 0;
     return (
         hasEvents && (
-            <Box>
-                <ButtonBar
-                    list={[
-                        {
-                            title: "Delete All",
-                            isDisplayed: true,
-                            variant: "outline",
-                            onClick: () => dispatch(review.actions.deleteAll())
-                        },
-                        {
-                            title: "Send All",
-                            isDisplayed: true,
-                            variant: "primary",
-                            onClick: () =>
-                                dispatch(review.actions.sendMultiple(events))
-                        }
-                    ]}
-                />
-                {events.map((event, i) => (
-                    <ReviewCard {...{ ...event }} key={event.title + i} />
-                ))}
-            </Box>
+            <Fragment>
+                <Flex mb={3}>
+                    <Box width={1}>
+                        <ButtonBar
+                            list={[
+                                {
+                                    title: "Delete All",
+                                    isDisplayed: true,
+                                    variant: "outline",
+                                    onClick: () =>
+                                        dispatch(review.actions.deleteAll())
+                                },
+                                {
+                                    title: "Send All",
+                                    isDisplayed: true,
+                                    variant: "primary",
+                                    onClick: () =>
+                                        dispatch(
+                                            review.actions.sendMultiple(events)
+                                        )
+                                }
+                            ]}
+                        />
+                    </Box>
+                </Flex>
+                <Flex flexWrap="wrap">
+                    {events.map((event, i) => (
+                        <Box width={1 / 2}>
+                            <ReviewCard
+                                {...{ ...event }}
+                                key={event.title + i}
+                            />
+                        </Box>
+                    ))}
+                </Flex>
+            </Fragment>
         )
     );
 }
