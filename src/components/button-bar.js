@@ -6,7 +6,12 @@ export default function ButtonBar({ list }) {
             {list
                 .filter(({ isDisplayed }) => isDisplayed)
                 .map(({ title, variant, onClick }, i) => (
-                    <Button variant={variant} onClick={onClick} key={i + title}>
+                    <Button
+                        variant={variant}
+                        ml="2"
+                        onClick={onClick}
+                        key={i + title}
+                    >
                         {title}
                     </Button>
                 ))}

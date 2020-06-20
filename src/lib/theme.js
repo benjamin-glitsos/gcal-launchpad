@@ -30,8 +30,7 @@ const custom = {
             fontWeight: "bold",
             fontSize: 3,
             px: 3,
-            py: 2,
-            my: 3
+            py: 2
         }
     },
     buttons: {
@@ -39,15 +38,23 @@ const custom = {
             cursor: "pointer"
         },
         secondary: {
-            cursor: "buttons.primary"
+            "cursor": "buttons.primary",
+            "&:hover": {
+                backgroundColor: "muted"
+            },
+            "transition": "background-color .3s"
         },
         outline: {
             cursor: "buttons.primary"
         },
         link: {
-            cursor: "buttons.primary",
-            color: "primary",
-            bg: "none"
+            "cursor": "buttons.primary",
+            "color": "primary",
+            "bg": "none",
+            "&:hover": {
+                backgroundColor: "muted"
+            },
+            "transition": "background-color .3s"
         }
     },
     styles: {

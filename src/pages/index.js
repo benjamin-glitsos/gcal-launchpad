@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-import { useSelector } from "react-redux";
 import Head from "next/head";
 import { Heading, Flex, Box } from "rebass";
 import ReviewArea from "~/components/review-area";
@@ -9,13 +8,12 @@ import InfoCard from "~/components/info-card";
 import MainMenu from "~/components/main-menu";
 
 export default function Index() {
-    const state = useSelector(state => state);
     return (
         <Fragment>
             <Head>
                 <title>{process.env.settings.title}</title>
             </Head>
-            <Flex>
+            <Flex my={2}>
                 <Box width={1 / 2}>
                     <Heading variant="h1">{process.env.settings.title}</Heading>
                 </Box>
@@ -23,20 +21,36 @@ export default function Index() {
                     <MainMenu />
                 </Box>
             </Flex>
-            <EventInput
-                placeholders={[
-                    "work out today, or else...",
-                    "d, 2d buy some milk",
-                    "2w go to meeting",
-                    "4d, 3y finish that book",
-                    "t, m, 2m, 3m, 4m buy in bulk",
-                    "t, d do it today, or maybe tomorrow",
-                    "100d challenge is finished"
-                ]}
-            />
-            <ReviewArea />
-            <InfoCard />
-            <HistoryList title="Recent Events" />
+            <Flex my={3}>
+                <Box width={1}>
+                    <EventInput
+                        placeholders={[
+                            "work out today, or else...",
+                            "d, 2d buy some milk",
+                            "2w go to meeting",
+                            "4d, 3y finish that book",
+                            "t, m, 2m, 3m, 4m buy in bulk",
+                            "t, d do it today, or maybe tomorrow",
+                            "100d challenge is finished"
+                        ]}
+                    />
+                </Box>
+            </Flex>
+            <Flex my={2}>
+                <Box width={1}>
+                    <ReviewArea />
+                </Box>
+            </Flex>
+            <Flex my={2}>
+                <Box width={1}>
+                    <InfoCard />
+                </Box>
+            </Flex>
+            <Flex my={2}>
+                <Box width={1}>
+                    <HistoryList title="Recent Events" />
+                </Box>
+            </Flex>
         </Fragment>
     );
 }
