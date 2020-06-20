@@ -2,8 +2,13 @@ const webpack = require("webpack");
 const withMDX = require("@next/mdx");
 const path = require("path");
 const { parsed: localEnv } = require("dotenv").config();
+const externalLinks = require("remark-external-links");
 
-module.exports = withMDX()({
+module.exports = withMDX({
+    options: {
+        remarkPlugins: [externalLinks, { rel: false }]
+    }
+})({
     webpack(config, { isServer }) {
         config.resolve.alias["~"] = path.resolve(__dirname, "src");
 
