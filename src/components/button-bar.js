@@ -1,11 +1,15 @@
-import { Button } from "rebass";
+import { Button, Box } from "rebass";
 
 export default function ButtonBar({ list }) {
-    return list
-        .filter(({ isDisplayed }) => isDisplayed)
-        .map(({ title, onClick }, i) => (
-            <Button onClick={onClick} key={i + title}>
-                {title}
-            </Button>
-        ));
+    return (
+        <Box textAlign="right">
+            {list
+                .filter(({ isDisplayed }) => isDisplayed)
+                .map(({ title, variant, onClick }, i) => (
+                    <Button variant={variant} onClick={onClick} key={i + title}>
+                        {title}
+                    </Button>
+                ))}
+        </Box>
+    );
 }

@@ -63,6 +63,7 @@ const EventButtonBar = ({ messages, status, id, input, title, days }) => {
                     ])
                         ? "Close"
                         : "Delete",
+                    variant: "outline",
                     isDisplayed: true,
                     onClick: () =>
                         status === messages.EDITING
@@ -75,6 +76,7 @@ const EventButtonBar = ({ messages, status, id, input, title, days }) => {
                 {
                     title:
                         status === messages.FAILURE ? "Retry Sending" : "Send",
+                    variant: "primary",
                     isDisplayed: status !== messages.SUCCESS,
                     onClick: () =>
                         dispatch(
@@ -84,6 +86,7 @@ const EventButtonBar = ({ messages, status, id, input, title, days }) => {
                 {
                     title: "Open Calendar",
                     isDisplayed: status === messages.SUCCESS,
+                    variant: "outline",
                     onClick: () =>
                         window.open(
                             process.env.settings.googleCalendarUrl,

@@ -1,12 +1,12 @@
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import Head from "next/head";
-import { Heading } from "rebass";
+import { Heading, Flex, Box } from "rebass";
 import ReviewArea from "~/components/review-area";
 import EventInput from "~/components/event-input";
 import HistoryList from "~/components/history-list";
 import InfoCard from "~/components/info-card";
-import InfoLink from "~/components/info-link";
+import MainMenu from "~/components/main-menu";
 
 export default function Index() {
     const state = useSelector(state => state);
@@ -15,8 +15,14 @@ export default function Index() {
             <Head>
                 <title>{process.env.settings.title}</title>
             </Head>
-            <Heading variant="h1">{process.env.settings.title}</Heading>
-            <InfoLink title="Info" />
+            <Flex>
+                <Box width={1 / 2}>
+                    <Heading variant="h1">{process.env.settings.title}</Heading>
+                </Box>
+                <Box width={1 / 2}>
+                    <MainMenu />
+                </Box>
+            </Flex>
             <EventInput
                 placeholders={[
                     "work out today, or else...",
@@ -31,9 +37,6 @@ export default function Index() {
             <ReviewArea />
             <InfoCard />
             <HistoryList title="Recent Events" />
-            <pre>
-                <code>{JSON.stringify(state, null, 4)}</code>
-            </pre>
         </Fragment>
     );
 }

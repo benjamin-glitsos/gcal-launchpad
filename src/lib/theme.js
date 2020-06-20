@@ -6,6 +6,7 @@ const custom = {
         text: "#3c4043",
         background: "#fff",
         primary: "#1a73e8",
+        none: "none",
         modes: {
             sending: {},
             success: {},
@@ -16,7 +17,8 @@ const custom = {
         h1: {
             color: "primary",
             fontWeight: "bold",
-            fontSize: 4
+            fontSize: 4,
+            py: 2
         },
         h2: {
             fontSize: 3
@@ -29,7 +31,23 @@ const custom = {
             fontSize: 3,
             px: 3,
             py: 2,
-            my: 4
+            my: 3
+        }
+    },
+    buttons: {
+        primary: {
+            cursor: "pointer"
+        },
+        secondary: {
+            cursor: "buttons.primary"
+        },
+        outline: {
+            cursor: "buttons.primary"
+        },
+        link: {
+            cursor: "buttons.primary",
+            color: "primary",
+            bg: "none"
         }
     },
     styles: {
