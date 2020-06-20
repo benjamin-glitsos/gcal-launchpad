@@ -12,10 +12,6 @@ export default function Index() {
     const state = useSelector(state => state);
     return (
         <Fragment>
-            {/* TODO: steps to MVP: */}
-            {/* - clicking on history event should add current input to review and then add new input to review area (without inputting into input bar?) */}
-            {/* handle review.new on an empty input bar for both components that use this method */}
-            {/* - styling */}
             <Head>
                 <title>{process.env.settings.title}</title>
             </Head>
