@@ -54,11 +54,13 @@ export default class Review {
 
     new() {
         return produce(this.state, draft => {
-            draft.new = this.empty.new;
-            draft[this.id.next().value] = {
-                ...this.state.new,
-                status: process.env.messages.REVIEW
-            };
+            if (draft.new.status !== process.env.messages.EMPTY) {
+                draft.new = this.empty.new;
+                draft[this.id.next().value] = {
+                    ...this.state.new,
+                    status: process.env.messages.REVIEW
+                };
+            }
         });
     }
 

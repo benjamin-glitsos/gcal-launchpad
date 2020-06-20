@@ -1,5 +1,7 @@
 import App from "next/app";
 import { END } from "redux-saga";
+import withGA from "next-ga";
+import Router from "next/router";
 import { ThemeProvider } from "theme-ui";
 import { wrapper } from "~/state/store";
 import theme from "~/lib/theme";
@@ -30,4 +32,6 @@ class MyApp extends App {
     }
 }
 
-export default wrapper.withRedux(MyApp);
+export default wrapper.withRedux(
+    withGA(process.env.GA_TRACKING_CODE, Router)(MyApp)
+);
