@@ -73,8 +73,8 @@ function* infoSaga() {
     try {
         if (cookies.get(process.env.cookies.INFO_SHOW) !== "yes") {
             yield put(info.actions.show());
+            yield cookies.set(process.env.cookies.INFO_SHOW, "yes");
         }
-        yield cookies.set(process.env.cookies.INFO_SHOW, "yes", { expires: 3 });
         yield put(info.actions.infoSuccess());
     } catch (err) {
         console.error(err);
