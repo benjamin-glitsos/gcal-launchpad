@@ -36,16 +36,8 @@ export default function Index() {
                     />
                 </Box>
             </Flex>
-            <Flex my={2}>
-                <Box width={1}>
-                    <ReviewArea />
-                </Box>
-            </Flex>
-            <Flex my={2}>
-                <Box width={1}>
-                    <InfoCard />
-                </Box>
-            </Flex>
+            <ReviewArea />
+            <InfoCard />
             <Flex my={2}>
                 <Box width={1}>
                     <HistoryList title="Recent Events" />

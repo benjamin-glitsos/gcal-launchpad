@@ -19,10 +19,14 @@ const custom = {
             color: "primary",
             fontWeight: "bold",
             fontSize: 4,
-            py: 2
+            my: 2
         },
         h2: {
-            fontSize: 3
+            fontSize: 3,
+            fontWeight: "bold",
+            color: "text",
+            my: 2,
+            mb: 3
         }
     },
     forms: {
@@ -39,17 +43,17 @@ const custom = {
             cursor: "pointer"
         },
         secondary: {
-            "cursor": "buttons.primary",
+            "cursor": "pointer",
             "&:hover": {
                 backgroundColor: "muted"
             },
             "transition": "background-color .3s"
         },
         outline: {
-            cursor: "buttons.primary"
+            cursor: "pointer"
         },
         link: {
-            "cursor": "buttons.primary",
+            "cursor": "pointer",
             "color": "primary",
             "bg": "none",
             "&:hover": {
@@ -63,7 +67,8 @@ const custom = {
             maxWidth: ["auto", 1000],
             mx: "auto",
             px: 3,
-            py: 4
+            py: 4,
+            color: "text"
         }
     }
 };

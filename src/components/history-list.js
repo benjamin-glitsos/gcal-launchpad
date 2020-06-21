@@ -11,7 +11,7 @@ export default function HistoryList({ title }) {
     const historyState = useSelector(history.selectors.all);
     return (
         <Fragment>
-            <Heading>{title}</Heading>
+            <Heading variant="h2">{title}</Heading>
             <ColumnList width={[1, 1 / 2, 1 / 3, 1 / 4]}>
                 {historyState.map((historyInput, i) => (
                     <Link
@@ -22,6 +22,7 @@ export default function HistoryList({ title }) {
                                 review.actions.parse(historyInput)
                             ].forEach(dispatch)
                         }
+                        color="text"
                         key={historyInput + i}
                     >
                         {historyInput}

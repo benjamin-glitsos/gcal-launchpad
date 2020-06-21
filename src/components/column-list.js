@@ -2,7 +2,7 @@ import { Flex, Box } from "rebass";
 import ConditionalWrap from "~/components/conditional-wrap";
 
 const Bullet = children => (
-    <ul>
+    <ul style={{ marginTop: 2, marginBottom: 2 }}>
         <li>{children}</li>
     </ul>
 );
