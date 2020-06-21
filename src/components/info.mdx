@@ -1,4 +1,4 @@
-import { Heading, Flex, Box } from "rebass";
+import { Heading, Box, Text } from "rebass";
 import Link from "~/components/link";
 import Code from "~/components/code";
 import ColumnList from "~/components/column-list";
@@ -18,11 +18,19 @@ This will create the same event today (<Code>t</Code>), in one day (<Code>d</Cod
 
 You can now press the enter key if you want to add additional events.
 
-In the review area, you can choose to delete or send events. Just note that it will send to the calendar defined in the environment file, not your personal calendar (for security reasons).
+You can also re-add **Recent Events** to your review area by clicking on them.
 
-You can also re-add past events to your review area by clicking on them.
+In the review area, you can choose to delete or send events.
 
-Click the *info* button on the top-right at any time to re-open this dialogue.
+To view the events you've created in Google Calendar, you can log in with these details:
+
+<Box p={1} pl={4}>
+    <Text><Link href="https://calendar.google.com/calendar/">https://calendar.google.com/calendar/</Link></Text>
+    <Text><strong>Username:</strong> gcal.launchpad</Text>
+    <Text><strong>Password:</strong> gcal#901</Text>
+</Box>
+
+(Click the **Info** button on the top-right at any time to re-open this dialogue.)
 
 <Heading variant="h2" mt="4">This project uses:</Heading>
 
