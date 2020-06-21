@@ -11,7 +11,7 @@ export default function ColumnList({ width, py, hasBullets, children }) {
     return (
         <Flex width={1} flexWrap="wrap">
             {children.map((Child, i) => (
-                <Box width={width} py={py}>
+                <Box key={"column list item" + i} width={width} py={py}>
                     <ConditionalWrap condition={hasBullets} wrap={Bullet}>
                         {Child}
                     </ConditionalWrap>
