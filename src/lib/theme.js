@@ -7,9 +7,9 @@ const custom = {
         background: "#fff",
         primary: "#1a73e8",
         secondary: "#039BE5",
-        yellow: "yellow",
-        green: "green",
-        red: "red",
+        yellow: "#F6BF26",
+        green: "#0B8043",
+        red: "#AD1457",
         none: "none",
         modes: {
             sending: {},

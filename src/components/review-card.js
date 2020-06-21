@@ -14,26 +14,22 @@ const messages = process.env.messages;
 const variant = status =>
     cond([
         {
-            case: anyMatches([messages.EDITING, messages.REVIEW]),
+            case: anyMatches([messages.EDITING, messages.REVIEW], [status]),
             return: "create"
         },
         {
             case: isEqual(messages.REQUEST),
-            return: "sending"
+            return: "create"
         },
         {
             case: isEqual(messages.SUCCESS),
             return: "done"
         },
         {
-            case: isEqual(messages.FAILURE),
+            case: isEqual(messages.FAILURE) || true,
             return: "error"
-        },
-        {
-            case: true,
-            return: "blank"
         }
-    ])([status]);
+    ])(status);
 
 const ConditionalHeading = ({ status, days }) => {
     const pluraliseDays = s => pluralise(days.length, s);
