@@ -12,7 +12,7 @@ export default function Index() {
         <Fragment>
             <Head>
                 <title>{process.env.settings.title}</title>
-                <link rel="shortcut icon" href="/public/favicon.ico" />
+                <link rel="shortcut icon" href="/favicon.ico" />
             </Head>
             <Flex my={2} alignItems="center" pb={2}>
                 <Box width={2 / 3}>
