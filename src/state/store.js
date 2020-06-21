@@ -27,5 +27,5 @@ export const makeStore = (context, ssrState) => {
 };
 
 export const wrapper = createWrapper(makeStore, {
-    debug: process.env.settings.reduxDebugMode
+    debug: process.env.REDUX_DEBUG_MODE === "yes"
 });

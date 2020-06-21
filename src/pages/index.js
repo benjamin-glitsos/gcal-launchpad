@@ -12,6 +12,7 @@ export default function Index() {
         <Fragment>
             <Head>
                 <title>{process.env.settings.title}</title>
+                <link rel="shortcut icon" href="/public/favicon.ico" />
             </Head>
             <Flex my={2} alignItems="center" pb={2}>
                 <Box width={2 / 3}>
@@ -23,6 +24,7 @@ export default function Index() {
             </Flex>
             <Flex my={3}>
                 <Box width={1}>
+                    {/* TODO: make random placeholder come from a redux state */}
                     <EventInput
                         placeholders={[
                             "work out today, or else...",
