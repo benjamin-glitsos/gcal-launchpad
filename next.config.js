@@ -2,8 +2,13 @@ const webpack = require("webpack");
 const withMDX = require("@next/mdx");
 const path = require("path");
 const { parsed: localEnv } = require("dotenv").config();
+const smartypants = require("@silvenon/remark-smartypants");
 
-module.exports = withMDX()({
+module.exports = withMDX({
+    options: {
+        remarkPlugins: [smartypants, { backticks: false }]
+    }
+})({
     webpack(config, { isServer }) {
         config.resolve.alias["~"] = path.resolve(__dirname, "src");
 
