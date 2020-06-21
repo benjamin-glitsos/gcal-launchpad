@@ -14,15 +14,17 @@ const custom = {
             failure: {}
         }
     },
+    radii: {
+        card: 8
+    },
     text: {
         h1: {
             color: "primary",
             fontWeight: "bold",
-            fontSize: 4,
-            my: 2
+            fontSize: 5
         },
         h2: {
-            fontSize: 3,
+            fontSize: 4,
             fontWeight: "bold",
             color: "text",
             my: 2,
@@ -45,19 +47,20 @@ const custom = {
         secondary: {
             "cursor": "pointer",
             "&:hover": {
-                backgroundColor: "muted"
+                bg: "muted"
             },
             "transition": "background-color .3s"
         },
         outline: {
-            cursor: "pointer"
+            cursor: "pointer",
+            bg: "white"
         },
         link: {
             "cursor": "pointer",
             "color": "primary",
             "bg": "none",
             "&:hover": {
-                backgroundColor: "muted"
+                bg: "muted"
             },
             "transition": "background-color .3s"
         }

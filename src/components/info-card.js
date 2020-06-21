@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Flex, Box, Card } from "rebass";
+import { Flex, Box } from "rebass";
 import { info } from "~/state/redux/index";
 import Info from "~/components/info.mdx";
 import ButtonBar from "~/components/button-bar";
+import Card from "~/components/card";
 
 export default function InfoCard() {
     const isShown = useSelector(info.selectors.isShown);

@@ -1,16 +1,18 @@
 import { Fragment } from "react";
 import { useDispatch } from "react-redux";
-import { Heading, Card } from "rebass";
+import { Heading, Box, Text } from "rebass";
 import { Label } from "@rebass/forms";
 import pluralise from "pluralise";
 import { input, review, history } from "~/state/redux";
 import { cond, anyMatches, isEqual } from "~/lib/utilities";
 import ButtonBar from "~/components/button-bar";
+import Divider from "~/components/divider";
+import Card from "~/components/card";
 
 const ConditionalHeading = ({ messages, status, days }) => {
     const pluraliseDays = s => pluralise(days.length, s);
     return (
-        <Heading variant="h2">
+        <Heading variant="h2" color="white" fontSize={3}>
             {cond([
                 {
                     case: anyMatches([messages.EDITING, messages.REVIEW]),
@@ -37,16 +39,29 @@ const ConditionalHeading = ({ messages, status, days }) => {
     );
 };
 
-const EventTitle = ({ title }) => <p>{title}</p>;
+const EventTitle = ({ title }) => (
+    <Text fontWeight="bold" fontSize={4} my={2}>
+        {title}
+    </Text>
+);
 
 const DaysDisplay = ({ days }) => (
     <Fragment>
         {days.map(({ in: { number, period } }, i) => (
-            <p key={number + period + i}>
-                <span>{(i === 0 ? "In" : "And").toUpperCase()}</span>
-                {number > 0 && <span>{number}</span>}
-                <span>{period}</span>
-            </p>
+            <Box key={number + period + i}>
+                <Text
+                    display="inline-block"
+                    fontWeight="bold"
+                    fontSize={3}
+                    width={45}
+                >
+                    {(i === 0 ? "In" : "And").toUpperCase()}
+                </Text>
+                <Text display="inline-block" mr={1}>
+                    {number > 0 && <span>{number}</span>}
+                </Text>
+                <Text display="inline-block">{period}</Text>
+            </Box>
         ))}
     </Fragment>
 );
@@ -83,7 +98,7 @@ const EventButtonBar = ({
                 {
                     title:
                         status === messages.FAILURE ? "Retry Sending" : "Send",
-                    variant: "primary",
+                    variant: "outline",
                     isDisplayed: status !== messages.SUCCESS,
                     onClick: () =>
                         dispatch(
@@ -119,6 +134,7 @@ export default function ReviewCard({ id, input, title, days, status }) {
                 status={status}
                 days={days}
             />
+            <Divider />
             <EventTitle title={title} />
             <DaysDisplay days={days} />
             <EventButtonBar
