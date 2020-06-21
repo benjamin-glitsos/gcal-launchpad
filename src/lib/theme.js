@@ -7,6 +7,9 @@ const custom = {
         background: "#fff",
         primary: "#1a73e8",
         secondary: "#039BE5",
+        yellow: "yellow",
+        green: "green",
+        red: "red",
         none: "none",
         modes: {
             sending: {},
@@ -29,11 +32,6 @@ const custom = {
             color: "text",
             my: 2,
             mb: 3
-        },
-        card_create: {
-            fontWeight: "bold",
-            fontSize: 4,
-            my: 2
         }
     },
     forms: {
@@ -43,6 +41,12 @@ const custom = {
             fontSize: 3,
             px: 3,
             py: 2
+        }
+    },
+    card: {
+        create: {
+            backgroundColor: "primary",
+            color: "white"
         }
     },
     buttons: {

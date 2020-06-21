@@ -12,7 +12,7 @@ import Card from "~/components/card";
 const messages = process.env.messages;
 
 const variant = status =>
-    `card_${cond([
+    cond([
         {
             case: anyMatches([messages.EDITING, messages.REVIEW]),
             return: "create"
@@ -33,7 +33,7 @@ const variant = status =>
             case: true,
             return: "blank"
         }
-    ])([status])}`;
+    ])([status]);
 
 const ConditionalHeading = ({ status, days }) => {
     const pluraliseDays = s => pluralise(days.length, s);
@@ -41,23 +41,23 @@ const ConditionalHeading = ({ status, days }) => {
         <Heading variant="h2" color="white" fontSize={3}>
             {cond([
                 {
-                    case: isEqual("card_create"),
+                    case: isEqual("create"),
                     return: pluraliseDays("Create Event")
                 },
                 {
-                    case: isEqual("card_sending"),
+                    case: isEqual("sending"),
                     return: "Sending..."
                 },
                 {
-                    case: isEqual("card_done"),
+                    case: isEqual("done"),
                     return: "Done"
                 },
                 {
-                    case: isEqual("card_error"),
+                    case: isEqual("error"),
                     return: pluraliseDays("Failed to Create Event")
                 },
                 {
-                    case: isEqual("card_blank") || true,
+                    case: isEqual("blank") || true,
                     return: pluraliseDays("Event")
                 }
             ])(variant(status))}
@@ -65,7 +65,11 @@ const ConditionalHeading = ({ status, days }) => {
     );
 };
 
-const EventTitle = ({ title }) => <Text variant={variant}>{title}</Text>;
+const EventTitle = ({ title }) => (
+    <Text variant="h2" fontWeight="bold" fontSize={4} my={2} color="white">
+        {title}
+    </Text>
+);
 
 const DaysDisplay = ({ days }) => (
     <Fragment>
@@ -76,13 +80,16 @@ const DaysDisplay = ({ days }) => (
                     fontWeight="bold"
                     fontSize={3}
                     width={45}
+                    color="white"
                 >
                     {(i === 0 ? "In" : "And").toUpperCase()}
                 </Text>
-                <Text display="inline-block" mr={1}>
+                <Text display="inline-block" color="white" mr={1}>
                     {number > 0 && <span>{number}</span>}
                 </Text>
-                <Text display="inline-block">{period}</Text>
+                <Text display="inline-block" color="white">
+                    {period}
+                </Text>
             </Box>
         ))}
     </Fragment>
@@ -142,7 +149,7 @@ const EventButtonBar = ({ status, id, input: inputText, title, days }) => {
 
 export default function ReviewCard({ id, input, title, days, status }) {
     return (
-        <Card>
+        <Card status={variant(status)}>
             <ConditionalHeading
                 messages={messages}
                 status={status}
