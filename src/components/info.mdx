@@ -1,6 +1,7 @@
 import { Heading, Flex, Box } from "rebass";
 import Link from "~/components/link";
 import Code from "~/components/code";
+import ColumnList from "~/components/column-list";
 
 <Heading>Info</Heading>
 
@@ -22,23 +23,44 @@ Click the *info* button on the top-right at any time to re-open this dialogue.
 
 <Heading>This project uses:</Heading>
 
-<Flex width={1} flexWrap="wrap">
-    <Box width={[1, 1 / 2, 1 / 4]}>
-    </Box>
-</Flex>
-
-* <Link href="https://nextjs.org/">NextJs</Link> web framework
-* <Link href="https://reactjs.org/">React</Link> UI framework
-* <Link href="https://redux.js.org/">Redux</Link> state management stream
-* <Link href="https://redux-saga.js.org/">Saga</Link> asynchronous stream
-* <Link href="https://www.npmjs.com/package/arcsecond">Arcsecond</Link> monadic parser combinator library
-* <Link href="https://developers.google.com/calendar">Google Calendar API</Link>
-* <Link href="https://www.postgresql.org/">PostgreSQL</Link> database
-* Browser Cookies
-* <Link href="https://rebassjs.org/">Rebass</Link> (<Link href="https://theme-ui.com/">ThemeUI</Link> and <Link href="https://styled-system.com/">Styled System</Link>) CSS framework
-* <Link href="https://webpack.js.org/">Webpack</Link>, <Link href="https://babeljs.io/">Babel</Link>, <Link href="http://es6-features.org/">ES6</Link>, <Link href="https://nodejs.org/en/">NodeJs</Link>
-* Functional Programming principles
-* UX Design
+<ColumnList width={[1, 1 / 2, 1 / 3]} hasBullets={true}>
+    <span>
+        <Link href="https://nextjs.org/">NextJs</Link> web framework
+    </span>
+    <span>
+        <Link href="https://reactjs.org/">React</Link> UI framework
+    </span>
+    <span>
+        <Link href="https://redux.js.org/">Redux</Link> state management stream
+    </span>
+    <span>
+        <Link href="https://redux-saga.js.org/">Saga</Link> asynchronous stream
+    </span>
+    <span>
+        <Link href="https://www.npmjs.com/package/arcsecond">Arcsecond</Link> monadic parser combinator library
+    </span>
+    <span>
+        <Link href="https://developers.google.com/calendar">Google Calendar API</Link>
+    </span>
+    <span>
+        <Link href="https://www.postgresql.org/">PostgreSQL</Link> database
+    </span>
+    <span>
+        Browser Cookies
+    </span>
+    <span>
+        <Link href="https://rebassjs.org/">Rebass</Link> (<Link href="https://theme-ui.com/">ThemeUI</Link> and <Link href="https://styled-system.com/">Styled System</Link>) CSS framework
+    </span>
+    <span>
+        <Link href="https://webpack.js.org/">Webpack</Link>, <Link href="https://babeljs.io/">Babel</Link>, <Link href="http://es6-features.org/">ES6</Link>, <Link href="https://nodejs.org/en/">NodeJs</Link>
+    </span>
+    <span>
+        Functional Programming principles
+    </span>
+    <span>
+        UX Design
+    </span>
+</ColumnList>
 
 <Heading>View the code on GitHub:</Heading>
 

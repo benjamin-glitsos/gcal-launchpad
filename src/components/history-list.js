@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Heading, Flex, Box } from "rebass";
 import { input, history, review } from "~/state/redux";
+import ColumnList from "~/components/column-list";
 import Link from "~/components/link";
 
 export default function HistoryList({ title }) {
@@ -11,24 +12,22 @@ export default function HistoryList({ title }) {
     return (
         <Fragment>
             <Heading>{title}</Heading>
-            <Flex width={1} flexWrap="wrap">
+            <ColumnList width={[1, 1 / 2, 1 / 3, 1 / 4]}>
                 {historyState.map((historyInput, i) => (
-                    <Box width={[1, 1 / 2, 1 / 4]}>
-                        <Link
-                            onClick={() =>
-                                [
-                                    review.actions.new(),
-                                    input.actions.update(historyInput),
-                                    review.actions.parse(historyInput)
-                                ].forEach(dispatch)
-                            }
-                            key={historyInput + i}
-                        >
-                            {historyInput}
-                        </Link>
-                    </Box>
+                    <Link
+                        onClick={() =>
+                            [
+                                review.actions.new(),
+                                input.actions.update(historyInput),
+                                review.actions.parse(historyInput)
+                            ].forEach(dispatch)
+                        }
+                        key={historyInput + i}
+                    >
+                        {historyInput}
+                    </Link>
                 ))}
-            </Flex>
+            </ColumnList>
         </Fragment>
     );
 }
