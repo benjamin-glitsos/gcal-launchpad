@@ -2,6 +2,11 @@ import { Heading, Flex, Box } from "rebass";
 import Link from "~/components/link";
 import Code from "~/components/code";
 import ColumnList from "~/components/column-list";
+import Divider from "~/components/divider";
+
+<Heading variant="h2" mt="3">Overview</Heading>
+
+<Divider color="text" mb="4" />
 
 This app allows you to make Google Calendar events more quickly by parsing a simple shorthand notation that looks like this:
 
@@ -19,7 +24,7 @@ You can also re-add past events to your review area by clicking on them.
 
 Click the *info* button on the top-right at any time to re-open this dialogue.
 
-<Heading variant="h2">This project uses:</Heading>
+<Heading variant="h2" mt="4">This project uses:</Heading>
 
 <ColumnList width={[1, 1 / 2]} hasBullets={true}>
     <span>
@@ -60,6 +65,6 @@ Click the *info* button on the top-right at any time to re-open this dialogue.
     </span>
 </ColumnList>
 
-<Heading variant="h2">View the code on GitHub:</Heading>
+<Heading variant="h2" mt="4">View the codebase:</Heading>
 
 <Link href="https://github.com/benjamin-glitsos/gcal-launchpad">benjamin-glitsos/gcal-launchpad</Link>
