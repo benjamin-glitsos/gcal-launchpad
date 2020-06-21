@@ -9,10 +9,10 @@ export default function HistoryList({ title }) {
     const historyList = useSelector(history.selectors.all);
     return (
         historyList.length > 0 && (
-            <Flex mt={4}>
+            <Flex my={4}>
                 <Box width={1}>
                     <Heading variant="h2">{title}</Heading>
-                    <ColumnList width={[1, 1 / 2, 1 / 3, 1 / 4]}>
+                    <ColumnList width={[1, 1 / 2, 1 / 3, 1 / 4]} py={[2, 1]}>
                         {historyList.map((historyInput, i) => (
                             <Link
                                 onClick={() =>

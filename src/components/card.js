@@ -3,7 +3,6 @@ import { cond, isEqual } from "~/lib/utilities";
 
 export default function Card(props) {
     const status = props.status;
-    console.log(status);
     return (
         <RebassCard
             {...props}
