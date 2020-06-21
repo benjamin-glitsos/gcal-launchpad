@@ -63,6 +63,20 @@ const custom = {
                 bg: "muted"
             },
             "transition": "background-color .3s"
+        },
+        cardOutline: {
+            ...material.buttons.outline,
+            cursor: "pointer",
+            bg: "white"
+        },
+        cardLink: {
+            "cursor": "pointer",
+            "color": "primary",
+            "bg": "none",
+            "&:hover": {
+                bg: "muted"
+            },
+            "transition": "background-color .3s"
         }
     },
     styles: {
