@@ -24,7 +24,7 @@ const auth = (() => {
 })();
 
 export default async (req, res) => {
-    if (process.env.TEST_MODE === "yes") {
+    if (process.env.TEST_MODE !== "yes") {
         const {
             query: { title, date }
         } = req;
