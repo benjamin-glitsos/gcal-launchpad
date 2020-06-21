@@ -38,11 +38,7 @@ export default function Index() {
             </Flex>
             <ReviewArea />
             <InfoCard />
-            <Flex my={2}>
-                <Box width={1}>
-                    <HistoryList title="Recent Events" />
-                </Box>
-            </Flex>
+            <HistoryList title="Recent Events" />
         </Fragment>
     );
 }

@@ -41,7 +41,7 @@ export default function ReviewArea() {
                     </Flex>
                     <Flex flexWrap="wrap">
                         {events.map((event, i) => (
-                            <Box width={1 / 2}>
+                            <Box width={[1, 1 / 2]} p={2}>
                                 <ReviewCard
                                     {...{ ...event }}
                                     key={event.title + i}
