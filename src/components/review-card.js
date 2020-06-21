@@ -11,25 +11,26 @@ import Card from "~/components/card";
 
 const messages = process.env.messages;
 
-const variant = status =>
-    cond([
+const variant = status => {
+    return cond([
         {
-            case: anyMatches([messages.EDITING, messages.REVIEW], [status]),
+            case: anyMatches([
+                messages.EDITING,
+                messages.REVIEW,
+                messages.REQUEST
+            ]),
             return: "create"
         },
         {
-            case: isEqual(messages.REQUEST),
-            return: "create"
-        },
-        {
-            case: isEqual(messages.SUCCESS),
+            case: anyMatches([messages.SUCCESS]),
             return: "done"
         },
         {
-            case: isEqual(messages.FAILURE) || true,
+            case: anyMatches([messages.FAILURE]) || true,
             return: "error"
         }
-    ])(status);
+    ])([status]);
+};
 
 const ConditionalHeading = ({ status, days }) => {
     const pluraliseDays = s => pluralise(days.length, s);
