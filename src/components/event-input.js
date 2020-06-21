@@ -4,13 +4,13 @@ import { input, review } from "~/state/redux/index";
 import { randomItem } from "~/lib/utilities";
 
 export default function EventInput({ placeholders }) {
-    const inputState = useSelector(input.selectors.all);
-    const reviewState = useSelector(review.selectors.all);
+    const { inputValue, inputPlaceholder } = useSelector(input.selectors.all);
+    const events = useSelector(review.selectors.events);
     const dispatch = useDispatch();
-    const reviewStateIsEmpty = Object.keys(reviewState).length === 1;
-    const placeholder = reviewStateIsEmpty
-        ? randomItem(placeholders)
-        : `Add another: ${randomItem(placeholders)}`;
+    const placeholder =
+        events.length === 0
+            ? randomItem(placeholders)
+            : `Add another: ${randomItem(placeholders)}`;
     const onChangeHandler = e => {
         e.preventDefault();
         const value = e.target.value;
@@ -32,8 +32,8 @@ export default function EventInput({ placeholders }) {
     return (
         <Input
             type="text"
-            placeholder={placeholder}
-            value={inputState}
+            placeholder={inputPlaceholder}
+            value={inputValue}
             onChange={onChangeHandler}
             onKeyPress={onKeyPressHandler}
             variant="mainInput"

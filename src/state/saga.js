@@ -1,7 +1,7 @@
 import { all, put, takeLatest, call, delay, select } from "redux-saga/effects";
 import es6promise from "es6-promise";
 import Cookies from "universal-cookie";
-import { history, review, info } from "./redux";
+import { history, input, review, info } from "./redux";
 import { fetchApi } from "~/lib/database";
 import { fromEntries } from "~/lib/polyfills";
 
@@ -82,9 +82,20 @@ function* infoSaga() {
     }
 }
 
+function* randomPlaceholderSaga() {
+    try {
+        yield put(input.actions.randomPlaceholder());
+        yield put(input.actions.randomPlaceholderSuccess());
+    } catch (err) {
+        console.error(err);
+        yield put(input.actions.randomPlaceholderFailure());
+    }
+}
+
 function* rootSaga() {
     yield all([
         call(infoSaga),
+        call(randomPlaceholderSaga),
         call(updateHistorySaga, {
             payload: [process.env.settings.historyListLength]
         }),
@@ -92,7 +103,8 @@ function* rootSaga() {
         takeLatest(history.actions.add.type, addHistorySaga),
         takeLatest(review.actions.send.type, sendReviewsSaga),
         takeLatest(review.actions.sendMultiple.type, sendMultipleReviewsSaga),
-        takeLatest(info.actions.info.type, infoSaga)
+        takeLatest(info.actions.info.type, infoSaga),
+        takeLatest(input.actions.randomPlaceholder.type, randomPlaceholderSaga)
     ]);
 }
 
