@@ -9,41 +9,60 @@ import ButtonBar from "~/components/button-bar";
 import Divider from "~/components/divider";
 import Card from "~/components/card";
 
+const variant = `card_${cond([
+    {
+        case: anyMatches([messages.EDITING, messages.REVIEW]),
+        return: "create"
+    },
+    {
+        case: isEqual(messages.REQUEST),
+        return: "sending"
+    },
+    {
+        case: isEqual(messages.SUCCESS),
+        return: "done"
+    },
+    {
+        case: isEqual(messages.FAILURE),
+        return: "error"
+    },
+    {
+        case: true,
+        return: "blank"
+    }
+])([status])}`;
+
 const ConditionalHeading = ({ messages, status, days }) => {
     const pluraliseDays = s => pluralise(days.length, s);
     return (
         <Heading variant="h2" color="white" fontSize={3}>
             {cond([
                 {
-                    case: anyMatches([messages.EDITING, messages.REVIEW]),
+                    case: isEqual("card_create"),
                     return: pluraliseDays("Create Event")
                 },
                 {
-                    case: isEqual(messages.REQUEST),
+                    case: isEqual("card_sending"),
                     return: "Sending..."
                 },
                 {
-                    case: isEqual(messages.SUCCESS),
+                    case: isEqual("card_done"),
                     return: "Done"
                 },
                 {
-                    case: isEqual(messages.FAILURE),
+                    case: isEqual("card_error"),
                     return: pluraliseDays("Failed to Create Event")
                 },
                 {
-                    case: true,
+                    case: isEqual("card_blank") || true,
                     return: pluraliseDays("Event")
                 }
-            ])([status])}
+            ])(variant)}
         </Heading>
     );
 };
 
-const EventTitle = ({ title }) => (
-    <Text fontWeight="bold" fontSize={4} my={2}>
-        {title}
-    </Text>
-);
+const EventTitle = ({ title }) => <Text variant={variant}>{title}</Text>;
 
 const DaysDisplay = ({ days }) => (
     <Fragment>

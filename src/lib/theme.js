@@ -29,6 +29,11 @@ const custom = {
             color: "text",
             my: 2,
             mb: 3
+        },
+        card_create: {
+            fontWeight: "bold",
+            fontSize: 4,
+            my: 2
         }
     },
     forms: {
