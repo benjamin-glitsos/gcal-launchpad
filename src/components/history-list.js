@@ -9,7 +9,7 @@ export default function HistoryList({ title }) {
     const historyList = useSelector(history.selectors.all);
     return (
         historyList.length > 0 && (
-            <Flex my={2}>
+            <Flex mt={4}>
                 <Box width={1}>
                     <Heading variant="h2">{title}</Heading>
                     <ColumnList width={[1, 1 / 2, 1 / 3, 1 / 4]}>
