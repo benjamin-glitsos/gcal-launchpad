@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+
 import { useDispatch } from "react-redux";
 import { Heading, Box, Text } from "rebass";
 import { Label } from "@rebass/forms";
@@ -14,12 +15,12 @@ const messages = process.env.messages;
 const variant = status => {
     return cond([
         {
-            case: anyMatches([
-                messages.EDITING,
-                messages.REVIEW,
-                messages.REQUEST
-            ]),
+            case: anyMatches([messages.EDITING, messages.REVIEW]),
             return: "create"
+        },
+        {
+            case: anyMatches([messages.REQUEST]),
+            return: "sending"
         },
         {
             case: anyMatches([messages.SUCCESS]),
