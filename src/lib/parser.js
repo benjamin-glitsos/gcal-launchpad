@@ -90,11 +90,11 @@ const event = coroutine(function* () {
 
     yield whitespaces;
 
-    const title = yield possibly(anything);
+    const optionalTitle = yield possibly(anything);
 
     yield whitespaces;
 
-    return { title, days: dayValues };
+    return { title: optionalTitle || "...", days: dayValues };
 });
 
 export default function parser(s) {

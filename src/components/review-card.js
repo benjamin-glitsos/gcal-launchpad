@@ -9,30 +9,33 @@ import ButtonBar from "~/components/button-bar";
 import Divider from "~/components/divider";
 import Card from "~/components/card";
 
-const variant = `card_${cond([
-    {
-        case: anyMatches([messages.EDITING, messages.REVIEW]),
-        return: "create"
-    },
-    {
-        case: isEqual(messages.REQUEST),
-        return: "sending"
-    },
-    {
-        case: isEqual(messages.SUCCESS),
-        return: "done"
-    },
-    {
-        case: isEqual(messages.FAILURE),
-        return: "error"
-    },
-    {
-        case: true,
-        return: "blank"
-    }
-])([status])}`;
+const messages = process.env.messages;
 
-const ConditionalHeading = ({ messages, status, days }) => {
+const variant = status =>
+    `card_${cond([
+        {
+            case: anyMatches([messages.EDITING, messages.REVIEW]),
+            return: "create"
+        },
+        {
+            case: isEqual(messages.REQUEST),
+            return: "sending"
+        },
+        {
+            case: isEqual(messages.SUCCESS),
+            return: "done"
+        },
+        {
+            case: isEqual(messages.FAILURE),
+            return: "error"
+        },
+        {
+            case: true,
+            return: "blank"
+        }
+    ])([status])}`;
+
+const ConditionalHeading = ({ status, days }) => {
     const pluraliseDays = s => pluralise(days.length, s);
     return (
         <Heading variant="h2" color="white" fontSize={3}>
@@ -57,7 +60,7 @@ const ConditionalHeading = ({ messages, status, days }) => {
                     case: isEqual("card_blank") || true,
                     return: pluraliseDays("Event")
                 }
-            ])(variant)}
+            ])(variant(status))}
         </Heading>
     );
 };
@@ -85,14 +88,7 @@ const DaysDisplay = ({ days }) => (
     </Fragment>
 );
 
-const EventButtonBar = ({
-    messages,
-    status,
-    id,
-    input: inputText,
-    title,
-    days
-}) => {
+const EventButtonBar = ({ status, id, input: inputText, title, days }) => {
     const dispatch = useDispatch();
     return (
         <ButtonBar
@@ -104,7 +100,7 @@ const EventButtonBar = ({
                     ])
                         ? "Close"
                         : "Delete",
-                    variant: "cardOutline",
+                    variant: "cardLink",
                     isDisplayed: true,
                     onClick: () =>
                         status === messages.EDITING
@@ -145,7 +141,6 @@ const EventButtonBar = ({
 };
 
 export default function ReviewCard({ id, input, title, days, status }) {
-    const messages = process.env.messages;
     return (
         <Card>
             <ConditionalHeading
