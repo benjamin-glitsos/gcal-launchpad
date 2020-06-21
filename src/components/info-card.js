@@ -9,22 +9,18 @@ export default function InfoCard() {
     const dispatch = useDispatch();
     return (
         isShown && (
-            <Flex my={2}>
-                <Box width={1}>
-                    <Card>
-                        <Info />
-                        <ButtonBar
-                            list={[
-                                {
-                                    title: "Close",
-                                    isDisplayed: true,
-                                    onClick: () => dispatch(info.actions.hide())
-                                }
-                            ]}
-                        />
-                    </Card>
-                </Box>
-            </Flex>
+            <Card my={2}>
+                <Info />
+                <ButtonBar
+                    list={[
+                        {
+                            title: "Close",
+                            isDisplayed: true,
+                            onClick: () => dispatch(info.actions.hide())
+                        }
+                    ]}
+                />
+            </Card>
         )
     );
 }
