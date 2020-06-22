@@ -34,12 +34,11 @@ function* deleteSaga({ payload: [id] }) {
     try {
         const event = yield select(review.selectors.event(id));
         yield delay(process.env.settings.deletionDelay);
-        console.log(event);
-        // if () {
-        //     yield put(review.actions.delete(id));
-        // } else {
-        //     yield put(review.actions.toReview(id));
-        // }
+        if (event.status === process.env.messages.DELETED) {
+            yield put(review.actions.delete(id));
+        } else {
+            yield put(review.actions.toReview(id));
+        }
         yield put(review.actions.toDeleteSuccess());
     } catch (err) {
         console.error(err);

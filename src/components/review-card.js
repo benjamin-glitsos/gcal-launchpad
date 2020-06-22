@@ -156,8 +156,8 @@ const EventButtonBar = ({ status, id, input: inputText, title, days }) => {
                         )
                 },
                 {
-                    title: "Restore",
-                    isDisplayed: status === messages.DELETE,
+                    title: "Undo",
+                    isDisplayed: status === messages.DELETED,
                     variant: "cardOutline",
                     onClick: () => dispatch(review.actions.toReview(id))
                 }

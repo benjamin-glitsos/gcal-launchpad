@@ -18,7 +18,7 @@ export default class Review {
                 id,
                 ...data
             })),
-        event: key => state => state[key]
+        event: key => state => state.review[key]
     };
 
     empty = {
