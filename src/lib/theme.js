@@ -11,7 +11,7 @@ const custom = {
         yellow: "#F6BF26",
         green: "#0B8043",
         purple: "#7F39FB",
-        red: "#AD1457",
+        red: "#EA4335",
         none: "none",
         modes: {
             sending: {},

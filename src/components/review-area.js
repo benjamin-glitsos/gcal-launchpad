@@ -9,6 +9,7 @@ export default function ReviewArea() {
     const dispatch = useDispatch();
     const events = useSelector(review.selectors.events);
     const hasEvents = events.length > 0;
+    const ids = events.map(event => event.id);
     return (
         hasEvents && (
             <Flex my={2}>
@@ -22,7 +23,11 @@ export default function ReviewArea() {
                                         isDisplayed: true,
                                         variant: "outline",
                                         onClick: () =>
-                                            dispatch(review.actions.deleteAll())
+                                            dispatch(
+                                                review.actions.toDeleteMultiple(
+                                                    ids
+                                                )
+                                            )
                                     },
                                     {
                                         title: "Send All",

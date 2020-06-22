@@ -60,7 +60,7 @@ const ConditionalHeading = ({ status, days }) => {
                 },
                 {
                     case: isEqual("error"),
-                    return: pluraliseDays("Failed to Create Event")
+                    return: pluraliseDays("Error")
                 },
                 {
                     case: isEqual("blank") || true,
@@ -127,8 +127,7 @@ const EventButtonBar = ({ status, id, input: inputText, title, days }) => {
                     onClick: () => dispatch(review.actions.delete(id))
                 },
                 {
-                    title:
-                        status !== messages.FAILURE ? "Send" : "Retry Sending",
+                    title: "Send",
                     variant: "cardOutline",
                     isDisplayed: anyMatches([status])([
                         messages.EDITING,

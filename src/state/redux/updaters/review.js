@@ -18,7 +18,7 @@ export default class Review {
                 id,
                 ...data
             })),
-        event: key => state => state.review[key]
+        item: key => state => state.review[key]
     };
 
     empty = {
@@ -76,7 +76,25 @@ export default class Review {
     }
 
     toDeleteFailure(id) {
-        draft[id].status = process.env.messages.FAILURE;
+        return produce(this.state, draft => {
+            draft[id].status = process.env.messages.FAILURE;
+        });
+    }
+
+    toDeleteMultiple(ids) {
+        return produce(this.state, draft => {
+            ids.forEach(id => {
+                draft[id].status = process.env.messages.DELETED;
+            });
+        });
+    }
+
+    toDeleteMultipleSuccess() {
+        return this.state;
+    }
+
+    toDeleteMultipleFailure(id) {
+        return this.state;
     }
 
     toReview(id) {
@@ -118,16 +136,18 @@ export default class Review {
     }
 
     sendMultiple() {
-        return this.state;
+        return produce(this.state, draft => {
+            ids.forEach(id => {
+                draft[id].status = process.env.messages.REQUEST;
+            });
+        });
     }
 
     sendMultipleSuccess() {
-        // TODO: mark all as success?
         return this.state;
     }
 
     sendMultipleFailure() {
-        // TODO: mark all as failure?
         return this.state;
     }
 }
