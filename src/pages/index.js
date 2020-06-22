@@ -28,7 +28,17 @@ export default function Index() {
             </Flex>
             <Flex my={3}>
                 <Box width={1}>
-                    <EventInput />
+                    <EventInput
+                        placeholders={[
+                            "work out today, or else...",
+                            "d, 2d buy some milk",
+                            "2w go to meeting",
+                            "4d, 3y finish that book",
+                            "t, m, 2m, 3m, 4m buy in bulk",
+                            "t, d do it today, or maybe tomorrow",
+                            "100d challenge is finished"
+                        ]}
+                    />
                 </Box>
             </Flex>
             <ReviewArea />

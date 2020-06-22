@@ -1,22 +1,26 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input } from "@rebass/forms";
 import { input, review } from "~/state/redux/index";
-import { randomItem } from "~/lib/utilities";
+import { randomItem, removeItem } from "~/lib/utilities";
 
-export default function EventInput() {
-    const { value: inputValue, placeholder: inputPlaceholder } = useSelector(
-        input.selectors.all
-    );
+const CONST = 1;
 
-    const events = useSelector(review.selectors.events);
+export default function EventInput({ placeholders }) {
+    const eventsLength = useSelector(review.selectors.events).length;
+
+    const value = useSelector(input.selectors.all);
+
+    const [placeholder, setPlaceholder] = useState("");
+
+    useEffect(() => {
+        const nextPlaceholder = randomItem(
+            removeItem(placeholder, placeholders)
+        );
+        setPlaceholder(nextPlaceholder);
+    }, [eventsLength]);
 
     const dispatch = useDispatch();
-
-    const placeholder =
-        events.length === 0
-            ? inputPlaceholder
-            : `Add another e.g. ${inputPlaceholder}`;
 
     const onChangeHandler = e => {
         e.preventDefault();
@@ -34,23 +38,17 @@ export default function EventInput() {
 
     const onKeyPressHandler = e => {
         if (e.key === "Enter") {
-            [
-                review.actions.new(),
-                input.actions.randomPlaceholder(),
-                input.actions.clear()
-            ].forEach(dispatch);
+            [review.actions.new(), input.actions.clear()].forEach(dispatch);
         }
     };
-
-    // useEffect(() => {
-    //     return placeholder2;
-    // });
 
     return (
         <Input
             type="text"
-            placeholder={placeholder2}
-            value={inputValue}
+            placeholder={
+                (eventsLength === 0 ? "" : "Add another e.g. ") + placeholder
+            }
+            value={value}
             onChange={onChangeHandler}
             onKeyPress={onKeyPressHandler}
             variant="mainInput"
