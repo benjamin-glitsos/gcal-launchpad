@@ -24,7 +24,7 @@ export default class Review {
     empty = {
         new: {
             status: process.env.messages.EMPTY,
-            countdown: process.env.settings.deletionDelay / 1000,
+            countdown: process.env.settings.deletionDelaySeconds,
             input: "",
             title: "",
             days: []

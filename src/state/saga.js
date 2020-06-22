@@ -33,7 +33,7 @@ function* addHistorySaga({ payload: [input] }) {
 function* deleteSaga({ payload: [id] }) {
     try {
         const event = yield select(review.selectors.item(id));
-        while (event.countdown > 0) {
+        for (let i = 0; i < process.env.settings.deletionDelaySeconds; i++) {
             yield delay(1000);
             yield put(review.actions.decrementCountdown(id));
         }
@@ -78,7 +78,7 @@ function* sendReviewsSaga({ payload: [{ id, input, title, days }] }) {
             )
         );
         yield put(review.actions.sendSuccess(id));
-        yield delay(process.env.settings.deletionDelay);
+        yield delay(process.env.settings.deletionDelaySeconds * 1000);
         yield put(review.actions.delete(id));
         yield call(addHistorySaga, {
             payload: [input]
