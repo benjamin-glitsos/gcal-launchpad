@@ -34,6 +34,10 @@ function* deleteSaga({ payload: [id] }) {
     try {
         const event = yield select(review.selectors.item(id));
         for (let i = 0; i < process.env.settings.deletionDelaySeconds; i++) {
+            if (event.status !== process.env.messages.DELETED) {
+                yield put(review.actions.toReview(id));
+                break;
+            }
             yield delay(1000);
             yield put(review.actions.decrementCountdown(id));
         }
