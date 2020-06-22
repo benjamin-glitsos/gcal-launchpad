@@ -106,7 +106,14 @@ const DaysDisplay = ({ days }) => (
     </Fragment>
 );
 
-const EventButtonBar = ({ status, id, input: inputText, title, days }) => {
+const EventButtonBar = ({
+    status,
+    id,
+    countdown,
+    input: inputText,
+    title,
+    days
+}) => {
     const dispatch = useDispatch();
     return (
         <ButtonBar
@@ -155,7 +162,7 @@ const EventButtonBar = ({ status, id, input: inputText, title, days }) => {
                         )
                 },
                 {
-                    title: "Undo",
+                    title: `Undo (${countdown})`,
                     isDisplayed: status === messages.DELETED,
                     variant: "cardOutline",
                     onClick: () => dispatch(review.actions.toReview(id))
@@ -165,7 +172,14 @@ const EventButtonBar = ({ status, id, input: inputText, title, days }) => {
     );
 };
 
-export default function ReviewCard({ id, input, title, days, status }) {
+export default function ReviewCard({
+    id,
+    countdown,
+    input,
+    title,
+    days,
+    status
+}) {
     return (
         <Card status={variant(status)}>
             <ConditionalHeading
@@ -179,6 +193,7 @@ export default function ReviewCard({ id, input, title, days, status }) {
             <EventButtonBar
                 messages={messages}
                 status={status}
+                countdown={countdown}
                 id={id}
                 input={input}
                 title={title}

@@ -24,6 +24,7 @@ export default class Review {
     empty = {
         new: {
             status: process.env.messages.EMPTY,
+            countdown: process.env.settings.deletionDelay / 1000,
             input: "",
             title: "",
             days: []
@@ -149,5 +150,11 @@ export default class Review {
 
     sendMultipleFailure() {
         return this.state;
+    }
+
+    decrementCountdown(id) {
+        return produce(this.state, draft => {
+            draft[id].countdown = draft[id].countdown - 1;
+        });
     }
 }

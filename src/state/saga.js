@@ -33,7 +33,10 @@ function* addHistorySaga({ payload: [input] }) {
 function* deleteSaga({ payload: [id] }) {
     try {
         const event = yield select(review.selectors.item(id));
-        yield delay(process.env.settings.deletionDelay);
+        while (event.countdown > 0) {
+            yield delay(1000);
+            yield put(review.actions.decrementCountdown(id));
+        }
         if (event.status === process.env.messages.DELETED) {
             yield put(review.actions.delete(id));
         } else {
