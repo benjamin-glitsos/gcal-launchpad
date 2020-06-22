@@ -5,8 +5,9 @@ const custom = {
     colors: {
         text: "#3c4043",
         background: "#fff",
+        glass: "rgb(212, 212, 212, 0.15)",
         primary: "#1a73e8",
-        secondary: "#039BE5",
+        secondary: "#1967d2",
         yellow: "#F6BF26",
         green: "#0B8043",
         red: "#AD1457",
@@ -51,39 +52,52 @@ const custom = {
     },
     buttons: {
         primary: {
-            cursor: "pointer"
+            "cursor": "pointer",
+            "&:hover": {
+                bg: "secondary"
+            }
         },
         secondary: {
             "cursor": "pointer",
             "&:hover": {
-                bg: "muted"
+                bg: "glass"
             },
             "transition": ".3s"
         },
         outline: {
-            cursor: "pointer",
-            bg: "white"
+            "cursor": "pointer",
+            "bg": "white",
+            "transition": ".3s",
+            "&:hover": {
+                bg: "glass"
+            }
         },
         link: {
             "cursor": "pointer",
             "color": "primary",
             "bg": "none",
             "&:hover": {
-                bg: "muted"
+                bg: "glass"
             },
             "transition": ".3s"
         },
         cardOutline: {
             ...material.buttons.outline,
-            cursor: "pointer",
-            color: "white",
-            bg: "none",
-            borderColor: "white"
+            "cursor": "pointer",
+            "color": "white",
+            "bg": "none",
+            "borderColor": "white",
+            "&:hover": {
+                bg: "glass"
+            }
         },
         cardLink: {
-            cursor: "pointer",
-            color: "white",
-            bg: "none"
+            "cursor": "pointer",
+            "color": "white",
+            "bg": "none",
+            "&:hover": {
+                bg: "glass"
+            }
         }
     },
     styles: {

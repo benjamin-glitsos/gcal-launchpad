@@ -19,6 +19,7 @@ export default function InfoCard() {
                                 {
                                     title: "Close",
                                     isDisplayed: true,
+                                    variant: "primary",
                                     onClick: () => dispatch(info.actions.hide())
                                 }
                             ]}
