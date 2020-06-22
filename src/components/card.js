@@ -24,6 +24,10 @@ export default function Card(props) {
                         return: "green"
                     },
                     {
+                        case: isEqual("deleted"),
+                        return: "purple"
+                    },
+                    {
                         case: isEqual("error"),
                         return: "red"
                     },

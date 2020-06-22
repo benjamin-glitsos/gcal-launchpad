@@ -17,7 +17,8 @@ export default class Review {
             ).map(([id, data]) => ({
                 id,
                 ...data
-            }))
+            })),
+        event: key => state => state[key]
     };
 
     empty = {
@@ -64,6 +65,26 @@ export default class Review {
         });
     }
 
+    toDelete(id) {
+        return produce(this.state, draft => {
+            draft[id].status = process.env.messages.DELETED;
+        });
+    }
+
+    toDeleteSuccess() {
+        return this.state;
+    }
+
+    toDeleteFailure(id) {
+        draft[id].status = process.env.messages.FAILURE;
+    }
+
+    toReview(id) {
+        return produce(this.state, draft => {
+            draft[id].status = process.env.messages.REVIEW;
+        });
+    }
+
     delete(id) {
         return produce(this.state, draft => {
             if (id === "new") {
@@ -101,10 +122,12 @@ export default class Review {
     }
 
     sendMultipleSuccess() {
+        // TODO: mark all as success?
         return this.state;
     }
 
     sendMultipleFailure() {
+        // TODO: mark all as failure?
         return this.state;
     }
 }

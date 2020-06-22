@@ -23,6 +23,10 @@ const variant = status => {
             return: "sending"
         },
         {
+            case: anyMatches([messages.DELETED]),
+            return: "deleted"
+        },
+        {
             case: anyMatches([messages.SUCCESS]),
             return: "done"
         },
@@ -45,6 +49,10 @@ const ConditionalHeading = ({ status, days }) => {
                 {
                     case: isEqual("sending"),
                     return: "Sending..."
+                },
+                {
+                    case: isEqual("deleted"),
+                    return: "Deleted"
                 },
                 {
                     case: isEqual("done"),
@@ -104,27 +112,29 @@ const EventButtonBar = ({ status, id, input: inputText, title, days }) => {
         <ButtonBar
             list={[
                 {
-                    title: anyMatches([status])([
-                        messages.SUCCESS,
-                        messages.FAILURE
-                    ])
-                        ? "Close"
-                        : "Delete",
+                    title: "Delete",
                     variant: "cardLink",
-                    isDisplayed: true,
-                    onClick: () =>
-                        status === messages.EDITING
-                            ? [
-                                  review.actions.clear(),
-                                  input.actions.clear()
-                              ].forEach(dispatch)
-                            : dispatch(review.actions.delete(id))
+                    isDisplayed: anyMatches([status])([
+                        messages.EDITING,
+                        messages.REVIEW
+                    ]),
+                    onClick: () => dispatch(review.actions.toDelete(id))
+                },
+                {
+                    title: "Close",
+                    variant: "cardLink",
+                    isDisplayed: status === messages.FAILURE,
+                    onClick: () => dispatch(review.actions.delete(id))
                 },
                 {
                     title:
-                        status === messages.FAILURE ? "Retry Sending" : "Send",
+                        status !== messages.FAILURE ? "Send" : "Retry Sending",
                     variant: "cardOutline",
-                    isDisplayed: status !== messages.SUCCESS,
+                    isDisplayed: anyMatches([status])([
+                        messages.EDITING,
+                        messages.REVIEW,
+                        messages.FAILURE
+                    ]),
                     onClick: () =>
                         dispatch(
                             review.actions.send({
@@ -144,6 +154,12 @@ const EventButtonBar = ({ status, id, input: inputText, title, days }) => {
                             process.env.settings.googleCalendarUrl,
                             "_blank"
                         )
+                },
+                {
+                    title: "Restore",
+                    isDisplayed: status === messages.DELETE,
+                    variant: "cardOutline",
+                    onClick: () => dispatch(review.actions.toReview(id))
                 }
             ]}
         />

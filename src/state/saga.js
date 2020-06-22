@@ -30,6 +30,23 @@ function* addHistorySaga({ payload: [input] }) {
     }
 }
 
+function* deleteSaga({ payload: [id] }) {
+    try {
+        const event = yield select(review.selectors.event(id));
+        yield delay(process.env.settings.deletionDelay);
+        console.log(event);
+        // if () {
+        //     yield put(review.actions.delete(id));
+        // } else {
+        //     yield put(review.actions.toReview(id));
+        // }
+        yield put(review.actions.toDeleteSuccess());
+    } catch (err) {
+        console.error(err);
+        yield put(review.actions.toDeleteFailure(id));
+    }
+}
+
 function* sendReviewsSaga({ payload: [{ id, input, title, days }] }) {
     try {
         yield all(
@@ -90,6 +107,7 @@ function* rootSaga() {
         }),
         takeLatest(history.actions.update.type, updateHistorySaga),
         takeLatest(history.actions.add.type, addHistorySaga),
+        takeLatest(review.actions.toDelete.type, deleteSaga),
         takeLatest(review.actions.send.type, sendReviewsSaga),
         takeLatest(review.actions.sendMultiple.type, sendMultipleReviewsSaga),
         takeLatest(info.actions.info.type, infoSaga)

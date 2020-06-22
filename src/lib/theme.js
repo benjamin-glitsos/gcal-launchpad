@@ -10,6 +10,7 @@ const custom = {
         secondary: "#1967d2",
         yellow: "#F6BF26",
         green: "#0B8043",
+        purple: "#7F39FB",
         red: "#AD1457",
         none: "none",
         modes: {

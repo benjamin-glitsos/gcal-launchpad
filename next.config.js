@@ -51,6 +51,7 @@ module.exports = withMDX({
             EDITING: "EDITING",
             REVIEW: "REVIEW",
             REQUEST: "REQUEST",
+            DELETED: "DELETED",
             SUCCESS: "SUCCESS",
             FAILURE: "FAILURE"
         },
