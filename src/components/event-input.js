@@ -1,16 +1,23 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input } from "@rebass/forms";
 import { input, review } from "~/state/redux/index";
 import { randomItem } from "~/lib/utilities";
 
-export default function EventInput({ placeholders }) {
-    const { inputValue, inputPlaceholder } = useSelector(input.selectors.all);
+export default function EventInput() {
+    const { value: inputValue, placeholder: inputPlaceholder } = useSelector(
+        input.selectors.all
+    );
+
     const events = useSelector(review.selectors.events);
+
     const dispatch = useDispatch();
+
     const placeholder =
         events.length === 0
-            ? randomItem(placeholders)
-            : `Add another: ${randomItem(placeholders)}`;
+            ? inputPlaceholder
+            : `Add another e.g. ${inputPlaceholder}`;
+
     const onChangeHandler = e => {
         e.preventDefault();
         const value = e.target.value;
@@ -24,15 +31,25 @@ export default function EventInput({ placeholders }) {
             dispatch(review.actions.clear());
         }
     };
+
     const onKeyPressHandler = e => {
         if (e.key === "Enter") {
-            [review.actions.new(), input.actions.clear()].forEach(dispatch);
+            [
+                review.actions.new(),
+                input.actions.randomPlaceholder(),
+                input.actions.clear()
+            ].forEach(dispatch);
         }
     };
+
+    // useEffect(() => {
+    //     return placeholder2;
+    // });
+
     return (
         <Input
             type="text"
-            placeholder={inputPlaceholder}
+            placeholder={placeholder2}
             value={inputValue}
             onChange={onChangeHandler}
             onKeyPress={onKeyPressHandler}

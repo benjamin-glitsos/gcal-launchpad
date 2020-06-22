@@ -21,3 +21,5 @@ export const invertObj = obj => {
 };
 
 export const randomItem = ls => ls[Math.floor(Math.random() * ls.length)];
+
+export const removeItem = (x, ls) => ls.filter(y => y !== x);

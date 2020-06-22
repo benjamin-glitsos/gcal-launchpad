@@ -84,7 +84,6 @@ function* infoSaga() {
 
 function* randomPlaceholderSaga() {
     try {
-        yield put(input.actions.randomPlaceholder());
         yield put(input.actions.randomPlaceholderSuccess());
     } catch (err) {
         console.error(err);

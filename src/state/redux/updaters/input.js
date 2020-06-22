@@ -1,5 +1,5 @@
 import produce from "immer";
-import { randomItem } from "~/lib/utilities";
+import { randomItem, removeItem } from "~/lib/utilities";
 
 export default class Input {
     static title = "input";
@@ -38,13 +38,15 @@ export default class Input {
     }
 
     randomPlaceholder() {
-        return produce(this.state, draft => {
-            draft.placeholder = randomItem(this.placeholders);
-        });
+        return this.state;
     }
 
     randomPlaceholderSuccess() {
-        return this.state;
+        return produce(this.state, draft => {
+            draft.placeholder = randomItem(
+                removeItem(draft.placeholder, this.placeholders)
+            );
+        });
     }
 
     randomPlaceholderFailure() {
