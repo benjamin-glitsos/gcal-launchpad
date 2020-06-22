@@ -86,7 +86,7 @@ const DaysDisplay = ({ days }) => (
                     <Text display="inline-block" color="white" mr={1}>
                         {number > 0 && <span>{number}</span>}
                     </Text>
-                    <Text display="inline-block" color="white" width={60}>
+                    <Text display="inline-block" color="white" width={75}>
                         {period}
                     </Text>
                     <Text display="inline-block" color="muted" fontSize={2}>

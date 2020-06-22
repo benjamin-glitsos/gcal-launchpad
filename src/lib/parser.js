@@ -36,14 +36,19 @@ const symbols = new Symbols();
 
 export const createDay = (number, period) => {
     const now = moment(new Date(), process.env.settings.timeZone);
-    const ifToday = (a, b) => (period === symbols.keyValues.TODAY ? a : b);
+    const isToday = period === symbols.keyValues.TODAY;
+    const isTomorrow = period === symbols.keyValues.DAY && number === 1;
     const nonZeroNumber = number === 0 ? 1 : number;
     const periodValue = symbols.periodFromValue(period);
-    const date = ifToday(now, now.add(nonZeroNumber, periodValue));
+    const date = isToday ? now : now.add(nonZeroNumber, periodValue);
     return {
         in: {
-            number: ifToday(0, nonZeroNumber),
-            period: ifToday(periodValue, pluralise(number, periodValue))
+            number: isToday || isTomorrow ? 0 : nonZeroNumber,
+            period: isToday
+                ? periodValue
+                : isTomorrow
+                ? "tomorrow"
+                : pluralise(number, periodValue)
         },
         date: {
             international: date.format("YYYY-MM-DD"),
@@ -69,7 +74,7 @@ const day = coroutine(function* () {
 
     const period = yield choice(symbols.values.map(c => char(c)));
 
-    return createDay(optionalNumber || 0, period);
+    return createDay(optionalNumber || 1, period);
 });
 
 const days = coroutine(function* () {
@@ -86,7 +91,7 @@ const event = coroutine(function* () {
     yield whitespaces;
 
     const dayValues = yield possibly(days).map(ds =>
-        !ds ? [createDay(0, "t")] : ds
+        !ds ? [createDay(1, "t")] : ds
     );
 
     yield whitespaces;
