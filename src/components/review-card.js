@@ -71,25 +71,30 @@ const EventTitle = ({ title }) => (
 
 const DaysDisplay = ({ days }) => (
     <Fragment>
-        {days.map(({ in: { number, period } }, i) => (
-            <Box key={number + period + i}>
-                <Text
-                    display="inline-block"
-                    fontWeight="bold"
-                    fontSize={3}
-                    width={45}
-                    color="white"
-                >
-                    {(i === 0 ? "In" : "And").toUpperCase()}
-                </Text>
-                <Text display="inline-block" color="white" mr={1}>
-                    {number > 0 && <span>{number}</span>}
-                </Text>
-                <Text display="inline-block" color="white">
-                    {period}
-                </Text>
-            </Box>
-        ))}
+        {days.map(
+            ({ in: { number, period }, date: { natural: naturalDate } }, i) => (
+                <Box key={number + period + i}>
+                    <Text
+                        display="inline-block"
+                        fontWeight="bold"
+                        fontSize={3}
+                        width={45}
+                        color="white"
+                    >
+                        {(i === 0 ? "In" : "And").toUpperCase()}
+                    </Text>
+                    <Text display="inline-block" color="white" mr={1}>
+                        {number > 0 && <span>{number}</span>}
+                    </Text>
+                    <Text display="inline-block" color="white" width={60}>
+                        {period}
+                    </Text>
+                    <Text display="inline-block" color="muted" fontSize={2}>
+                        ({naturalDate})
+                    </Text>
+                </Box>
+            )
+        )}
     </Fragment>
 );
 

@@ -33,7 +33,7 @@ function* addHistorySaga({ payload: [input] }) {
 function* sendReviewsSaga({ payload: [{ id, input, title, days }] }) {
     try {
         yield all(
-            days.map(({ date }) =>
+            days.map(({ date: { international: date } }) =>
                 call(function* () {
                     yield fetchApi(["gcal", "create-event"], {
                         title,

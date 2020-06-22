@@ -43,7 +43,9 @@ module.exports = withMDX({
             ],
             googleCalendarUrl: "https://calendar.google.com/",
             deletionDelay: 3000,
-            historyListLength: 10
+            historyListLength: 10,
+            timeZone: "Australia/Sydney",
+            naturalDateFormat: "ddd, D MMM"
         },
         messages: {
             EDITING: "EDITING",
