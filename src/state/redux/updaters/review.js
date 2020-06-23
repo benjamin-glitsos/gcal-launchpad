@@ -136,9 +136,9 @@ export default class Review {
         });
     }
 
-    sendMultiple() {
+    sendMultiple(events) {
         return produce(this.state, draft => {
-            ids.forEach(id => {
+            events.forEach(({ id }) => {
                 draft[id].status = process.env.messages.REQUEST;
             });
         });
