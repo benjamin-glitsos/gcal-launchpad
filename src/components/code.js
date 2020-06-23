@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Text } from "rebass";
 
 export default function Code(props) {
@@ -16,4 +17,8 @@ export default function Code(props) {
             }}
         />
     );
+}
+
+Code.propTypes = {
+    type: PropTypes.string
 }
