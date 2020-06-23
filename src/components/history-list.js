@@ -36,6 +36,6 @@ export default function HistoryList({ title }) {
     );
 }
 
-HistoryList.PropTypes = PropTypes.shape({
+HistoryList.propTypes = {
     title: PropTypes.string.isRequired
-});
+};

@@ -5,8 +5,8 @@ export default function ConditionalWrap({ condition, wrap, children }) {
     return condition ? wrap(children) : <Fragment>{children}</Fragment>;
 }
 
-ConditionalWrap.propTypes = PropTypes.shape({
-    condition: PropTypes.bool.isRequired,
+ConditionalWrap.propTypes = {
+    condition: PropTypes.bool,
     wrap: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired
-});
+};

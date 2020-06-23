@@ -17,11 +17,13 @@ export default function ButtonBar({ list }) {
     );
 }
 
-ButtonBar.propTypes = PropTypes.arrayOf(
-    PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        isDisplayed: PropTypes.func.isRequired,
-        variant: PropTypes.string.isRequired,
-        onClick: PropTypes.func.isRequired
-    })
-);
+ButtonBar.propTypes = {
+    list: PropTypes.arrayOf(
+        PropTypes.shape({
+            title: PropTypes.string.isRequired,
+            isDisplayed: PropTypes.bool.isRequired,
+            variant: PropTypes.string.isRequired,
+            onClick: PropTypes.func.isRequired
+        })
+    )
+};

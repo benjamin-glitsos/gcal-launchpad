@@ -57,6 +57,6 @@ export default function EventInput({ placeholders }) {
     );
 }
 
-EventInput.propTypes = PropTypes.shape({
+EventInput.propTypes = {
     placeholders: PropTypes.arrayOf(PropTypes.string).isRequired
-});
+};

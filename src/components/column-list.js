@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { Flex, Box } from "rebass";
 import ConditionalWrap from "~/components/conditional-wrap";
+import CustomTypes from "~/lib/prop-types";
 
 const Bullet = children => (
     <ul style={{ marginTop: 2, marginBottom: 2 }}>
@@ -24,9 +25,9 @@ export default function ColumnList({ width, py, hasBullets, children }) {
     );
 }
 
-ColumnList.propTypes = PropTypes.shape({
-    width: PropTypes.number.isRequired,
-    py: PropTypes.number.isRequired,
-    hasBullets: PropTypes.bool.isRequired,
-    hasBullets: PropTypes.node.isRequired
-});
+ColumnList.propTypes = {
+    width: CustomTypes.numberOrMultiple.isRequired,
+    py: CustomTypes.numberOrMultiple.isRequired,
+    hasBullets: PropTypes.bool,
+    children: PropTypes.node.isRequired
+};

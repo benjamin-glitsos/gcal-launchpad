@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { Link as RebassLink } from "rebass";
 
 export default function Link(props) {
@@ -16,5 +15,3 @@ export default function Link(props) {
         />
     );
 }
-
-Link.PropTypes = PropTypes.object;

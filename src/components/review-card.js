@@ -198,7 +198,7 @@ export default function ReviewCard({
     );
 }
 
-ReviewCard.PropTypes = PropTypes.shape({
+ReviewCard.propTypes = {
     id: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
     countdown: PropTypes.number.isRequired,
@@ -207,7 +207,7 @@ ReviewCard.PropTypes = PropTypes.shape({
     days: PropTypes.arrayOf(
         PropTypes.shape({
             in: PropTypes.shape({
-                number: PropTypes.string.isRequired,
+                number: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
                 period: PropTypes.string.isRequired
             }),
             date: PropTypes.shape({
@@ -216,4 +216,4 @@ ReviewCard.PropTypes = PropTypes.shape({
             })
         })
     )
-});
+};
