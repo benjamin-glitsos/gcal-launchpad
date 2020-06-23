@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Card as RebassCard } from "rebass";
 import { cond, isEqual } from "~/lib/utilities";
 
@@ -40,3 +41,5 @@ export default function Card(props) {
         />
     );
 }
+
+Card.propTypes = PropTypes.object.isRequired;

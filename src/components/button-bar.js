@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Button, Flex, Box } from "rebass";
 
 export default function ButtonBar({ list }) {
@@ -15,3 +16,12 @@ export default function ButtonBar({ list }) {
         </Flex>
     );
 }
+
+ButtonBar.propTypes = PropTypes.arrayOf(
+    PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        isDisplayed: PropTypes.func.isRequired,
+        variant: PropTypes.string.isRequired,
+        onClick: PropTypes.func.isRequired
+    })
+).isRequired;
