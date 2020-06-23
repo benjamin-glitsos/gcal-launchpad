@@ -156,7 +156,10 @@ const EventButtonBar = ({
                 },
                 {
                     title: "Open Calendar",
-                    isDisplayed: status === messages.SUCCESS,
+                    isDisplayed: anyMatches([status])([
+                        messages.REQUEST,
+                        messages.SUCCESS
+                    ]),
                     variant: "cardOutline",
                     onClick: () =>
                         window.open(
