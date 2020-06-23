@@ -130,7 +130,10 @@ const EventButtonBar = ({
                 {
                     title: "Close",
                     variant: "cardLink",
-                    isDisplayed: status === messages.FAILURE,
+                    isDisplayed: anyMatches([status])([
+                        messages.SUCCESS,
+                        messages.FAILURE
+                    ]),
                     onClick: () => dispatch(review.actions.delete(id))
                 },
                 {

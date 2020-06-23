@@ -6,6 +6,7 @@ export default function MainMenu() {
     const dispatch = useDispatch();
     return (
         <ButtonBar
+            justifyContent={["center", "flex-end"]}
             list={[
                 {
                     title: "Calendar",

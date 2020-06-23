@@ -11,11 +11,11 @@ const Bullet = children => (
 
 Bullet.propTypes = PropTypes.node.isRequired;
 
-export default function ColumnList({ width, py, hasBullets, children }) {
+export default function ColumnList({ width, py, textAlign, hasBullets, children }) {
     return (
         <Flex width={1} flexWrap="wrap">
             {children.map((Child, i) => (
-                <Box key={"column list item" + i} width={width} py={py}>
+                <Box key={"column list item" + i} width={width} py={py} textAlign={textAlign || "left"}>
                     <ConditionalWrap condition={hasBullets} wrap={Bullet}>
                         {Child}
                     </ConditionalWrap>
@@ -28,6 +28,7 @@ export default function ColumnList({ width, py, hasBullets, children }) {
 ColumnList.propTypes = {
     width: CustomTypes.numberOrMultiple.isRequired,
     py: CustomTypes.numberOrMultiple.isRequired,
+    textAlign: CustomTypes.stringOrMultiple,
     hasBullets: PropTypes.bool,
     children: PropTypes.node.isRequired
 };
