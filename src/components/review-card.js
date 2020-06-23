@@ -157,7 +157,7 @@ const EventButtonBar = ({
                     variant: "cardOutline",
                     onClick: () =>
                         window.open(
-                            process.env.settings.googleCalendarUrl,
+                            process.env.GCAL_PUBLIC_CALENDAR,
                             "_blank"
                         )
                 },

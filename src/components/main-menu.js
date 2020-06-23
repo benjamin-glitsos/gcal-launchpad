@@ -8,6 +8,16 @@ export default function MainMenu() {
         <ButtonBar
             list={[
                 {
+                    title: "Calendar",
+                    isDisplayed: true,
+                    variant: "link",
+                    onClick: () =>
+                        window.open(
+                            process.env.GCAL_PUBLIC_CALENDAR,
+                            "_blank"
+                        )
+                },
+                {
                     title: "Info",
                     isDisplayed: true,
                     variant: "link",
