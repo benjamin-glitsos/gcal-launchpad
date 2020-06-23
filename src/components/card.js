@@ -42,4 +42,4 @@ export default function Card(props) {
     );
 }
 
-Card.propTypes = PropTypes.object.isRequired;
+Card.propTypes = PropTypes.object;

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { Heading, Flex, Box } from "rebass";
 import { input, history, review } from "~/state/redux";
@@ -34,3 +35,7 @@ export default function HistoryList({ title }) {
         )
     );
 }
+
+HistoryList.PropTypes = PropTypes.shape({
+    title: PropTypes.string.isRequired
+});

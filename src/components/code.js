@@ -19,4 +19,4 @@ export default function Code(props) {
     );
 }
 
-Code.propTypes = PropTypes.object.isRequired;
+Code.propTypes = PropTypes.object;

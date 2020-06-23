@@ -24,4 +24,4 @@ ButtonBar.propTypes = PropTypes.arrayOf(
         variant: PropTypes.string.isRequired,
         onClick: PropTypes.func.isRequired
     })
-).isRequired;
+);

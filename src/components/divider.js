@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Box } from "rebass";
 
 export default function Divider(props) {
@@ -15,3 +16,5 @@ export default function Divider(props) {
         />
     );
 }
+
+Divider.propTypes = PropTypes.object;
