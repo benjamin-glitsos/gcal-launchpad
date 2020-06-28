@@ -7,7 +7,8 @@
         "build": "next build",
         "start": "next start -p 3001",
         "bg": "nohup npm run start > /dev/null &",
-        "find": "sudo lsof -i -P -n | grep LISTEN"
+        "find": "sudo lsof -i -P -n | grep LISTEN",
+        "pull": "sudo git pull origin master"
     },
     "dependencies": {
         "@mdx-js/loader": "1.6.6",
