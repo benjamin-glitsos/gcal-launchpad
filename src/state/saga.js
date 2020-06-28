@@ -1,4 +1,4 @@
-import { all, put, takeLatest, call, delay, select } from "redux-saga/effects";
+import { all, put, takeLatest, call, delay, select, spawn } from "redux-saga/effects";
 import es6promise from "es6-promise";
 import Cookies from "universal-cookie";
 import { history, input, review, info } from "./redux";
@@ -31,22 +31,29 @@ function* addHistorySaga({ payload: [input] }) {
 }
 
 function* deleteSaga({ payload: [id] }) {
-    try {
-        for (let i = 0; i < process.env.settings.deletionDelaySeconds; i++) {
-            const event = yield select(review.selectors.item(id));
-            if (event.status !== process.env.messages.DELETED) {
-                yield put(review.actions.restoreDeleted(id));
-                break;
+    yield spawn(function* () {
+        try {
+            const deletionDelaySeconds = process.env.settings.deletionDelaySeconds;
+            for (let i = 0; i < deletionDelaySeconds; i++) {
+                const event = yield select(review.selectors.item(id));
+                const isLast = (i + 1) < deletionDelaySeconds;
+                if (event.status !== process.env.messages.DELETED) {
+                    yield put(review.actions.restoreDeleted(id));
+                    break;
+                }
+                yield delay(1000);
+                if(isLast) {
+                    yield put(review.actions.decrementCountdown(id));
+                } else {
+                    yield put(review.actions.delete(id));
+                }
             }
-            yield delay(1000);
-            yield put(review.actions.decrementCountdown(id));
+            yield put(review.actions.toDeleteSuccess());
+        } catch (err) {
+            console.error(err);
+            yield put(review.actions.toDeleteFailure(id));
         }
-        yield put(review.actions.delete(id));
-        yield put(review.actions.toDeleteSuccess());
-    } catch (err) {
-        console.error(err);
-        yield put(review.actions.toDeleteFailure(id));
-    }
+    })
 }
 
 function* deleteMultipleSaga({ payload: [ids] }) {
