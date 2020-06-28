@@ -171,7 +171,7 @@ const EventButtonBar = ({
                     title: `Undo (${countdown})`,
                     isDisplayed: status === messages.DELETED,
                     variant: "cardOutline",
-                    onClick: () => dispatch(review.actions.toReview(id))
+                    onClick: () => dispatch(review.actions.restoreDeleted(id))
                 }
             ]}
         />

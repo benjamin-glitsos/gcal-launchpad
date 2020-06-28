@@ -98,9 +98,10 @@ export default class Review {
         return this.state;
     }
 
-    toReview(id) {
+    restoreDeleted(id) {
         return produce(this.state, draft => {
             draft[id].status = process.env.messages.REVIEW;
+            draft[id].countdown = process.env.settings.deletionDelaySeconds;
         });
     }
 
@@ -157,4 +158,5 @@ export default class Review {
             draft[id].countdown = draft[id].countdown - 1;
         });
     }
+
 }

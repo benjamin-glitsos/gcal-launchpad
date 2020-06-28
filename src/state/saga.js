@@ -32,20 +32,16 @@ function* addHistorySaga({ payload: [input] }) {
 
 function* deleteSaga({ payload: [id] }) {
     try {
-        const event = yield select(review.selectors.item(id));
         for (let i = 0; i < process.env.settings.deletionDelaySeconds; i++) {
+            const event = yield select(review.selectors.item(id));
             if (event.status !== process.env.messages.DELETED) {
-                yield put(review.actions.toReview(id));
+                yield put(review.actions.restoreDeleted(id));
                 break;
             }
             yield delay(1000);
             yield put(review.actions.decrementCountdown(id));
         }
-        if (event.status === process.env.messages.DELETED) {
-            yield put(review.actions.delete(id));
-        } else {
-            yield put(review.actions.toReview(id));
-        }
+        yield put(review.actions.delete(id));
         yield put(review.actions.toDeleteSuccess());
     } catch (err) {
         console.error(err);
