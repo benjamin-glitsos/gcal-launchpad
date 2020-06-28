@@ -5,7 +5,9 @@
     "scripts": {
         "dev": "next -p 3001",
         "build": "next build",
-        "start": "next start -p 3001"
+        "start": "next start -p 3001",
+        "bg": "nohup npm run start > /dev/null &",
+        "find": "sudo lsof -i -P -n | grep LISTEN"
     },
     "dependencies": {
         "@mdx-js/loader": "1.6.6",
