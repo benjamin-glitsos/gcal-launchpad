@@ -11,7 +11,7 @@ const url = `mongodb://localhost:${process.env.MONGODB_PORT}/${process.env.APP_N
 
 MongoClient.connect(url, function(err, db) {
     if (err) throw err;
-    console.log("Database created!");
+    console.log("MongoDB Database created!");
     db.close();
 });
 
