@@ -26,6 +26,7 @@
         "googleapis": "39.2.0",
         "immer": "6.0.9",
         "moment": "2.26.0",
+        "mongodb": "3.6.2",
         "next": "latest",
         "next-ga": "2.3.4",
         "next-redux-wrapper": "6.0.0",
