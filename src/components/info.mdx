@@ -3,6 +3,7 @@ import Link from "~/components/link";
 import Code from "~/components/code";
 import ColumnList from "~/components/column-list";
 import Divider from "~/components/divider";
+import HistoryItem from "~/components/history-item";
 
 <Heading variant="h2" mt="3">Readme</Heading>
 
@@ -11,10 +12,10 @@ import Divider from "~/components/divider";
 This app allows you to make Google Calendar events more quickly by parsing a shorthand notation. For instance, to create an event in both one day’s time and three day’s time:
 
 <Code type="pre">
-    d, 3d buy some bananas
+    <HistoryItem title="d, 3d buy some bananas" />
 </Code>
 
-Then try adding multiple events before sending them off to the calendar.
+Try clicking the code above multiple times.
 
 <Heading variant="h2" mt="4">This project utilises:</Heading>
 
