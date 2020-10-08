@@ -9,6 +9,22 @@ export default function MainMenu() {
             justifyContent={["center", "flex-end"]}
             list={[
                 {
+                    title: "Readme",
+                    isDisplayed: true,
+                    variant: "link",
+                    onClick: () => dispatch(info.actions.toggle())
+                },
+                {
+                    title: "Github",
+                    isDisplayed: true,
+                    variant: "link",
+                    onClick: () =>
+                        window.open(
+                            "https://github.com/benjamin-glitsos/gcal-launchpad",
+                            "_blank"
+                        )
+                },
+                {
                     title: "Calendar",
                     isDisplayed: true,
                     variant: "link",
@@ -17,12 +33,6 @@ export default function MainMenu() {
                             process.env.GCAL_PUBLIC_CALENDAR,
                             "_blank"
                         )
-                },
-                {
-                    title: "Info",
-                    isDisplayed: true,
-                    variant: "link",
-                    onClick: () => dispatch(info.actions.toggle())
                 }
             ]}
         />
