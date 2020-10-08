@@ -37,7 +37,7 @@ module.exports = withMDX({
             title: "Google Calendar Launchpad",
             apiPath: [
                 process.env.NODE_ENV === "production"
-                    ? "https://launch.benglitsos.com.au"
+                    ? "https://gcal.benglitsos.com.au"
                     : "http://localhost:3001",
                 "api"
             ],
