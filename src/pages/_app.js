@@ -6,6 +6,15 @@ import { ThemeProvider } from "theme-ui";
 import { wrapper } from "~/state/store";
 import theme from "~/lib/theme";
 
+const MongoClient = require('mongodb').MongoClient;
+const url = `mongodb://localhost:${process.env.MONGODB_PORT}/${process.env.APP_NAME}`;
+
+MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    console.log("Database created!");
+    db.close();
+});
+
 class MyApp extends App {
     static async getInitialProps({ Component, ctx }) {
         const pageProps = {
