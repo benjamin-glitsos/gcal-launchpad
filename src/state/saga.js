@@ -84,12 +84,13 @@ function* sendReviewsSaga({ payload: [{ id, input, title, days }] }) {
         yield put(review.actions.sendSuccess(id));
         yield delay(process.env.settings.deletionDelaySeconds * 1000);
         yield put(review.actions.delete(id));
-        yield call(addHistorySaga, {
-            payload: [input]
-        });
-        yield call(updateHistorySaga, {
-            payload: [process.env.settings.historyListLength]
-        });
+        console.log("Updating history database table is disabled until a UX improvement is made to this feature.")
+        // yield call(addHistorySaga, {
+        //     payload: [input]
+        // });
+        // yield call(updateHistorySaga, {
+        //     payload: [process.env.settings.historyListLength]
+        // });
     } catch (err) {
         console.error(err);
         yield put(review.actions.sendFailure(id));

@@ -52,7 +52,7 @@ export default function Index() {
             </Flex>
             <ReviewArea />
             <InfoCard />
-            <HistoryList title="Recent Events" />
+            <HistoryList title="Try these examples:" />
         </Fragment>
     );
 }

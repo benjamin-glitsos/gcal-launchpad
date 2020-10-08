@@ -13,7 +13,7 @@ export default function HistoryList({ title }) {
         historyList.length > 0 && (
             <Flex my={4}>
                 <Box width={1}>
-                    <Heading variant="h2" textAlign={["center", "left"]}>{title}</Heading>
+                    <Heading variant="h3" textAlign={["center", "left"]}>{title}</Heading>
                     <ColumnList width={[1, 1 / 2, 1 / 3]} py={[2, 1]} textAlign={["center", "left"]}>
                         {historyList.map((title, i) => <HistoryItem title={title} key={title + i} />)}
                     </ColumnList>

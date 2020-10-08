@@ -34,6 +34,13 @@ const custom = {
             color: "text",
             my: 2,
             mb: 3
+        },
+        h3: {
+            fontSize: 3,
+            fontWeight: "bold",
+            color: "text",
+            my: 2,
+            mb: 3
         }
     },
     forms: {
