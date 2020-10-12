@@ -1,25 +1,14 @@
 import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input } from "@rebass/forms";
 import { input, review } from "~/state/redux/index";
 import { randomItem, removeItem } from "~/lib/utilities";
 
-const CONST = 1;
-
-export default function EventInput({ placeholders }) {
+export default function EventInput() {
     const eventsLength = useSelector(review.selectors.events).length;
 
     const value = useSelector(input.selectors.all);
-
-    const [placeholder, setPlaceholder] = useState("");
-
-    useEffect(() => {
-        const nextPlaceholder = randomItem(
-            removeItem(placeholder, placeholders)
-        );
-        setPlaceholder(nextPlaceholder);
-    }, [eventsLength]);
 
     const dispatch = useDispatch();
 
@@ -46,9 +35,7 @@ export default function EventInput({ placeholders }) {
     return (
         <Input
             type="text"
-            placeholder={
-                (eventsLength === 0 ? "" : "Add another e.g. ") + placeholder
-            }
+            placeholder={eventsLength === 0 ? "Type an event..." : "Type another..."}
             value={value}
             onChange={onChangeHandler}
             onKeyPress={onKeyPressHandler}
@@ -56,7 +43,3 @@ export default function EventInput({ placeholders }) {
         />
     );
 }
-
-EventInput.propTypes = {
-    placeholders: PropTypes.arrayOf(PropTypes.string).isRequired
-};
