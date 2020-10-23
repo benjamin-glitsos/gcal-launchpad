@@ -1,4 +1,12 @@
-import { all, put, takeLatest, call, delay, select, spawn } from "redux-saga/effects";
+import {
+    all,
+    put,
+    takeLatest,
+    call,
+    delay,
+    select,
+    spawn
+} from "redux-saga/effects";
 import es6promise from "es6-promise";
 import Cookies from "universal-cookie";
 import { history, input, review, info } from "./redux";
@@ -33,7 +41,8 @@ function* addHistorySaga({ payload: [input] }) {
 function* deleteSaga({ payload: [id] }) {
     yield spawn(function* () {
         try {
-            const deletionDelaySeconds = process.env.settings.deletionDelaySeconds;
+            const deletionDelaySeconds =
+                process.env.settings.deletionDelaySeconds;
             for (let i = 0; i < deletionDelaySeconds; i++) {
                 yield delay(1000);
                 yield put(review.actions.decrementCountdown(id));
@@ -41,7 +50,7 @@ function* deleteSaga({ payload: [id] }) {
                 if (event.status !== process.env.messages.DELETED) {
                     yield put(review.actions.restoreDeleted(id));
                     break;
-                } else if((i + 1) === deletionDelaySeconds) {
+                } else if (i + 1 === deletionDelaySeconds) {
                     yield put(review.actions.delete(id));
                 }
             }
@@ -50,7 +59,7 @@ function* deleteSaga({ payload: [id] }) {
             console.error(err);
             yield put(review.actions.toDeleteFailure(id));
         }
-    })
+    });
 }
 
 function* deleteMultipleSaga({ payload: [ids] }) {
@@ -84,7 +93,9 @@ function* sendReviewsSaga({ payload: [{ id, input, title, days }] }) {
         yield put(review.actions.sendSuccess(id));
         yield delay(process.env.settings.deletionDelaySeconds * 1000);
         yield put(review.actions.delete(id));
-        console.log("Updating history database table is disabled until a UX improvement is made to this feature.")
+        console.log(
+            "Updating history database table is disabled until a UX improvement is made to this feature."
+        );
         // yield call(addHistorySaga, {
         //     payload: [input]
         // });

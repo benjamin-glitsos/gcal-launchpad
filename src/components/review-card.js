@@ -162,10 +162,7 @@ const EventButtonBar = ({
                     ]),
                     variant: "cardOutline",
                     onClick: () =>
-                        window.open(
-                            process.env.GCAL_PUBLIC_CALENDAR,
-                            "_blank"
-                        )
+                        window.open(process.env.GCAL_PUBLIC_CALENDAR, "_blank")
                 },
                 {
                     title: `Undo (${countdown})`,
@@ -213,7 +210,10 @@ ReviewCard.propTypes = {
     days: PropTypes.arrayOf(
         PropTypes.shape({
             in: PropTypes.shape({
-                number: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+                number: PropTypes.oneOfType([
+                    PropTypes.string,
+                    PropTypes.number
+                ]).isRequired,
                 period: PropTypes.string.isRequired
             }),
             date: PropTypes.shape({

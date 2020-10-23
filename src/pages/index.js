@@ -7,6 +7,8 @@ import HistoryList from "~/components/history-list";
 import InfoCard from "~/components/info-card";
 import MainMenu from "~/components/main-menu";
 
+import { css, jsx } from "@emotion/core";
+
 export default function Index() {
     return (
         <Fragment>
@@ -18,9 +20,16 @@ export default function Index() {
                     type="image/x-icon"
                 />
             </Head>
-            <Flex my={2} pb={2} alignItems="center" flexWrap="wrap" >
+            <Flex
+                my={2}
+                pb={2}
+                alignItems="center"
+                flexWrap="wrap"
+            >
                 <Box width={[1, 1 / 2]} pb={[3, 1]}>
-                    <Heading variant="h1" textAlign={["center","left"]}>{process.env.settings.title}</Heading>
+                    <Heading variant="h1" textAlign={["center", "left"]}>
+                        {process.env.settings.title}
+                    </Heading>
                 </Box>
                 <Box width={[1, 1 / 2]}>
                     <MainMenu />

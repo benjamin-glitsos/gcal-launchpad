@@ -1,0 +1,10 @@
+{
+    "singleQuote": false,
+    "trailingComma": "none",
+    "tabWidth": 4,
+    "arrowParens": "avoid",
+    "quoteProps": "consistent",
+    "bracketSpacing": true,
+    "proseWrap": "never",
+    "htmlWhitespaceSensitivity": "css"
+}

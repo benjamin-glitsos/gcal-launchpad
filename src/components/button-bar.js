@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { Button, Flex, Box } from "rebass";
-import CustomTypes from "~/lib/prop-types"
+import CustomTypes from "~/lib/prop-types";
 
 export default function ButtonBar({ justifyContent, list }) {
     return (

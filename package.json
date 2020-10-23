@@ -45,6 +45,7 @@
         "webpack-import-glob-loader": "1.6.3"
     },
     "devDependencies": {
+        "prettier": "2.1.2",
         "redux-devtools-extension": "2.13.2"
     }
 }

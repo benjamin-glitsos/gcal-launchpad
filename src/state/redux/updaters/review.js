@@ -158,5 +158,4 @@ export default class Review {
             draft[id].countdown = draft[id].countdown - 1;
         });
     }
-
 }

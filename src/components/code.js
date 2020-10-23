@@ -21,4 +21,4 @@ export default function Code(props) {
 
 Code.propTypes = {
     type: PropTypes.string
-}
+};

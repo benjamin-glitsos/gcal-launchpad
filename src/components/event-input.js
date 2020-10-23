@@ -35,7 +35,9 @@ export default function EventInput() {
     return (
         <Input
             type="text"
-            placeholder={eventsLength === 0 ? "Type an event..." : "Type another..."}
+            placeholder={
+                eventsLength === 0 ? "Type an event..." : "Type another..."
+            }
             value={value}
             onChange={onChangeHandler}
             onKeyPress={onKeyPressHandler}

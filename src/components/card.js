@@ -44,4 +44,4 @@ export default function Card(props) {
 
 Card.propTypes = {
     status: PropTypes.string
-}
+};
