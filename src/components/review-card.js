@@ -117,6 +117,7 @@ const EventButtonBar = ({
     const dispatch = useDispatch();
     return (
         <ButtonBar
+            justifyContent={"flex-end"}
             list={[
                 {
                     title: "Delete",
