@@ -46,6 +46,7 @@ const custom = {
     forms: {
         mainInput: {
             color: "primary",
+            background: "white",
             fontWeight: "bold",
             fontSize: 3,
             px: 3,
