@@ -43,16 +43,6 @@ const custom = {
             mb: 3
         }
     },
-    forms: {
-        mainInput: {
-            color: "primary",
-            background: "white",
-            fontWeight: "bold",
-            fontSize: 3,
-            px: 3,
-            py: 2
-        }
-    },
     card: {
         create: {
             backgroundColor: "primary",

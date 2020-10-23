@@ -6,7 +6,6 @@ import { cond } from "~/lib/utilities";
 
 export default function HelpDescriptor({ ...props }) {
     const events = useSelector(review.selectors.events);
-    console.log(events);
     const allActiveEventsCount = events
         .filter(event => event.status !== process.env.messages.DELETED)
         .map(x => x.days.length)
@@ -33,7 +32,6 @@ export default function HelpDescriptor({ ...props }) {
             {...props}
             sx={{
                 fontSize: 3,
-                pt: 1,
                 fontWeight: "bold",
                 color: "text"
             }}

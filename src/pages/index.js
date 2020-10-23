@@ -32,7 +32,7 @@ const Body = () => (
         </Page>
         <PatternBackground py={2}>
             <Page>
-                <Flex my={3}>
+                <Flex my={[2, 3]}>
                     <Box width={1}>
                         <EventInput />
                     </Box>

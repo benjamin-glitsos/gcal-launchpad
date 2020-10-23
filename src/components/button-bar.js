@@ -2,9 +2,9 @@ import PropTypes from "prop-types";
 import { Button, Flex, Box } from "rebass";
 import CustomTypes from "~/lib/prop-types";
 
-export default function ButtonBar({ justifyContent, list }) {
+export default function ButtonBar({ list, ...props }) {
     return (
-        <Flex justifyContent={justifyContent || "flex-end"}>
+        <Flex {...props}>
             {list
                 .filter(({ isDisplayed }) => isDisplayed)
                 .map(({ title, variant, onClick }, i) => (

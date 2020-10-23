@@ -42,6 +42,14 @@ export default function EventInput() {
             onChange={onChangeHandler}
             onKeyPress={onKeyPressHandler}
             variant="mainInput"
+            sx={{
+                px: 3,
+                py: 2,
+                color: "primary",
+                background: "white",
+                fontWeight: "bold",
+                fontSize: 3
+            }}
         />
     );
 }

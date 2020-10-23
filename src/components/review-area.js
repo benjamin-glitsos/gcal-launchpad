@@ -17,14 +17,16 @@ export default function ReviewArea() {
     const activeIds = activeEvents.map(event => event.id);
     return (
         hasEvents && (
-            <Flex pt={2} pb={3}>
+            <Flex pt={[0, 2]} pb={3}>
                 <Box width={1}>
-                    <Flex mb={3} height={40}>
+                    <Flex mb={2} alignItems="center" flexWrap="wrap">
                         <Box width={[1, 1 / 2]}>
                             <HelpDescriptor />
                         </Box>
                         <Box width={[1, 1 / 2]}>
                             <ButtonBar
+                                justifyContent={["center", "flex-end"]}
+                                mb={[2, 0]}
                                 list={[
                                     {
                                         title: "Delete All",
