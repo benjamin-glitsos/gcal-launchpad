@@ -5,7 +5,7 @@ import { review } from "~/state/redux";
 import CustomTypes from "~/lib/prop-types";
 import { cond } from "~/lib/utilities";
 
-export default function HelpDescriptor({ events, ...props }) {
+export default function StatusBar({ events, ...props }) {
     const countAllEvents = events =>
         events.map(x => x.days.length).reduce((a, b) => a + b, 0);
     const activeEventsCount = countAllEvents(
@@ -62,6 +62,6 @@ export default function HelpDescriptor({ events, ...props }) {
     );
 }
 
-HelpDescriptor.propTypes = {
+StatusBar.propTypes = {
     events: CustomTypes.days.isRequired
 };
