@@ -11,7 +11,7 @@ export default function HistoryList({ title }) {
     const historyList = useSelector(history.selectors.all);
     return (
         historyList.length > 0 && (
-            <Flex py={1}>
+            <Flex pt={3}>
                 <Box width={1}>
                     <Heading variant="h3" textAlign={["center", "left"]}>
                         {title}
