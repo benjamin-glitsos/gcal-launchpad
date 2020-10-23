@@ -107,15 +107,6 @@ const custom = {
                 bg: "glass"
             }
         }
-    },
-    styles: {
-        root: {
-            maxWidth: ["auto", 1000],
-            mx: "auto",
-            px: 3,
-            py: 4,
-            color: "text"
-        }
     }
 };
 
