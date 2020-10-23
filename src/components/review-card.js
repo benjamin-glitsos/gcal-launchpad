@@ -40,7 +40,14 @@ const variant = status => {
 const ConditionalHeading = ({ status, days }) => {
     const pluraliseDays = s => pluralise(days.length, s);
     return (
-        <Heading variant="h2" color="white" fontSize={3}>
+        <Heading
+            variant="h2"
+            fontSize={2}
+            mt={0}
+            mb={1}
+            fontWeight="normal"
+            color="white"
+        >
             {cond([
                 {
                     case: isEqual("create"),
@@ -72,7 +79,14 @@ const ConditionalHeading = ({ status, days }) => {
 };
 
 const EventTitle = ({ title }) => (
-    <Text variant="h2" fontWeight="bold" fontSize={4} my={2} color="white">
+    <Text
+        variant="h2"
+        fontWeight="bold"
+        fontSize={4}
+        mt={3}
+        mb={2}
+        color="white"
+    >
         {title}
     </Text>
 );
