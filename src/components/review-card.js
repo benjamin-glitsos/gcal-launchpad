@@ -91,33 +91,55 @@ const EventTitle = ({ title }) => (
     </Text>
 );
 
-const DaysDisplay = ({ days }) => (
-    <Fragment>
-        {days.map(
-            ({ in: { number, period }, date: { natural: naturalDate } }, i) => (
-                <Box key={number + period + i} fontSize={2}>
-                    <Text
-                        display="inline-block"
-                        fontWeight="bold"
-                        width={45}
-                        color="white"
-                    >
-                        {(i === 0 ? "In" : "And").toUpperCase()}
-                    </Text>
-                    <Text display="inline-block" color="white" mr={1}>
-                        {number > 0 && <span>{number}</span>}
-                    </Text>
-                    <Text display="inline-block" color="white" width={75}>
-                        {period}
-                    </Text>
-                    <Text display="inline-block" color="muted" fontSize={2}>
-                        ({naturalDate})
-                    </Text>
-                </Box>
-            )
-        )}
-    </Fragment>
-);
+const DaysDisplay = ({ days }) => {
+    const readableDateFormat = (daysCount, period, naturalDate) =>
+        cond([
+            {
+                case: n => n === 0,
+                return: "Today"
+            },
+            {
+                case: n => n === 1,
+                return: "Tomorrow"
+            },
+            {
+                case: n => n <= 3,
+                return: `in ${daysCount} days`
+            },
+            {
+                case: n => n <= 7,
+                return: period
+            },
+            {
+                case: true,
+                return: naturalDate
+            }
+        ])(daysCount);
+    return (
+        <Fragment>
+            {days.map(
+                (
+                    { in: { number, period }, date: { natural: naturalDate } },
+                    i
+                ) => (
+                    <Box key={number + period + i} fontSize={2}>
+                        <Text
+                            display="inline-block"
+                            fontWeight="bold"
+                            color="white"
+                            mr={1}
+                        >
+                            {i === 0 ? "Occuring" : "And"}
+                        </Text>
+                        <Text display="inline-block" color="white">
+                            {readableDateFormat(number, period, naturalDate)}
+                        </Text>
+                    </Box>
+                )
+            )}
+        </Fragment>
+    );
+};
 
 const EventButtonBar = ({
     status,
