@@ -41,10 +41,11 @@ module.exports = withMDX({
                     : "http://localhost:3001",
                 "api"
             ],
-            deletionDelaySeconds: 3,
+            deletionDelaySeconds: 2,
             historyListLength: 10,
             timeZone: "Australia/Sydney",
-            naturalDateFormat: "ddd, D MMM"
+            internationalDateFormat: "YYYY-MM-DD",
+            naturalDateFormat: "ddd, D MMM YYYY"
         },
         messages: {
             EDITING: "EDITING",

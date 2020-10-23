@@ -53,7 +53,9 @@ export const createDay = (number, period) => {
             totalDays
         },
         date: {
-            international: date.format("YYYY-MM-DD"),
+            international: date.format(
+                process.env.settings.internationalDateFormat
+            ),
             natural: date.format(process.env.settings.naturalDateFormat)
         }
     };
