@@ -16,7 +16,7 @@ export default function ReviewArea() {
     const activeIds = activeEvents.map(event => event.id);
     return (
         hasEvents && (
-            <Flex my={2}>
+            <Flex pt={2} pb={4}>
                 <Box width={1}>
                     <Flex mb={3} height={40}>
                         <Box width={1}>
