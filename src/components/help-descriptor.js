@@ -1,29 +1,50 @@
+import PropTypes from "prop-types";
 import { Heading } from "rebass";
-import { useSelector } from "react-redux";
 import pluralise from "pluralise";
 import { review } from "~/state/redux";
+import CustomTypes from "~/lib/prop-types";
 import { cond } from "~/lib/utilities";
 
-export default function HelpDescriptor({ ...props }) {
-    const events = useSelector(review.selectors.events);
-    const allActiveEventsCount = events
-        .filter(event => event.status !== process.env.messages.DELETED)
-        .map(x => x.days.length)
-        .reduce((a, b) => a + b, 0);
+export default function HelpDescriptor({ events, ...props }) {
+    const countAllEvents = events =>
+        events.map(x => x.days.length).reduce((a, b) => a + b, 0);
+    const activeEventsCount = countAllEvents(
+        events.filter(event => event.status !== process.env.messages.DELETED)
+    );
+    const sendingEventsCount = countAllEvents(
+        events.filter(event => event.status === process.env.messages.REQUEST)
+    );
+    const deletingEventsCount = countAllEvents(
+        events.filter(event => event.status === process.env.messages.DELETED)
+    );
 
     const descriptor = cond([
         {
-            case: n => n > 0,
+            case: sendingEventsCount > 0,
             return: () => {
-                const pluralEvent = pluralise(allActiveEventsCount, "event");
-                return `Create ${allActiveEventsCount} ${pluralEvent}:`;
+                const pluralEvent = pluralise(sendingEventsCount, "event");
+                return `Sending ${sendingEventsCount} ${pluralEvent}...`;
+            }
+        },
+        {
+            case: deletingEventsCount > 0,
+            return: () => {
+                const pluralEvent = pluralise(deletingEventsCount, "event");
+                return `Deleting ${deletingEventsCount} ${pluralEvent}...`;
+            }
+        },
+        {
+            case: activeEventsCount > 0,
+            return: () => {
+                const pluralEvent = pluralise(activeEventsCount, "event");
+                return `Create ${activeEventsCount} ${pluralEvent}:`;
             }
         },
         {
             case: true,
             return: ""
         }
-    ])(allActiveEventsCount);
+    ])(true);
 
     return (
         <Heading
@@ -40,3 +61,7 @@ export default function HelpDescriptor({ ...props }) {
         </Heading>
     );
 }
+
+HelpDescriptor.propTypes = {
+    events: CustomTypes.days.isRequired
+};

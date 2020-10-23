@@ -21,7 +21,7 @@ export default function ReviewArea() {
                 <Box width={1}>
                     <Flex mb={2} alignItems="center" flexWrap="wrap">
                         <Box width={[1, 1 / 2]}>
-                            <HelpDescriptor />
+                            <HelpDescriptor events={events} />
                         </Box>
                         <Box width={[1, 1 / 2]}>
                             <ButtonBar

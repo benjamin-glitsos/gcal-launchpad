@@ -6,6 +6,7 @@ import { Label } from "@rebass/forms";
 import pluralise from "pluralise";
 import { input, review, history } from "~/state/redux";
 import { cond, anyMatches, isEqual } from "~/lib/utilities";
+import CustomTypes from "~/lib/prop-types";
 import ButtonBar from "~/components/button-bar";
 import Divider from "~/components/divider";
 import Card from "~/components/card";
@@ -59,7 +60,7 @@ const ConditionalHeading = ({ status, days }) => {
                 },
                 {
                     case: isEqual("deleted"),
-                    return: "Deleted"
+                    return: "Deleting..."
                 },
                 {
                     case: isEqual("done"),
@@ -97,42 +98,46 @@ const DaysDisplay = ({ days }) => (
             (
                 {
                     in: { number, period, totalDays },
-                    date: { natural: naturalDate }
+                    date: { natural: fullDate }
                 },
                 i
-            ) => (
-                <Fragment>
-                    <Text
-                        key={number + period + i}
-                        display="inline-block"
-                        fontWeight="bold"
-                        color="white"
-                        mr={1}
-                    >
-                        {i === 0 ? "Occuring" : "And"}
-                    </Text>
-                    <Text display="inline-block" color="white" mr={1}>
-                        {cond([
-                            {
-                                case: n => n === 0,
-                                return: "Today"
-                            },
-                            {
-                                case: n => n === 1,
-                                return: "Tomorrow"
-                            },
-                            {
-                                case: n => n <= 7,
-                                return: `in ${totalDays} days`
-                            },
-                            {
-                                case: true,
-                                return: `on ${naturalDate}`
-                            }
-                        ])(totalDays)}
-                    </Text>
-                </Fragment>
-            )
+            ) => {
+                const articleWord = i === 0 ? "Occuring" : "And";
+                const naturalLanguageDate = cond([
+                    {
+                        case: n => n === 0,
+                        return: "Today"
+                    },
+                    {
+                        case: n => n === 1,
+                        return: "Tomorrow"
+                    },
+                    {
+                        case: n => n <= 7,
+                        return: `in ${totalDays} days`
+                    },
+                    {
+                        case: true,
+                        return: `on ${fullDate}`
+                    }
+                ])(totalDays);
+                return (
+                    <Fragment>
+                        <Text
+                            key={number + period + i}
+                            display="inline-block"
+                            fontWeight="bold"
+                            color="white"
+                            mr={1}
+                        >
+                            {articleWord}
+                        </Text>
+                        <Text display="inline-block" color="white" mr={1}>
+                            {naturalLanguageDate}
+                        </Text>
+                    </Fragment>
+                );
+            }
         )}
     </Box>
 );
@@ -239,19 +244,5 @@ ReviewCard.propTypes = {
     countdown: PropTypes.number.isRequired,
     input: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    days: PropTypes.arrayOf(
-        PropTypes.shape({
-            in: PropTypes.shape({
-                number: PropTypes.oneOfType([
-                    PropTypes.string,
-                    PropTypes.number
-                ]).isRequired,
-                period: PropTypes.string.isRequired
-            }),
-            date: PropTypes.shape({
-                international: PropTypes.string.isRequired,
-                natural: PropTypes.string.isRequired
-            })
-        })
-    )
+    days: CustomTypes.days.isRequired
 };
