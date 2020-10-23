@@ -122,16 +122,12 @@ const DaysDisplay = ({ days }) => (
                                 return: "Tomorrow"
                             },
                             {
-                                case: n => n <= 3,
+                                case: n => n <= 7,
                                 return: `in ${totalDays} days`
                             },
                             {
-                                case: n => n <= 7,
-                                return: period
-                            },
-                            {
                                 case: true,
-                                return: naturalDate
+                                return: `on ${naturalDate}`
                             }
                         ])(totalDays)}
                     </Text>

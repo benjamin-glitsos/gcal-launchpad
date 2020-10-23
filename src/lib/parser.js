@@ -41,8 +41,7 @@ export const createDay = (number, period) => {
     const nonZeroNumber = number === 0 ? 1 : number;
     const periodValue = symbols.periodFromValue(period);
     const date = isToday ? now : now.add(nonZeroNumber, periodValue);
-    const totalDays = date.diff(now, "days");
-    console.log(totalDays);
+    const totalDays = moment.duration(number, period).asDays();
     return {
         in: {
             number: isToday || isTomorrow ? 0 : nonZeroNumber,
