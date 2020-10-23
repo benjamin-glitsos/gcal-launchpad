@@ -41,6 +41,8 @@ export const createDay = (number, period) => {
     const nonZeroNumber = number === 0 ? 1 : number;
     const periodValue = symbols.periodFromValue(period);
     const date = isToday ? now : now.add(nonZeroNumber, periodValue);
+    const totalDays = date.diff(now, "days");
+    console.log(totalDays);
     return {
         in: {
             number: isToday || isTomorrow ? 0 : nonZeroNumber,
@@ -48,7 +50,8 @@ export const createDay = (number, period) => {
                 ? periodValue
                 : isTomorrow
                 ? "tomorrow"
-                : pluralise(number, periodValue)
+                : pluralise(number, periodValue),
+            totalDays
         },
         date: {
             international: date.format("YYYY-MM-DD"),

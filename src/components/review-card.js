@@ -91,55 +91,55 @@ const EventTitle = ({ title }) => (
     </Text>
 );
 
-const DaysDisplay = ({ days }) => {
-    const readableDateFormat = (daysCount, period, naturalDate) =>
-        cond([
-            {
-                case: n => n === 0,
-                return: "Today"
-            },
-            {
-                case: n => n === 1,
-                return: "Tomorrow"
-            },
-            {
-                case: n => n <= 3,
-                return: `in ${daysCount} days`
-            },
-            {
-                case: n => n <= 7,
-                return: period
-            },
-            {
-                case: true,
-                return: naturalDate
-            }
-        ])(daysCount);
-    return (
-        <Fragment>
-            {days.map(
-                (
-                    { in: { number, period }, date: { natural: naturalDate } },
-                    i
-                ) => (
-                    <Box key={number + period + i} fontSize={2}>
-                        <Text
-                            display="inline-block"
-                            fontWeight="bold"
-                            color="white"
-                            mr={1}
-                        >
-                            {i === 0 ? "Occuring" : "And"}
-                        </Text>
-                        <Text display="inline-block" color="white">
-                            {readableDateFormat(number, period, naturalDate)}
-                        </Text>
-                    </Box>
-                )
-            )}
-        </Fragment>
-    );
-};
+const DaysDisplay = ({ days }) => (
+    <Box fontSize={2}>
+        {days.map(
+            (
+                {
+                    in: { number, period, totalDays },
+                    date: { natural: naturalDate }
+                },
+                i
+            ) => (
+                <Fragment>
+                    <Text
+                        key={number + period + i}
+                        display="inline-block"
+                        fontWeight="bold"
+                        color="white"
+                        mr={1}
+                    >
+                        {i === 0 ? "Occuring" : "And"}
+                    </Text>
+                    <Text display="inline-block" color="white" mr={1}>
+                        {cond([
+                            {
+                                case: n => n === 0,
+                                return: "Today"
+                            },
+                            {
+                                case: n => n === 1,
+                                return: "Tomorrow"
+                            },
+                            {
+                                case: n => n <= 3,
+                                return: `in ${totalDays} days`
+                            },
+                            {
+                                case: n => n <= 7,
+                                return: period
+                            },
+                            {
+                                case: true,
+                                return: naturalDate
+                            }
+                        ])(totalDays)}
+                    </Text>
+                </Fragment>
+            )
+        )}
+    </Box>
+);
 
 const EventButtonBar = ({
     status,
