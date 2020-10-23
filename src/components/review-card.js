@@ -95,11 +95,10 @@ const DaysDisplay = ({ days }) => (
     <Fragment>
         {days.map(
             ({ in: { number, period }, date: { natural: naturalDate } }, i) => (
-                <Box key={number + period + i}>
+                <Box key={number + period + i} fontSize={2}>
                     <Text
                         display="inline-block"
                         fontWeight="bold"
-                        fontSize={3}
                         width={45}
                         color="white"
                     >
