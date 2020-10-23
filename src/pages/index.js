@@ -34,15 +34,6 @@ export default function Index() {
             <ReviewArea />
             <InfoCard />
             <HistoryList title="Try these examples:" />
-            {/* DELETE FROM "history"; */}
-            {/* INSERT INTO "history" ("input", "created_at") VALUES */}
-            {/* ('work out today, or else...', '2020-10-08'), */}
-            {/* ('2w go to meeting', '2020-10-08'), */}
-            {/* ('d, 2d buy some milk', '2020-10-08'), */}
-            {/* ('4d, 3y finish that book', '2020-10-08'), */}
-            {/* ('t, m, 2m, 3m, 4m buy in bulk', '2020-10-08'), */}
-            {/* ('t, d do it today, or maybe tomorrow', '2020-10-08'), */}
-            {/* ('100d challenge is finished', '2020-10-08'); */}
         </Fragment>
     );
 }
