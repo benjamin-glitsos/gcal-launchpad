@@ -92,55 +92,93 @@ const EventTitle = ({ title }) => (
     </Text>
 );
 
-const DaysDisplay = ({ days }) => (
-    <Box fontSize={2}>
-        {days.map(
-            (
-                {
-                    in: { number, period, totalDays },
-                    date: { natural: fullDate }
-                },
-                i
-            ) => {
-                const articleWord = i === 0 ? "Occuring" : "And";
-                const naturalLanguageDate = cond([
+const DaysDisplay = ({ days }) => {
+    const WordedDays = () => (
+        <Fragment>
+            {days.map(
+                (
                     {
-                        case: n => n === 0,
-                        return: "Today"
+                        in: { number, period, totalDays },
+                        date: { natural: fullDate }
                     },
-                    {
-                        case: n => n === 1,
-                        return: "Tomorrow"
-                    },
-                    {
-                        case: n => n <= 7,
-                        return: `in ${totalDays} days`
-                    },
-                    {
-                        case: true,
-                        return: `on ${fullDate}`
-                    }
-                ])(totalDays);
-                return (
-                    <Fragment>
-                        <Text
-                            key={number + period + i}
-                            display="inline-block"
-                            fontWeight="bold"
-                            color="white"
-                            mr={1}
-                        >
-                            {articleWord}
-                        </Text>
-                        <Text display="inline-block" color="white" mr={1}>
-                            {naturalLanguageDate}
-                        </Text>
-                    </Fragment>
-                );
-            }
-        )}
-    </Box>
-);
+                    i
+                ) => {
+                    const articleWord = i === 0 ? "Occuring" : "And";
+                    const naturalLanguageDate = cond([
+                        {
+                            case: n => n === 0,
+                            return: "Today"
+                        },
+                        {
+                            case: n => n === 1,
+                            return: "Tomorrow"
+                        },
+                        {
+                            case: n => n <= 7,
+                            return: `in ${totalDays} days`
+                        },
+                        {
+                            case: true,
+                            return: `on ${fullDate}`
+                        }
+                    ])(totalDays);
+                    return (
+                        <span>
+                            <Text
+                                key={number + period + i}
+                                display="inline-block"
+                                fontWeight="bold"
+                                color="white"
+                                mr={1}
+                            >
+                                {articleWord}
+                            </Text>
+                            <Text display="inline-block" color="white" mr={1}>
+                                {naturalLanguageDate}
+                            </Text>
+                        </span>
+                    );
+                }
+            )}
+        </Fragment>
+    );
+    const WordedDaysDisplay = () => {
+        const daysCount = days.length;
+        if (daysCount <= 3) {
+            return <WordedDays />;
+        } else {
+            const datesListTooltip = days
+                .map(x => `\u2022 ${x.date.international}`)
+                .join("\n");
+            return (
+                <span
+                    title={datesListTooltip}
+                    style={{
+                        textDecoration: "underlined",
+                        textDecorationStyle: "dotted"
+                    }}
+                >
+                    <Text
+                        display="inline-block"
+                        fontWeight="bold"
+                        color="white"
+                        mr={1}
+                    >
+                        Occuring
+                    </Text>
+                    <Text display="inline-block" color="white" mr={1}>
+                        on {daysCount} dates.
+                    </Text>
+                </span>
+            );
+        }
+    };
+    return (
+        <Box fontSize={2}>
+            <WordedDaysDisplay />
+        </Box>
+    );
+};
 
 const EventButtonBar = ({
     status,
