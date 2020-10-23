@@ -20,21 +20,20 @@ export default function Index() {
                     type="image/x-icon"
                 />
             </Head>
-            <PatternBackground pt={4} pb={3}>
+            <Page pt={4} pb={2}>
+                <Flex alignItems="center" flexWrap="wrap">
+                    <Box width={[1, 1 / 2]} pb={[3, 1]}>
+                        <Heading variant="h1" textAlign={["center", "left"]}>
+                            {process.env.settings.title}
+                        </Heading>
+                    </Box>
+                    <Box width={[1, 1 / 2]}>
+                        <MainMenu />
+                    </Box>
+                </Flex>
+            </Page>
+            <PatternBackground py={2}>
                 <Page>
-                    <Flex alignItems="center" flexWrap="wrap">
-                        <Box width={[1, 1 / 2]} pb={[3, 1]}>
-                            <Heading
-                                variant="h1"
-                                textAlign={["center", "left"]}
-                            >
-                                {process.env.settings.title}
-                            </Heading>
-                        </Box>
-                        <Box width={[1, 1 / 2]}>
-                            <MainMenu />
-                        </Box>
-                    </Flex>
                     <Flex my={3}>
                         <Box width={1}>
                             <EventInput />
