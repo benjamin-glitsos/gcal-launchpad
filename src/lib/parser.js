@@ -88,7 +88,11 @@ const days = coroutine(function* () {
 
     yield whitespaces1;
 
-    return dayValues;
+    const sortedDayValues = [...dayValues].sort((a, b) =>
+        a.date.international.localeCompare(b.date.international)
+    );
+
+    return sortedDayValues;
 });
 
 const event = coroutine(function* () {

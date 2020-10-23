@@ -134,9 +134,8 @@ const DaysDisplay = ({ days }) => {
                         ])(totalDays);
                         if (!(isTooLong && i > 0)) {
                             return (
-                                <Fragment>
+                                <Fragment key={number + period + i}>
                                     <Text
-                                        key={number + period + i}
                                         display="inline-block"
                                         fontWeight="bold"
                                         color="white"
