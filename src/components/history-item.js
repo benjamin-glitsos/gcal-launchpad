@@ -23,6 +23,5 @@ export default function HistoryItem({ title }) {
 }
 
 HistoryItem.propTypes = {
-    title: PropTypes.string.isRequired,
-    index: PropTypes.number.isRequired
+    title: PropTypes.string.isRequired
 };
