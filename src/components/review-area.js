@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { review } from "~/state/redux";
 import ButtonBar from "~/components/button-bar";
 import ReviewCard from "~/components/review-card";
+import HelpDescriptor from "~/components/help-descriptor";
 
 export default function ReviewArea() {
     const dispatch = useDispatch();
@@ -19,7 +20,10 @@ export default function ReviewArea() {
             <Flex pt={2} pb={4}>
                 <Box width={1}>
                     <Flex mb={3} height={40}>
-                        <Box width={1}>
+                        <Box width={[1, 1 / 2]}>
+                            <HelpDescriptor />
+                        </Box>
+                        <Box width={[1, 1 / 2]}>
                             <ButtonBar
                                 list={[
                                     {
