@@ -8,7 +8,6 @@ export default async (req, res) => {
         const query = await pool.query(
             `INSERT INTO history(input) VALUES ('${input}')`
         );
-        console.log(query.rows);
         res.status(200).json(query.rows);
     } catch (err) {
         console.error(err);
