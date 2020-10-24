@@ -34,7 +34,7 @@ export default function ColumnList({ columns, centerOnMobile, children }) {
     return (
         <Ul columns={columns} centerOnMobile={centerOnMobile}>
             {children.map((Child, i) => (
-                <li>{Child}</li>
+                <li key={i}>{Child}</li>
             ))}
         </Ul>
     );
