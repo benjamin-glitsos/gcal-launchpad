@@ -2,6 +2,7 @@ import material from "@rebass/preset-material";
 import merge from "deepmerge";
 
 const custom = {
+    breakpoints: process.env.breakpoints,
     colors: {
         text: "#3c4043",
         background: "#fff",

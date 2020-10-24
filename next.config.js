@@ -64,6 +64,7 @@ module.exports = withMDX({
         },
         cookies: {
             INFO_SHOW: "gcal_launchpad___info_show"
-        }
+        },
+        breakpoints: ["40em", "52em", "64em"]
     }
 });
