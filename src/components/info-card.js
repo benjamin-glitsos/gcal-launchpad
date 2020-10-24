@@ -10,7 +10,7 @@ export default function InfoCard() {
     const dispatch = useDispatch();
     return (
         isShown && (
-            <Flex mt={4}>
+            <Flex py={3}>
                 <Box>
                     <Card my={2}>
                         <Info />
