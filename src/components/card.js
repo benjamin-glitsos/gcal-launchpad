@@ -4,6 +4,7 @@ import { cond, isEqual } from "~/lib/utilities";
 
 export default function Card(props) {
     const status = props.status;
+    console.log(props.hoverEffect);
     return (
         <RebassCard
             {...props}
@@ -12,9 +13,11 @@ export default function Card(props) {
                 "p": 3,
                 "color": status === "blank" ? "white" : "text",
                 "transition": "box-shadow .5s ease-out",
-                ":hover": {
-                    boxShadow: "none"
-                },
+                ":hover": props.hoverEffect
+                    ? {
+                          boxShadow: "none"
+                      }
+                    : {},
                 "bg": cond([
                     {
                         case: isEqual("create"),
@@ -47,5 +50,6 @@ export default function Card(props) {
 }
 
 Card.propTypes = {
-    status: PropTypes.string
+    status: PropTypes.string,
+    hoverEffect: PropTypes.bool.required
 };

@@ -244,7 +244,7 @@ export default function ReviewCard({
     days
 }) {
     return (
-        <Card status={variant(status)}>
+        <Card status={variant(status)} hoverEffect={true}>
             <ConditionalHeading status={status} days={days} />
             <Divider />
             <EventTitle title={title} />

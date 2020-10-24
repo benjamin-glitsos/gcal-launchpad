@@ -12,7 +12,7 @@ export default function InfoCard() {
         isShown && (
             <Flex py={3}>
                 <Box>
-                    <Card my={2}>
+                    <Card my={2} hoverEffect={false}>
                         <Info />
                         <ButtonBar
                             list={[
