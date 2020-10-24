@@ -8,10 +8,14 @@ export default function Card(props) {
         <RebassCard
             {...props}
             sx={{
-                borderRadius: "card",
-                p: 3,
-                color: status === "blank" ? "white" : "text",
-                bg: cond([
+                "borderRadius": "card",
+                "p": 3,
+                "color": status === "blank" ? "white" : "text",
+                "transition": "box-shadow .5s ease-out",
+                ":hover": {
+                    boxShadow: "none"
+                },
+                "bg": cond([
                     {
                         case: isEqual("create"),
                         return: "primary"
