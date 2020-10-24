@@ -24,15 +24,16 @@ const Ul = styled.ul`
             `
                 text-align: center;
                 list-style: none;
+                padding-left: 0;
                 li {
                     margin-bottom: 0.5em;
                 }
                 `}
 `;
 
-export default function ColumnList({ columns, centerOnMobile, children }) {
+export default function ColumnList({ children, ...props }) {
     return (
-        <Ul columns={columns} centerOnMobile={centerOnMobile}>
+        <Ul {...props}>
             {children.map((Child, i) => (
                 <li key={i}>{Child}</li>
             ))}
