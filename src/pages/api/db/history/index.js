@@ -1,11 +1,12 @@
 import { pool } from "~/lib/database";
+const SQL = require("sql-template-strings");
 
 export default async (req, res) => {
     const {
         query: { length }
     } = req;
     try {
-        const query = await pool.query(`
+        const query = await pool.query(SQL`
             SELECT input
             FROM history
             ORDER BY id DESC

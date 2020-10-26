@@ -1,4 +1,5 @@
 import { pool } from "~/lib/database";
+const SQL = require("sql-template-strings");
 
 export default async (req, res) => {
     const {
@@ -6,7 +7,7 @@ export default async (req, res) => {
     } = req;
     try {
         const query = await pool.query(
-            `INSERT INTO history(input) VALUES ('${input}')`
+            SQL`INSERT INTO history(input) VALUES ('${input}')`
         );
         res.status(200).json(query.rows);
     } catch (err) {
